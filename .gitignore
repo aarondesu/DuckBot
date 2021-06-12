@@ -1,0 +1,7 @@
+#Files
+*.log
+*.env
+
+#Folders
+node_modules/
+logs/
