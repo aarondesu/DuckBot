@@ -8,11 +8,14 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": "14.x"
+    "node": ">=14.x"
   },
   "scripts": {
-    "dev": "nodemon",
-    "start": "npx ts-node src/index.ts"
+    "dev": "ts-node",
+    "build": "tsc",
+    "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx",
+    "start": "yarn build",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.21.1",
