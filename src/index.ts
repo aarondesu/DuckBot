@@ -1,4 +1,4 @@
 import DiscordBot from './bot';
 
-let bot = new DiscordBot();
-bot.start('nil');
+const client = new DiscordBot();
+client.logger.info('Hello World!!');
