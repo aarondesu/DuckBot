@@ -11,6 +11,7 @@
     "node": "14.x"
   },
   "scripts": {
+    "dev": "nodemon",
     "start": "npx ts-node src/index.ts"
   },
   "dependencies": {
@@ -30,9 +31,13 @@
     "eslint": "^7.28.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-config-ruppy-jest": "^1.0.0",
+    "eslint-config-ruppy-node": "^1.5.2",
+    "eslint-config-ruppy-ts": "^1.6.0",
     "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "eslint-ruppy": "^1.4.1",
     "prettier": "^2.3.1",
     "tslint": "^6.1.3",
     "typescript": "^4.3.2"
