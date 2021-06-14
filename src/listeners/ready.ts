@@ -1,5 +1,5 @@
 import { Listener } from 'discord-akairo';
-import logger from '../logger';
+import logger from 'lib/logger';
 
 class ReadyListener extends Listener {
   public constructor() {
@@ -10,7 +10,7 @@ class ReadyListener extends Listener {
   }
 
   exec() {
-    logger.info('Ready listener called');
+    logger.info(`Logged in as user: ${this.client.user?.username as string}`);
   }
 }
 

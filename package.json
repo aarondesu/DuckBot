@@ -12,7 +12,7 @@
     "yarn": ">=1.22.10"
   },
   "scripts": {
-    "dev": "ts-node ./src/index.ts",
+    "dev": "ts-node --files -r tsconfig-paths/register ./src/index.ts",
     "build": "tsc",
     "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx",
     "start": "yarn build",
@@ -26,7 +26,9 @@
     "discord-akairo": "^8.1.0",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
+    "tsconfig-paths": "^3.9.0",
     "twitter-autohook": "^1.7.2",
+    "typescript-is": "^0.18.2",
     "winston": "^3.3.3"
   },
   "devDependencies": {
