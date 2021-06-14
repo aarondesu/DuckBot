@@ -3,7 +3,9 @@ import winston from 'winston';
 const format = winston.format.combine(
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
   winston.format.colorize({ all: true }),
-  winston.format.simple()
+  winston.format.printf(({ level, message, timestamp }) => {
+    return ` [${timestamp as string}] (${level}) ${message} `;
+  })
 );
 
 const colors = {

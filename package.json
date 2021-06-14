@@ -4,7 +4,7 @@
   "description": "Discord bot for private server",
   "main": "index.js",
   "repository": "https://github.com/Shinudesu/RALMBot.git",
-  "author": "shinudesu <arokidaaron93@gmail.com>",
+  "author": "shinudesu",
   "license": "MIT",
   "private": true,
   "engines": {
@@ -22,6 +22,7 @@
     "axios": "^0.21.1",
     "chalk": "^4.1.1",
     "common-tags": "^1.8.0",
+    "detectlanguage": "^2.1.0",
     "discord-akairo": "^8.1.0",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
