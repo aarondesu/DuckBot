@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import dotenv from 'dotenv';
-import DiscordBot from './bot';
+import DiscordBot from 'structures/bot';
 import logger from 'lib/logger';
 
 dotenv.config({ path: resolve(__dirname, '..', '.env') });

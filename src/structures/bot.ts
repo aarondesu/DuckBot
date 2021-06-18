@@ -14,6 +14,7 @@ export default class DiscordBot extends AkairoClient {
     directory: resolve(__dirname, 'commands'),
     commandUtil: true,
     prefix: '?',
+    blockBots: true,
   });
 
   public inhibitorHandler = new InhibitorHandler(this, {

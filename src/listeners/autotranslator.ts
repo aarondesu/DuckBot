@@ -73,6 +73,16 @@ export default class AutoTranslator extends Listener {
     }
   }
 
+  private static async displayError(errorMessage: string, message: Message) {
+    const embed = new MessageEmbed()
+      .setTitle('An error occurred.')
+      .setDescription(errorMessage);
+
+    logger.error(errorMessage);
+
+    await message.channel.send(embed);
+  }
+
   // TODO: stop intercepting messages when confronted with a command requiring additional info
   public async exec(message: Message) {
     // Check if message is not bot message, not a command, and is only from a server
@@ -87,8 +97,7 @@ export default class AutoTranslator extends Listener {
         Reason: ${langError}
       `;
 
-      logger.error(strErr);
-      await message.channel.send(strErr);
+      await AutoTranslator.displayError(strErr, message);
     }
 
     // Check if language is not EN
@@ -98,14 +107,14 @@ export default class AutoTranslator extends Listener {
         language as string,
         message.content
       );
+
       if (transError !== null) {
         const strErr = oneLine`
         Unable to process DeepL request.
         Reason: ${langError}
         `;
 
-        logger.error(strErr);
-        await message.channel.send(strErr);
+        await AutoTranslator.displayError(strErr, message);
       }
 
       // Create embed

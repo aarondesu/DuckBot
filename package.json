@@ -26,6 +26,7 @@
     "discord-akairo": "^8.1.0",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
+    "moment": "^2.29.1",
     "tsconfig-paths": "^3.9.0",
     "twitter-autohook": "^1.7.2",
     "typescript-is": "^0.18.2",
