@@ -15,6 +15,7 @@
     "dev": "ts-node --files -r tsconfig-paths/register ./src/index.ts",
     "build": "tsc",
     "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write .",
     "start": "yarn build",
     "test": "jest"
   },
