@@ -34,7 +34,7 @@ export default class AutoTranslator extends Listener {
 
   private async detectLanguage(content: string) {
     try {
-      logger.info('Getting language of text...');
+      logger.http('Getting language of text...');
       const result = await this.languageApi.detect(content);
       const language = result.pop()?.language as string;
 
@@ -62,10 +62,10 @@ export default class AutoTranslator extends Listener {
         },
       };
 
-      logger.info('Requesting data from RAPID API/deepL... ');
+      logger.http('Requesting data from RAPID API/deepL... ');
       // Request data
       const response = await axios.request<DeepLTranslate>(option);
-      logger.info('Request reecieved from RAPID API/DeepL!');
+      logger.http('Request reecieved from RAPID API/DeepL!');
 
       return [response.data.data.translations.translatedText, null];
     } catch (error) {
@@ -74,17 +74,18 @@ export default class AutoTranslator extends Listener {
   }
 
   private static async displayError(errorMessage: string, message: Message) {
-    const embed = new MessageEmbed()
-      .setTitle('An error occurred.')
-      .setDescription(errorMessage);
-
     logger.error(errorMessage);
-
-    await message.channel.send(embed);
+    await message.channel.send({
+      embeds: [
+        new MessageEmbed()
+          .setTitle('Autotranslate failed.')
+          .setDescription(errorMessage),
+      ],
+    });
   }
 
   // TODO: stop intercepting messages when confronted with a command requiring additional info
-  public async exec(message: Message) {
+  async exec(message: Message) {
     // Check if message is not bot message, not a command, and is only from a server
     if (message.author.bot || !message.guild || message.content[0] === '?')
       return;
@@ -118,13 +119,15 @@ export default class AutoTranslator extends Listener {
       }
 
       // Create embed
-      const translatedEmbed = new MessageEmbed()
-        .setColor('#0099ff')
-        .setTitle('Autotranslated text')
-        .setDescription(`${translatedText as string}`);
-
       // Send translated message back to channel
-      await message.channel.send(translatedEmbed);
+      await message.channel.send({
+        embeds: [
+          new MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle('Autotranslated text')
+            .setDescription(`${translatedText as string}`),
+        ],
+      });
     }
   }
 }
