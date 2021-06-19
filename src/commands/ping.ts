@@ -1,14 +1,14 @@
-import { Command } from 'discord-akairo';
-import { Message } from 'discord.js';
-
-export default class PingCommand extends Command {
+import { CommandInteraction } from 'discord.js';
+import {} from 'discord-akairo';
+import { SlashCommand } from 'modules/slash_command';
+export default class PingCommand extends SlashCommand {
   public constructor() {
     super('ping', {
-      aliases: ['ping'],
+      description: `Go ping!`,
     });
   }
 
-  exec(message: Message) {
-    return message.reply('Pong!');
+  async exec(interaction: CommandInteraction) {
+    await interaction.reply('Pong!');
   }
 }
