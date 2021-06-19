@@ -13,7 +13,6 @@ export default class DiscordBot extends AkairoClient {
 
   public listenerHandler = new ListenerHandler(this, {
     directory: resolve(__dirname, '..', `listeners`),
-
   });
   // #endregion
 
@@ -26,8 +25,8 @@ export default class DiscordBot extends AkairoClient {
       },
       {
         // Discord settings
-        partials: ['CHANNEL', 'MESSAGE', 'GUILD_MEMBER'],
-        intents: Intents.NON_PRIVILEGED,
+        partials: ['CHANNEL', 'MESSAGE', 'GUILD_MEMBER', 'USER', 'REACTION'],
+        intents: Intents.ALL,
       }
     );
   }
