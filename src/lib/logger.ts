@@ -11,20 +11,11 @@ const format = winston.format.combine(
 
 const formatFile = winston.format.combine(
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
+  winston.format.colorize({ all: false }),
   winston.format.printf(({ level, message, timestamp }) => {
     return ` [${timestamp as string}] (${level}) ${message} `;
   })
 );
-
-const colors = {
-  error: 'red',
-  warn: 'yellow',
-  info: 'green',
-  http: 'magenta',
-  debug: 'white',
-};
-
-winston.addColors(colors);
 
 const transports = [
   new winston.transports.Console(),
