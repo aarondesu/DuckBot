@@ -1,11 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  ApplicationCommandOptionChoice,
-  ApplicationCommandOptionData,
-  CommandInteraction,
-  Interaction,
-  MessageComponentInteraction,
-} from 'discord.js';
+import { ApplicationCommandOptionData, CommandInteraction } from 'discord.js';
 import { AkairoError, AkairoModule, AkairoModuleOptions } from 'discord-akairo';
 
 export interface SlashCommandOptions extends AkairoModuleOptions {
