@@ -11,18 +11,18 @@ import logger from 'lib/logger';
 export default class DiscordBot extends AkairoClient {
   // #region Handlers
   public commandHandler = new CommandHandler(this, {
-    directory: resolve(__dirname, 'commands'),
+    directory: resolve(__dirname, '..', 'commands'),
     commandUtil: true,
     prefix: '?',
     blockBots: true,
   });
 
   public inhibitorHandler = new InhibitorHandler(this, {
-    directory: resolve(__dirname, 'inhibitors'),
+    directory: resolve(__dirname, '..', 'inhibitors'),
   });
 
   public listenerHandler = new ListenerHandler(this, {
-    directory: resolve(__dirname, 'listeners'),
+    directory: resolve(__dirname, '..', 'listeners'),
   });
   // #endregion
 
