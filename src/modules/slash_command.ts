@@ -24,7 +24,7 @@ export class SlashCommand extends AkairoModule {
 
   exec(interaction: CommandInteraction) {
     throw new Error(
-      `Commmand ${this.constructor.name} execute not yet implemented.`
+      `Command ${this.constructor.name} execute not yet implemented.`
     );
   }
 }

@@ -1,4 +1,4 @@
-import { Collection, Interaction } from 'discord.js';
+import { Collection, Interaction, MessageEmbed } from 'discord.js';
 import {
   AkairoClient,
   AkairoHandler,
@@ -57,12 +57,19 @@ export default class SlashCommandHandler extends AkairoHandler {
       module.exec(interaction);
     } catch (error) {
       const strErr = oneLine`
-        Error occured while processing command:
-        Reason: ${error}
+        Error occured while processing command.
+        ${error}
       `;
 
       logger.error(strErr);
-      await interaction.reply(strErr);
+      await interaction.reply({
+        embeds: [
+          new MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Command Failed')
+            .setDescription(strErr),
+        ],
+      });
     }
   }
 
