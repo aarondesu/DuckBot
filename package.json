@@ -4,7 +4,7 @@
   "description": "Discord bot for private server",
   "main": "index.js",
   "repository": "https://github.com/Shinudesu/RALMBot.git",
-  "author": "shinudesu <arokidaaron93@gmail.com>",
+  "author": "shinudesu",
   "license": "MIT",
   "private": true,
   "engines": {
@@ -12,19 +12,25 @@
     "yarn": ">=1.22.10"
   },
   "scripts": {
-    "dev": "ts-node",
+    "dev": "ts-node --files -r tsconfig-paths/register ./src/index.ts",
     "build": "tsc",
     "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write .",
     "start": "yarn build",
     "test": "jest"
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "chalk": "^4.1.1",
     "common-tags": "^1.8.0",
-    "discord-akairo": "^8.1.0",
-    "discord.js": "^12.5.3",
+    "detectlanguage": "^2.1.0",
+    "discord-akairo": "https://github.com/discord-akairo/discord-akairo.git#master",
+    "discord.js": "^13.0.0-dev.2d12db000f2a0a22a8919d7a63989a6e762ae335",
     "dotenv": "^10.0.0",
+    "moment": "^2.29.1",
+    "tsconfig-paths": "^3.9.0",
     "twitter-autohook": "^1.7.2",
+    "typescript-is": "^0.18.2",
     "winston": "^3.3.3"
   },
   "devDependencies": {

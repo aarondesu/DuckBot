@@ -1,4 +1,11 @@
-import DiscordBot from './bot';
+import { resolve } from 'path';
+import dotenv from 'dotenv';
+import DiscordBot from 'structures/bot';
+import logger from 'lib/logger';
 
-let bot = new DiscordBot();
-bot.start('nil');
+dotenv.config({ path: resolve(__dirname, '..', '.env') });
+
+const client = new DiscordBot();
+client.start().catch((err) => {
+  logger.error(err);
+});
