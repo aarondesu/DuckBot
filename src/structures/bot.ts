@@ -13,6 +13,7 @@ export default class DiscordBot extends AkairoClient {
 
   public listenerHandler = new ListenerHandler(this, {
     directory: resolve(__dirname, '..', `listeners`),
+
   });
   // #endregion
 
