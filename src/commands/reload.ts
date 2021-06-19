@@ -18,10 +18,7 @@ export default class ReloadCommand extends Command {
     super('reload', {
       aliases: ['reload-command', 'reload-inhibitor', 'reload-listener'],
       ownerOnly: true,
-      description: {
-        content: 'Reloads a module(command/listener/inhibitor)',
-        usage: '<module>',
-      },
+      description: 'Reloads a command',
       args: [
         {
           id: 'module',

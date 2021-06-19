@@ -80,7 +80,7 @@ export default class AutoTranslator extends Listener {
 
     logger.error(errorMessage);
 
-    await message.channel.send(embed);
+    // await message.channel.send(embed);
   }
 
   // TODO: stop intercepting messages when confronted with a command requiring additional info
@@ -124,7 +124,7 @@ export default class AutoTranslator extends Listener {
         .setDescription(`${translatedText as string}`);
 
       // Send translated message back to channel
-      await message.channel.send(translatedEmbed);
+      // await message.channel.send(translatedEmbed);
     }
   }
 }
