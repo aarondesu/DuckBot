@@ -2,7 +2,7 @@ import { resolve } from 'path';
 import dotenv from 'dotenv';
 import DiscordBot from '@structures/bot';
 
-dotenv.config({ path: resolve(__dirname, '..', '.env') });
+dotenv.config({ path: resolve('.env') });
 
 const client = new DiscordBot();
 
