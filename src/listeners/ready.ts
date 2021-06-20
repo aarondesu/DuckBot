@@ -1,5 +1,5 @@
 import { Listener } from 'discord-akairo';
-import logger from 'lib/logger';
+import logger from '@lib/logger';
 
 export default class ReadyListener extends Listener {
   public constructor() {

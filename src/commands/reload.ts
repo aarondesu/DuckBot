@@ -1,11 +1,12 @@
 import {} from 'discord.js';
 import {} from 'discord-akairo';
-import { SlashCommand } from 'structures/modules/slash_command';
+import { SlashCommand } from '@structures/modules/slash_command';
 
 export default class ReloadCommand extends SlashCommand {
   public constructor() {
     super('reload', {
       description: `Reloads selected module`,
+      disabled: true,
       options: [
         {
           name: 'module',

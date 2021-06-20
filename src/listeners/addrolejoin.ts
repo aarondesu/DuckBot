@@ -1,7 +1,7 @@
 import { oneLine } from 'common-tags';
 import { Listener } from 'discord-akairo';
 import { GuildMember, Role } from 'discord.js';
-import logger from 'lib/logger';
+import logger from '@lib/logger';
 
 export default class AddRoleJoin extends Listener {
   public constructor() {

@@ -12,11 +12,13 @@
     "yarn": ">=1.22.10"
   },
   "scripts": {
-    "dev": "ts-node --files -r tsconfig-paths/register ./src/index.ts",
+    "dev": "ts-node --files -r tsconfig-paths/register src/index.ts",
     "build": "tsc",
+    "clean": "npx rimraf dist",
     "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write .",
-    "start": "node -r tsconfig-paths/register ./dist/src/index.js",
+    "start": "node -r ./tsconfig-paths-bootstrap.js dist/src/index js",
+    "quickstart": "yarn clean && yarn build && yarn start",
     "test": "jest"
   },
   "dependencies": {
@@ -38,6 +40,7 @@
     "@types/node": "^15.12.2",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
+    "cross-env": "^7.0.3",
     "eslint": "^7.28.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",

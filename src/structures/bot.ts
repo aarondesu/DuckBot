@@ -1,7 +1,7 @@
 import { AkairoClient, ListenerHandler } from 'discord-akairo';
 import { Intents } from 'discord.js';
 import { resolve } from 'path';
-import logger from 'lib/logger';
+import logger from '@lib/logger';
 import SlashCommandHandler from './handlers/slash_command_handler';
 import { ClientConfig } from '../config';
 
@@ -53,8 +53,7 @@ export default class DiscordBot extends AkairoClient {
     } catch (error) {
       logger.error(`Unable to login bot.. Reason: ${error as string}`);
       logger.error('Bot shutting down...');
-      this.destroy();
-      process.exit(0);
+      process.exit(1);
     }
   }
 }

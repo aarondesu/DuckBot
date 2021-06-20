@@ -4,9 +4,9 @@ import {
   AkairoHandler,
   AkairoHandlerOptions,
 } from 'discord-akairo';
-import logger from 'lib/logger';
+import logger from '@lib/logger';
 import { oneLine } from 'common-tags';
-import { SlashCommand } from '../modules/slash_command';
+import { SlashCommand } from '@structures/modules/slash_command';
 
 export default class SlashCommandHandler extends AkairoHandler {
   public constructor(client: AkairoClient, options?: AkairoHandlerOptions) {
@@ -38,6 +38,14 @@ export default class SlashCommandHandler extends AkairoHandler {
         // Add the commands
         for (const [, data] of this.modules) {
           const slash = data as SlashCommand;
+
+          // Check to see if it is disabled, if disabled skip adding this command
+          if (
+            slash.options.disabled !== null &&
+            slash.options.disabled === true
+          )
+            // eslint-disable-next-line no-continue
+            continue;
 
           // eslint-disable-next-line no-await-in-loop
           await this.client.guilds.cache.get(id)?.commands.create({
