@@ -10,7 +10,7 @@ Commands should be placed here
 
 ```typescript
 import { CommandInteraction } from "discord.js";
-import { SlashCommand } from "modules/slash_command";
+import { SlashCommand } from "@structures/modules/slash_command";
 
 export default class PingCommand extends SlashCommand {
   public constructor() {
@@ -29,7 +29,7 @@ export default class PingCommand extends SlashCommand {
 
 ```typescript
 import { CommandInteraction } from "discord.js";
-import { SlashCommand } from "modules/slash_command";
+import { SlashCommand } from "@structures/modules/slash_command";
 
 export default class AddCommand extends SlashCommand {
   public constructor() {
@@ -65,7 +65,7 @@ export default class AddCommand extends SlashCommand {
 
 ```typescript
 import { CommandInteraction } from "discord.js";
-import { SlashCommand } from "modules/slash_command";
+import { SlashCommand } from "@structures/modules/slash_command";
 
 export default class VacationCommand extends SlashCommand {
   public constructor() {
