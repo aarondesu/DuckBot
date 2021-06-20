@@ -2,19 +2,21 @@ name: test and build
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
   pull_request:
-    brances: [main]
+    brances:
+      - main
 
 jobs:
   test_and_build:
-    name: Test & Build
+    name: Build
 
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        node-version: [14.x, 16.x]
+        os: ubuntu-latest
+        node-version: [14.x]
 
     runs-on: ${{ matrix.os }}
 
@@ -33,5 +35,17 @@ jobs:
       - name: Run formatter
         run: yarn format
 
+      - name: Run eslint
+        run: yarn lint
+
       - name: Run build
         run: yarn build
+
+  deploy:
+    name: Deploy to glitch
+
+    needs: test_and_build
+
+    env:
+      project-id: "${{ secrets.projectId }}"
+      auth-token: "${{ secrets.authToken }}"

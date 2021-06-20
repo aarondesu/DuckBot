@@ -69,7 +69,7 @@ export default class TranslateCommand extends SlashCommand {
     interaction: CommandInteraction
   ) {
     logger.error(errorMessage);
-    await interaction.reply({
+    await interaction.editReply({
       embeds: [
         new MessageEmbed()
           .setColor('#FF0000')
@@ -150,15 +150,19 @@ export default class TranslateCommand extends SlashCommand {
         await TranslateCommand.displayError(strErr, interaction);
       }
 
-      // Display info back to user
-      await interaction.editReply({
-        embeds: [
-          new MessageEmbed()
-            .setColor('#0099ff')
-            .setTitle('❯ Translated text')
-            .setDescription(translatedText as string),
-        ],
-      });
+      try {
+        // Display info back to user
+        await interaction.editReply({
+          embeds: [
+            new MessageEmbed()
+              .setColor('#0099ff')
+              .setTitle('❯ Translated text')
+              .setDescription(translatedText as string),
+          ],
+        });
+      } catch (error) {
+        logger.error(`Error returning reply. ${error as string}`);
+      }
     } else {
       await interaction.editReply({
         embeds: [
