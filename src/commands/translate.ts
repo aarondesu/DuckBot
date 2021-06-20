@@ -1,6 +1,6 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js';
 import {} from 'discord-akairo';
-import { SlashCommand } from 'modules/slash_command';
+import { SlashCommand } from 'structures/modules/slash_command';
 import DetectLanguage from 'detectlanguage';
 import axios, { AxiosRequestConfig } from 'axios';
 import logger from 'lib/logger';
@@ -157,6 +157,15 @@ export default class TranslateCommand extends SlashCommand {
             .setColor('#0099ff')
             .setTitle('❯ Translated text')
             .setDescription(translatedText as string),
+        ],
+      });
+    } else {
+      await interaction.editReply({
+        embeds: [
+          new MessageEmbed()
+            .setColor('#FF000')
+            .setTitle('❯ Translator error')
+            .setDescription('Target language is the same as source text!'),
         ],
       });
     }

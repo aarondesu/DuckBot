@@ -2,7 +2,7 @@ import { AkairoClient, ListenerHandler } from 'discord-akairo';
 import { Intents } from 'discord.js';
 import { resolve } from 'path';
 import logger from 'lib/logger';
-import SlashCommandHandler from 'handlers/slash_command_handler';
+import SlashCommandHandler from './handlers/slash_command_handler';
 import { ClientConfig } from '../config';
 
 export default class DiscordBot extends AkairoClient {
@@ -34,20 +34,27 @@ export default class DiscordBot extends AkairoClient {
 
   // #region Functions
   async start() {
-    logger.info('Initializing bot.');
-    logger.info('Loading commands...');
-    this.commandHandler.loadAll();
-    logger.info(`${this.commandHandler.modules.size} commands loaded.`);
+    try {
+      logger.info('Initializing bot.');
+      logger.info('Loading commands...');
+      this.commandHandler.loadAll();
+      logger.info(`${this.commandHandler.modules.size} commands loaded.`);
 
-    logger.info('Loading listeners...');
-    this.listenerHandler.setEmitters({
-      listenerHandler: this.listenerHandler,
-    });
-    this.listenerHandler.loadAll();
-    logger.info(`${this.listenerHandler.modules.size} listeners loaded.`);
+      logger.info('Loading listeners...');
+      this.listenerHandler.setEmitters({
+        listenerHandler: this.listenerHandler,
+      });
+      this.listenerHandler.loadAll();
+      logger.info(`${this.listenerHandler.modules.size} listeners loaded.`);
 
-    logger.info('Logging into discord...');
-    await this.login(process.env.DISCORD_TOKEN);
-    // #endregion
+      logger.info('Logging into discord...');
+      await this.login(process.env.DISCORD_TOKEN);
+      // #endregion
+    } catch (error) {
+      logger.error(`Unable to login bot.. Reason: ${error as string}`);
+      logger.error('Bot shutting down...');
+      this.destroy();
+      process.exit(0);
+    }
   }
 }

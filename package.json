@@ -16,7 +16,7 @@
     "build": "tsc",
     "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write .",
-    "start": "yarn build",
+    "start": "node -r tsconfig-paths/register ./dist/src/index.js",
     "test": "jest"
   },
   "dependencies": {

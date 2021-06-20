@@ -1,3 +1,4 @@
+import { oneLine } from 'common-tags';
 import { Listener } from 'discord-akairo';
 import { GuildMember, Role } from 'discord.js';
 import logger from 'lib/logger';
@@ -11,15 +12,23 @@ export default class AddRoleJoin extends Listener {
   }
 
   async exec(guildMember: GuildMember) {
-    // Auto assign guild member role
-    logger.info(
-      `${guildMember.user.tag} joined the channel. Adding Guest role...`
-    );
+    try {
+      // Auto assign guild member role
+      logger.info(
+        `${guildMember.user.tag} joined the server. Adding Guest role...`
+      );
 
-    const guestRole = guildMember.guild.roles.cache.find(
-      (role) => role.name === 'Guest'
-    ) as Role;
+      const guestRole = guildMember.guild.roles.cache.find(
+        (role) => role.name === 'Guest'
+      ) as Role;
 
-    await guildMember.roles.add(guestRole);
+      await guildMember.roles.add(guestRole);
+    } catch (error) {
+      logger.error(
+        oneLine`Failed to add role to user ${guildMember.user.tag}. ${
+          error as string
+        }`
+      );
+    }
   }
 }

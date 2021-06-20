@@ -1,16 +1,14 @@
-import { Collection, Interaction, MessageEmbed } from 'discord.js';
+import { Interaction, MessageEmbed } from 'discord.js';
 import {
   AkairoClient,
   AkairoHandler,
   AkairoHandlerOptions,
 } from 'discord-akairo';
-import { SlashCommand } from 'src/modules/slash_command';
 import logger from 'lib/logger';
 import { oneLine } from 'common-tags';
+import { SlashCommand } from '../modules/slash_command';
 
 export default class SlashCommandHandler extends AkairoHandler {
-  aliases: Collection<string, string> = new Collection();
-
   public constructor(client: AkairoClient, options?: AkairoHandlerOptions) {
     super(client, {
       directory: options?.directory,
@@ -36,16 +34,20 @@ export default class SlashCommandHandler extends AkairoHandler {
       // Clear all commands from server
       this.client.guilds.cache.get(id)?.commands.set([]);
 
-      // Add the commands
-      for (const [, data] of this.modules) {
-        const slash = data as SlashCommand;
+      try {
+        // Add the commands
+        for (const [, data] of this.modules) {
+          const slash = data as SlashCommand;
 
-        // eslint-disable-next-line no-await-in-loop
-        await this.client.guilds.cache.get(id)?.commands.create({
-          name: slash.id,
-          description: slash.options.description,
-          options: slash.options.options,
-        });
+          // eslint-disable-next-line no-await-in-loop
+          await this.client.guilds.cache.get(id)?.commands.create({
+            name: slash.id,
+            description: slash.options.description,
+            options: slash.options.options,
+          });
+        }
+      } catch (error) {
+        logger.error(`Failed to add commands to guild. ${error as string}`);
       }
     }
   }
@@ -74,7 +76,6 @@ export default class SlashCommandHandler extends AkairoHandler {
   }
 
   findCommand(name: string) {
-    // const alias = this.aliases.get(name.toLowerCase()) as string;
     return this.modules.get(name);
   }
 }
