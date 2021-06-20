@@ -61,7 +61,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.4
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2.1.5
+      - name: Sync to Glitch Project
+        uses: kanadgupta/glitch-sync@master
         with:
-          node-version: ${{ matrix.node-version }}
+          project-id: "${{ secrets.projectId }}"
+          auth-token: "${{ secrets.authToken }}"
