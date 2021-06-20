@@ -1,6 +1,6 @@
 # RALM Bot
 
-![Build Status](https://github.com/Shinudesu/RALMBot/actions/workflows/test-and-build.yml/badge.svg?branch=main)
+![Build Status](https://github.com/Shinudesu/RALMBot/actions/workflows/main.yml/badge.svg?branch=main)
 
 ## Requirements
 
