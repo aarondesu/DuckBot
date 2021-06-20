@@ -12,6 +12,9 @@ export default class AddRoleJoin extends Listener {
   }
 
   async exec(guildMember: GuildMember) {
+    // Check if guild member is a bot
+    if (guildMember.user.bot === true) return;
+
     try {
       // Auto assign guild member role
       logger.info(
