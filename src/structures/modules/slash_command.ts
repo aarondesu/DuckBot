@@ -6,6 +6,7 @@ export interface SlashCommandOptions extends AkairoModuleOptions {
   description: string;
   options?: ApplicationCommandOptionData[];
   disabled?: boolean;
+  adminOnly?: boolean;
 }
 
 export class SlashCommand extends AkairoModule {
