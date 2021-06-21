@@ -19,7 +19,9 @@
     "format": "prettier --write .",
     "start": "node -r ./tsconfig-paths-bootstrap.js dist/src/index js",
     "quickstart": "yarn clean && yarn build && yarn start",
-    "test": "jest"
+    "test": "jest",
+    "tsc": "tsc",
+    "postinstall": "yarn build"
   },
   "dependencies": {
     "@types/common-tags": "^1.8.0",
