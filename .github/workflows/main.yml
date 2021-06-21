@@ -65,5 +65,11 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "{{ secrets.HEROKU_APP_NAME }}"
+          heroku_app_name: "${{ secrets.HEROKU_APP_NAME }}"
           heroku_email: "${{ secrets.HEROKU_USER_EMAIL }}"
+        env:
+          DISCORD_TOKENL: ${{ secrets.DISCORD_TOKEN }}
+          DETECTLANGUAGE_API_KEY: ${{ secrets.DETECTLANGUAGE_API_KEY }}
+          RAPID_API_KEY: ${{ secrets.RAPID_API_KEY }}
+          DEVELOPER_TEST_SERVER: ${{ secrets.DEVELOPER_TEST_SERVER }}
+          OWNER_IDS: ${{ secrets.OWNER_IDS }}
