@@ -17,7 +17,7 @@
     "clean": "npx rimraf dist",
     "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write .",
-    "start": "node -r ./tsconfig-paths-bootstrap.js dist/src/index js",
+    "start": "node -r ./tsconfig-paths-bootstrap.js dist/src/index.js",
     "quickstart": "yarn clean && yarn build && yarn start",
     "test": "jest",
     "tsc": "tsc",
