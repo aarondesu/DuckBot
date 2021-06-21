@@ -1,7 +1,7 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js';
 import {} from 'discord-akairo';
 import { SlashCommand } from '@structures/modules/slash_command';
-import DetectLanguage from 'detectlanguage';
+import DetectLanguage, { DetectionResult } from 'detectlanguage';
 import axios, { AxiosRequestConfig } from 'axios';
 import logger from '@lib/logger';
 import { oneLine } from 'common-tags';
@@ -16,8 +16,6 @@ type DeepLTranslate = {
 
 export default class TranslateCommand extends SlashCommand {
   languageApi: DetectLanguage;
-
-  requestConfig: AxiosRequestConfig;
 
   public constructor() {
     super('translate', {
@@ -52,16 +50,6 @@ export default class TranslateCommand extends SlashCommand {
     this.languageApi = new DetectLanguage(
       process.env.DETECTLANGUAGE_API_KEY as string
     );
-
-    this.requestConfig = {
-      method: 'POST',
-      url: 'https://deep-translate1.p.rapidapi.com/language/translate/v2',
-      headers: {
-        'content-type': 'application/json',
-        'x-rapidapi-key': process.env.RAPID_API_KEY as string,
-        'x-rapidapi-host': 'deep-translate1.p.rapidapi.com',
-      },
-    };
   }
 
   private static async displayError(
@@ -79,99 +67,80 @@ export default class TranslateCommand extends SlashCommand {
     });
   }
 
-  private async detectLanguage(content: string) {
-    try {
-      logger.http('Requesting language code from detectlanguage.com... ');
-      const result = await this.languageApi.detect(content);
-      const language = result.pop()?.language as string;
-
-      return [language, null];
-    } catch (error) {
-      return [null, error as string];
-    }
-  }
-
-  private async translateText(
-    sourceLang: string,
+  private static handleDetectLanguage(
+    result: DetectionResult[],
     targetLang: string,
-    toTranslate: string
+    sourceText: string
   ) {
-    try {
-      // Configure request data
-      this.requestConfig.data = {
-        q: toTranslate,
+    const sourceLang = result.pop()?.language as string;
+    logger.http(`Detected language as ${sourceLang}!`);
+
+    // Check if same language
+    if (sourceLang.toUpperCase() === targetLang)
+      throw new Error('Source language is the same as the targeted language!');
+
+    const requestConf: AxiosRequestConfig = {
+      method: 'POST',
+      url: 'https://deep-translate1.p.rapidapi.com/language/translate/v2',
+      headers: {
+        'content-type': 'application/json',
+        'x-rapidapi-key': process.env.RAPID_API_KEY as string,
+        'x-rapidapi-host': 'deep-translate1.p.rapidapi.com',
+      },
+      data: {
+        q: sourceText,
         source: sourceLang.toUpperCase(),
         target: targetLang,
-      };
+      },
+    };
 
-      // Request from API
-      logger.http('Requesting from rapid_api/deepL...');
-      const response = await axios.request<DeepLTranslate>(this.requestConfig);
-      logger.http('Request recieved!');
-
-      return [response.data.data.translations.translatedText, null];
-    } catch (error) {
-      return [null, error as string];
-    }
+    return requestConf;
   }
 
   async exec(interaction: CommandInteraction) {
     const targetLang = interaction.options.get('language')?.value as string;
-    const text = interaction.options.get('text')?.value as string;
+    const sourceText = interaction.options.get('text')?.value as string;
 
     await interaction.defer();
 
-    // Detect the language
-    const [sourceLang, langError] = await this.detectLanguage(text);
-    if (langError != null) {
-      const strErr = oneLine`
-        Unable to process DetectLanguage requst.
-        ${langError}
-      `;
-
-      await TranslateCommand.displayError(strErr, interaction);
-    }
-
-    // Check if language not equal to selected language to translate
-    if (sourceLang !== targetLang.toUpperCase()) {
-      // Request translated text
-      const [translatedText, transError] = await this.translateText(
-        sourceLang as string,
-        targetLang,
-        text
-      );
-
-      if (transError) {
-        const strErr = oneLine`
-          Unable to process DeepL request.
-          ${transError}
-        `;
-
-        await TranslateCommand.displayError(strErr, interaction);
-      }
-
-      try {
-        // Display info back to user
-        await interaction.editReply({
+    logger.http('Requesting language code from detectlanguage.com...');
+    this.languageApi
+      .detect(sourceText)
+      .then((result) => {
+        return TranslateCommand.handleDetectLanguage(
+          result,
+          targetLang,
+          sourceText
+        );
+      })
+      .then((request) => {
+        logger.http(`Sending requesting to rapid_api/deepL...`);
+        return axios.request<DeepLTranslate>(request);
+      })
+      .then((response) => {
+        // TODO: request translate
+        const { translatedText } = response.data.data.translations;
+        return interaction.editReply({
           embeds: [
             new MessageEmbed()
               .setColor('#0099ff')
               .setTitle('❯ Translated text')
-              .setDescription(translatedText as string),
+              .setDescription(`${translatedText}`),
           ],
         });
-      } catch (error) {
-        logger.error(`Error returning reply. ${error as string}`);
-      }
-    } else {
-      await interaction.editReply({
-        embeds: [
-          new MessageEmbed()
-            .setColor('#FF000')
-            .setTitle('❯ Translator error')
-            .setDescription('Target language is the same as source text!'),
-        ],
+      })
+      .catch((error) => {
+        const strErr = oneLine`
+          Error requesting data. 
+          ${error}
+        `;
+
+        TranslateCommand.displayError(strErr, interaction).catch(
+          (interactErr) =>
+            logger.error(
+              `interaction.editReply() failed. ${interactErr as string}`
+            )
+        );
       });
-    }
   }
 }
