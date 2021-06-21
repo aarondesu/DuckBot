@@ -41,6 +41,19 @@ jobs:
       - name: Run build
         run: yarn build
 
+      - name: Cache build for deployment
+        uses: actions/cache@v2.1.6
+        with:
+          path: |
+            ./dist
+            ./package.json
+            ./pm2.yml
+            ./tsconfig-paths-bootstrap.js
+            ./tsconfig.json
+            ./yarn.lock
+            ./procfile
+          key: ${{ github.sha }}-${{ runner.os }}-${{ matrix.node-version }}
+
   deploy:
     name: Deploy to heroku
 
@@ -60,6 +73,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4
+
+      - name: Cache build for deployment
+        uses: actions/cache@v2.1.6
+        with:
+          path: |
+            ./dist
+            ./package.json
+            ./pm2.yml
+            ./tsconfig-paths-bootstrap.js
+            ./tsconfig.json
+            ./yarn.lock
+            ./procfile
+          key: ${{ github.sha }}-${{ runner.os }}-${{ matrix.node-version }}
 
       - name: Deploy to heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
