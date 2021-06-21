@@ -68,7 +68,7 @@ jobs:
           heroku_app_name: "${{ secrets.HEROKU_APP_NAME }}"
           heroku_email: "${{ secrets.HEROKU_USER_EMAIL }}"
         env:
-          HD_DISCORD_TOKENL: ${{ secrets.DISCORD_TOKEN }}
+          HD_DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           HD_DETECTLANGUAGE_API_KEY: ${{ secrets.DETECTLANGUAGE_API_KEY }}
           HD_RAPID_API_KEY: ${{ secrets.RAPID_API_KEY }}
           HD_DEVELOPER_TEST_SERVER: ${{ secrets.DEVELOPER_TEST_SERVER }}

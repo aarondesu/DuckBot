@@ -21,7 +21,7 @@
     "quickstart": "yarn clean && yarn build && yarn start",
     "test": "jest",
     "tsc": "tsc",
-    "postinstall": "yarn build"
+    "postinstall": "yarn quickstart"
   },
   "dependencies": {
     "@types/common-tags": "^1.8.0",
