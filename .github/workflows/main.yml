@@ -1,4 +1,4 @@
-name: test and build
+name: Build & Deploy
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
-  test_and_build:
+  build:
     name: Build
 
     strategy:
@@ -57,7 +57,7 @@ jobs:
   deploy:
     name: Deploy to heroku
 
-    needs: test_and_build
+    needs: build
 
     env:
       project-id: "${{ secrets.projectId }}"
