@@ -10,7 +10,7 @@ const format = winston.format.combine(
 );
 
 const formatFile = winston.format.combine(
-  winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
+  winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
   winston.format.colorize({ all: false }),
   winston.format.printf(({ level, message, timestamp }) => {
     return ` [${timestamp as string}] (${level}) ${message} `;

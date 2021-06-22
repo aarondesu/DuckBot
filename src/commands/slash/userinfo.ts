@@ -54,7 +54,7 @@ export default class UserInfoCommand extends SlashCommand {
               },
               {
                 name: 'Account Created',
-                value: `${dateToString(guildUser?.joinedAt as Date)}`,
+                value: `${dateToString(user.createdAt)}`,
               },
               {
                 name: 'Join Date',
