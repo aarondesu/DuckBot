@@ -66,7 +66,6 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
-    if: github.ref == 'refs/head/main'
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4

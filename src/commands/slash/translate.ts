@@ -132,11 +132,7 @@ export default class TranslateCommand extends SlashCommand {
         });
       })
       .catch((error) => {
-        const strErr = oneLine`
-          Error requesting data. 
-          ${error}
-        `;
-
+        const strErr = oneLine`Error requesting data. ${error}`;
         TranslateCommand.displayError(strErr, interaction).catch(
           (interactErr) =>
             logger.error(
