@@ -6,7 +6,8 @@ export interface SlashCommandOptions extends AkairoModuleOptions {
   description: string;
   options?: ApplicationCommandOptionData[];
   disabled?: boolean;
-  adminOnly?: boolean;
+  ownerOnly?: boolean;
+  cooldown?: number;
 }
 
 export class SlashCommand extends AkairoModule {
@@ -18,7 +19,7 @@ export class SlashCommand extends AkairoModule {
     this.options = options;
   }
 
-  exec(_interaction: CommandInteraction) {
+  async exec(_interaction: CommandInteraction) {
     throw new Error(
       `Command ${this.constructor.name} execute not yet implemented.`
     );

@@ -8,7 +8,7 @@ import { ClientConfig } from '../config';
 export default class DiscordBot extends AkairoClient {
   // #region Handlers
   public commandHandler = new SlashCommandHandler(this, {
-    directory: resolve(__dirname, '..', `commands`),
+    directory: resolve(__dirname, '..', `commands/slash`),
   });
 
   public listenerHandler = new ListenerHandler(this, {
@@ -35,7 +35,8 @@ export default class DiscordBot extends AkairoClient {
   // #region Functions
   async start() {
     try {
-      logger.info('Initializing bot.');
+      logger.info('Initializing bot...');
+      logger.info(`Starting bot in NODE_ENV=${process.env.NODE_ENV as string}`);
       logger.info('Loading commands...');
       this.commandHandler.loadAll();
       logger.info(`${this.commandHandler.modules.size} commands loaded.`);

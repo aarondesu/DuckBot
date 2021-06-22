@@ -61,8 +61,9 @@ export default class TranslateCommand extends SlashCommand {
       embeds: [
         new MessageEmbed()
           .setColor('#FF0000')
-          .setTitle('Translate command error')
-          .setDescription(errorMessage),
+          .setDescription(errorMessage)
+          .setFooter('Error')
+          .setTimestamp(),
       ],
     });
   }
@@ -124,8 +125,9 @@ export default class TranslateCommand extends SlashCommand {
           embeds: [
             new MessageEmbed()
               .setColor('#0099ff')
-              .setTitle('❯ Translated text')
-              .setDescription(`${translatedText}`),
+              .setDescription(`${translatedText}`)
+              .setFooter('Translated using DeepL')
+              .setTimestamp(),
           ],
         });
       })
