@@ -85,7 +85,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "${{ secrets.HEROKU_APP_NAME }}"
           heroku_email: "${{ secrets.HEROKU_USER_EMAIL }}"
-          procfile: "worker: npm start"
+          procfile: "worker: yarn start"
         env:
           HD_DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           HD_DETECTLANGUAGE_API_KEY: ${{ secrets.DETECTLANGUAGE_API_KEY }}
