@@ -77,9 +77,6 @@ export default class TranslateCommand extends SlashCommand {
     logger.http(`Detected language as ${sourceLang}!`);
 
     // Check if same language
-    if (sourceLang.toUpperCase() === targetLang)
-      throw new Error('Source language is the same as the targeted language!');
-
     const requestConf: AxiosRequestConfig = {
       method: 'POST',
       url: 'https://deep-translate1.p.rapidapi.com/language/translate/v2',
@@ -119,7 +116,6 @@ export default class TranslateCommand extends SlashCommand {
         return axios.request<DeepLTranslate>(request);
       })
       .then((response) => {
-        // TODO: request translate
         const { translatedText } = response.data.data.translations;
         return interaction.editReply({
           embeds: [
