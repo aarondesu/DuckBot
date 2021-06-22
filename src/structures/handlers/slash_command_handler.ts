@@ -24,6 +24,7 @@ export default class SlashCommandHandler extends AkairoHandler {
     });
   }
 
+  // TODO: Add permission validation
   async initializeCommands() {
     // Get all joined guilds
     const guilds = this.client.guilds.cache.map((guild) => guild.id);
@@ -60,6 +61,9 @@ export default class SlashCommandHandler extends AkairoHandler {
     }
   }
 
+  // TODO: Add morme validation
+  // TODO: Add cooldown
+  // TODO: Add permission checks
   async handleCommand(interaction: CommandInteraction) {
     if (!interaction.isCommand()) return;
 
