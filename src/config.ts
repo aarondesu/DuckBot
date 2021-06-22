@@ -11,7 +11,7 @@ export const DuckPresence: PresenceData = {
     {
       name: 'Leading ducklings 🦆',
       type: 'PLAYING',
-      url: '',
     },
   ],
+  status: 'online',
 };
