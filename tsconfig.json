@@ -21,6 +21,8 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
 
     "newLine": "lf",
     "skipLibCheck": true
