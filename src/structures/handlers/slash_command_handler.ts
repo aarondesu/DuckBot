@@ -1,4 +1,4 @@
-import { Interaction, MessageEmbed } from 'discord.js';
+import { CommandInteraction, MessageEmbed } from 'discord.js';
 import {
   AkairoClient,
   AkairoHandler,
@@ -16,7 +16,7 @@ export default class SlashCommandHandler extends AkairoHandler {
     });
 
     this.client.on('interaction', async (interaction) => {
-      await this.handleCommand(interaction);
+      await this.handleCommand(interaction as CommandInteraction);
     });
 
     this.client.on('ready', async () => {
@@ -60,11 +60,18 @@ export default class SlashCommandHandler extends AkairoHandler {
     }
   }
 
-  async handleCommand(interaction: Interaction) {
+  async handleCommand(interaction: CommandInteraction) {
     if (!interaction.isCommand()) return;
+
     try {
+      // Get command and execute
       const module = this.findCommand(interaction.commandName) as SlashCommand;
-      module.exec(interaction);
+      if (!module) {
+        throw new Error(`Command not found!`);
+        return;
+      }
+
+      await module.exec(interaction);
     } catch (error) {
       const strErr = oneLine`
         Error occured while processing command.
@@ -73,6 +80,7 @@ export default class SlashCommandHandler extends AkairoHandler {
 
       logger.error(strErr);
       await interaction.reply({
+        ephemeral: true,
         embeds: [
           new MessageEmbed()
             .setColor('#FF0000')
