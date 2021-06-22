@@ -72,13 +72,13 @@ export default class SlashCommandHandler extends AkairoHandler {
       }
 
       await module.exec(interaction);
-    } catch (error) {
+    } catch ({ name, message, stack }) {
       const strErr = oneLine`
         Error occured while processing command.
-        ${error}
+        ${message}
       `;
 
-      logger.error(strErr);
+      logger.error(strErr, stack);
       await interaction.reply({
         ephemeral: true,
         embeds: [

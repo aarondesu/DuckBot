@@ -1,14 +1,14 @@
 import { resolve } from 'path';
 import dotenv from 'dotenv';
 import DiscordBot from '@structures/bot';
+import logger from '@lib/logger';
 
 dotenv.config({ path: resolve('.env') });
 
 const client = new DiscordBot();
-
-async function start() {
-  await client.start();
-}
-
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
-start();
+client.start().catch(({ message, stack }) =>
+  logger.error(
+    `An error occured. ${message as string} 
+      \nStack: ${stack as string}`
+  )
+);

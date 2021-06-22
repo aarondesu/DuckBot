@@ -35,6 +35,8 @@ export default class UserInfoCommand extends SlashCommand {
             .setColor('#add8e6')
             .setAuthor(`${user.tag}`, `${user.avatarURL() as string}`)
             .setThumbnail(`${user.avatarURL() as string}`)
+            .setFooter('User Info')
+            .setTimestamp()
             .addFields(
               { name: 'ID', value: `${user.id}`, inline: true },
               {
