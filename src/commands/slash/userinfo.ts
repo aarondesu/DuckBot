@@ -19,9 +19,9 @@ export default class UserInfoCommand extends SlashCommand {
   }
 
   async exec(interaction: CommandInteraction) {
-    try {
-      await interaction.defer();
+    await interaction.defer();
 
+    try {
       const { guild } = interaction;
       const user = await this.client.users.fetch(
         interaction.options.get('user')?.value as Snowflake

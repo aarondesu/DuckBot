@@ -123,10 +123,10 @@ export default class TranslateCommand extends SlashCommand {
 
     if (sourceLang === undefined) {
       try {
-        const apiLangSource = await this.detectLanguage(sourceText);
+        const detectLang = await this.detectLanguage(sourceText);
         const translatedText = await TranslateCommand.translateText(
           sourceText,
-          apiLangSource.toUpperCase(),
+          detectLang.toUpperCase(),
           targetLang.toUpperCase()
         );
 
@@ -159,8 +159,10 @@ export default class TranslateCommand extends SlashCommand {
           ],
         });
       } catch (error) {
-        const msg = oneLine`Error handing translation. ${error as string}`;
-        await this.displayError(msg, interaction);
+        await this.displayError(
+          oneLine`Error handing translation. ${error as string}`,
+          interaction
+        );
       }
     }
   }
