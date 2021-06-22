@@ -59,10 +59,6 @@ jobs:
 
     needs: test_and_build
 
-    env:
-      project-id: "${{ secrets.projectId }}"
-      auth-token: "${{ secrets.authToken }}"
-
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -70,6 +66,7 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
+    if: github.ref == 'refs/head/main'
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4
