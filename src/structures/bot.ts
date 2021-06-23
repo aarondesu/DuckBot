@@ -9,6 +9,7 @@ import { resolve } from 'path';
 import logger from '@lib/logger';
 import SlashCommandHandler from './handlers/slash-command-handler';
 import { ClientConfig } from '../config';
+import CronJobHandler from './handlers/cronjob-handler';
 
 export default class DiscordBot extends AkairoClient {
   // TODO: Combine prefix command handler and slash command handler
@@ -29,6 +30,10 @@ export default class DiscordBot extends AkairoClient {
 
   inhibitorHandler = new InhibitorHandler(this, {
     directory: resolve(__dirname, '..', `inhibitors`),
+  });
+
+  cronJobHandler = new CronJobHandler(this, {
+    directory: resolve(__dirname, '..', `jobs`),
   });
 
   public constructor() {
@@ -77,6 +82,10 @@ export default class DiscordBot extends AkairoClient {
       logger.info(
         `${this.slashCommandHandler.modules.size} slash commands loaded.`
       );
+
+      logger.info('Loading cron jobs...');
+      this.cronJobHandler.loadAll();
+      logger.info(`${this.cronJobHandler.modules.size} cron jobs loaded.`);
 
       logger.info('Logging into discord...');
       await this.login(process.env.DISCORD_TOKEN);

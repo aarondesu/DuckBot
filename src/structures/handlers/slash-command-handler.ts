@@ -15,10 +15,12 @@ export default class SlashCommandHandler extends AkairoHandler {
       classToHandle: SlashCommand,
     });
 
+    // TEMP
     this.client.on('interaction', async (interaction) => {
       await this.handleCommand(interaction as CommandInteraction);
     });
 
+    // TEMP
     this.client.on('ready', async () => {
       await this.initializeCommands();
     });
