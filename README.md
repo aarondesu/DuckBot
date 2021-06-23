@@ -4,7 +4,7 @@
 
 ## Foreword
 
-This both isn't design to be used widely. It was only inteded to be used as a private bot for a single server. Either way this bot can be refractored to be used as a public bot with a few adjustments.
+This bot isn't design to be used widely. It was only inteded to be used as a private bot for a single server. Either way this bot can be refractored to be used as a public bot with a few adjustments.
 
 ## Requirements
 
