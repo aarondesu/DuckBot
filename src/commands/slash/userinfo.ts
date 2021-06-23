@@ -1,6 +1,5 @@
 import { CommandInteraction, MessageEmbed, Snowflake } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash_command';
-import logger from '@lib/logger';
 import { dateToString } from '@lib/utils';
 import { EmbedColorCoding } from '@constants';
 
