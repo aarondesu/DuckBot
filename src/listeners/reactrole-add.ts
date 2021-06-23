@@ -25,7 +25,10 @@ export default class ReactRoleAdd extends Listener {
         const giveRoles = [];
 
         for (const reactRole of reactionRoles) {
-          if (reactRole.emojiId === reaction.emoji.toString()) {
+          if (
+            reactRole.emojiId === reaction.emoji.toString() &&
+            reactRole.messageId === reaction.message.id
+          ) {
             giveRoles.push(member?.roles.add(reactRole.roleId));
           }
         }
