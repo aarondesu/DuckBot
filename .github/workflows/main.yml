@@ -92,3 +92,4 @@ jobs:
           HD_RAPID_API_KEY: ${{ secrets.RAPID_API_KEY }}
           HD_DEVELOPER_TEST_SERVER: ${{ secrets.DEVELOPER_TEST_SERVER }}
           HD_OWNER_IDS: ${{ secrets.OWNER_IDS }}
+          HD_PREFIX: ${{ secrets.PREFIX }}
