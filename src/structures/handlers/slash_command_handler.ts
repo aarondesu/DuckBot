@@ -41,10 +41,7 @@ export default class SlashCommandHandler extends AkairoHandler {
           const slash = data as SlashCommand;
 
           // Check to see if it is disabled, if disabled skip adding this command
-          if (
-            slash.options.disabled !== null &&
-            slash.options.disabled === true
-          )
+          if (!slash.options.disabled !== undefined && slash.options.disabled)
             // eslint-disable-next-line no-continue
             continue;
 

@@ -1,6 +1,7 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash_command';
 import { oneLine } from 'common-tags';
+import { EmbedColorCoding } from '@constants';
 
 export default class InfoCommand extends SlashCommand {
   public constructor() {
@@ -12,7 +13,7 @@ export default class InfoCommand extends SlashCommand {
   async exec(interaction: CommandInteraction) {
     const owner = await this.client.users.fetch('161427536096526336');
     const botInfo = new MessageEmbed()
-      .setColor('#add8e6')
+      .setColor(EmbedColorCoding.primary)
       .setURL('https://github.com/Shinudesu/RALMBot')
       .setThumbnail(
         'https://cdn.discordapp.com/attachments/841881726946377738/855647445777645618/33022.png'

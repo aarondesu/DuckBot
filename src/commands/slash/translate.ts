@@ -5,6 +5,7 @@ import DetectLanguage from 'detectlanguage';
 import axios, { AxiosRequestConfig } from 'axios';
 import logger from '@lib/logger';
 import { oneLine } from 'common-tags';
+import { EmbedColorCoding } from '@constants';
 
 type DeepLTranslate = {
   data: {
@@ -121,7 +122,7 @@ export default class TranslateCommand extends SlashCommand {
 
     await interaction.defer();
 
-    if (sourceLang === undefined) {
+    if (!sourceLang) {
       try {
         const detectLang = await this.detectLanguage(sourceText);
         const translatedText = await TranslateCommand.translateText(
@@ -133,6 +134,7 @@ export default class TranslateCommand extends SlashCommand {
         await interaction.editReply({
           embeds: [
             new MessageEmbed()
+              .setColor(EmbedColorCoding.primary)
               .setFooter('Translated using DeepL')
               .setTimestamp()
               .setDescription(translatedText),
@@ -153,6 +155,7 @@ export default class TranslateCommand extends SlashCommand {
         await interaction.editReply({
           embeds: [
             new MessageEmbed()
+              .setColor(EmbedColorCoding.primary)
               .setFooter('Translated using DeepL')
               .setTimestamp()
               .setDescription(translatedText),

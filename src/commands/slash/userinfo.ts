@@ -2,6 +2,7 @@ import { CommandInteraction, MessageEmbed, Snowflake } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash_command';
 import logger from '@lib/logger';
 import { dateToString } from '@lib/utils';
+import { EmbedColorCoding } from '@constants';
 
 export default class UserInfoCommand extends SlashCommand {
   public constructor() {
@@ -32,7 +33,7 @@ export default class UserInfoCommand extends SlashCommand {
       await interaction.editReply({
         embeds: [
           new MessageEmbed()
-            .setColor('#add8e6')
+            .setColor(EmbedColorCoding.primary)
             .setAuthor(`${user.tag}`, `${user.avatarURL() as string}`)
             .setThumbnail(`${user.avatarURL() as string}`)
             .setFooter('User Info')
@@ -47,7 +48,7 @@ export default class UserInfoCommand extends SlashCommand {
               {
                 name: 'Nickname',
                 value: `${
-                  guildUser?.nickname !== null
+                  !guildUser?.nickname
                     ? (guildUser?.nickname as string)
                     : 'none'
                 }`,
