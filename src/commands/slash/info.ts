@@ -31,7 +31,7 @@ export default class InfoCommand extends SlashCommand {
         },
         {
           name: 'Source',
-          value: '[Source ](https://github.com/Shinudesu/RALMBot)',
+          value: '[Click Here](https://github.com/Shinudesu/RALMBot)',
           inline: true,
         }
       )
