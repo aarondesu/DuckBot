@@ -5,6 +5,7 @@ import DetectLanguage from 'detectlanguage';
 import axios, { AxiosRequestConfig } from 'axios';
 import logger from '@lib/logger';
 import { oneLine } from 'common-tags';
+import { EmbedColorCoding } from '@constants';
 
 type DeepLTranslate = {
   data: {
@@ -121,26 +122,30 @@ export default class TranslateCommand extends SlashCommand {
 
     await interaction.defer();
 
-    if (sourceLang === undefined) {
+    if (!sourceLang) {
       try {
-        const apiLangSource = await this.detectLanguage(sourceText);
+        const detectLang = await this.detectLanguage(sourceText);
         const translatedText = await TranslateCommand.translateText(
           sourceText,
-          apiLangSource.toUpperCase(),
+          detectLang.toUpperCase(),
           targetLang.toUpperCase()
         );
 
         await interaction.editReply({
           embeds: [
             new MessageEmbed()
+              .setColor(EmbedColorCoding.primary)
               .setFooter('Translated using DeepL')
               .setTimestamp()
               .setDescription(translatedText),
           ],
         });
-      } catch (error) {
-        const msg = oneLine`Error handing translation. ${error as string}`;
-        await this.displayError(msg, interaction);
+      } catch ({ message, stack }) {
+        await this.displayError(
+          oneLine`Error handing translation. ${message as string}`,
+          stack,
+          interaction
+        );
       }
     } else {
       try {
@@ -153,14 +158,18 @@ export default class TranslateCommand extends SlashCommand {
         await interaction.editReply({
           embeds: [
             new MessageEmbed()
+              .setColor(EmbedColorCoding.primary)
               .setFooter('Translated using DeepL')
               .setTimestamp()
               .setDescription(translatedText),
           ],
         });
-      } catch (error) {
-        const msg = oneLine`Error handing translation. ${error as string}`;
-        await this.displayError(msg, interaction);
+      } catch ({ message, stack }) {
+        await this.displayError(
+          oneLine`Error handing translation. ${message as string}`,
+          stack,
+          interaction
+        );
       }
     }
   }

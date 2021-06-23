@@ -6,6 +6,7 @@ import {
 } from 'discord.js';
 import { AkairoModule, AkairoModuleOptions } from 'discord-akairo';
 import logger from '@lib/logger';
+import { EmbedColorCoding } from '@constants';
 
 export interface SlashCommandOptions extends AkairoModuleOptions {
   description: string;
@@ -26,20 +27,24 @@ export class SlashCommand extends AkairoModule {
     this.options = options;
   }
 
-  async displayError(message: string, interaction: CommandInteraction) {
+  async displayError(
+    message: string,
+    stack: string,
+    interaction: CommandInteraction
+  ) {
     try {
-      this.logger.error(message);
+      this.logger.error(`${message}:${stack}`);
 
       const embed = new MessageEmbed()
-        .setColor('#ff0000')
+        .setColor(EmbedColorCoding.error)
         .setFooter('Error handling command')
-        .setDescription(message);
+        .setDescription(`${this.constructor.name}: ${message}`);
 
       if (interaction.deferred)
         await interaction.editReply({ embeds: [embed] });
       else await interaction.reply({ embeds: [embed] });
-    } catch (interactionError) {
-      this.logger.error(`Failed to ${interactionError as string}`);
+    } catch ({ errMsg, errStack }) {
+      this.logger.error(`Failed to ${errMsg as string}: ${errStack as string}`);
     }
   }
 

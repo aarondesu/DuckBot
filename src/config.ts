@@ -1,9 +1,9 @@
 /* eslint import/prefer-default-export: 0 */
 import { PresenceData, Snowflake } from 'discord.js';
 import dotenv from 'dotenv';
-import { join } from 'path';
+import { resolve } from 'path';
 
-dotenv.config({ path: join(__dirname, '../.env') });
+dotenv.config({ path: resolve('.env') });
 
 export const ClientConfig = {
   owners: process.env.OWNER_IDS?.split(',') as Snowflake[],
