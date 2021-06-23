@@ -1,7 +1,6 @@
 import DiscordBot from '@structures/bot';
 import logger from '@lib/logger';
-import { connectDB } from '@database';
-import { oneLine } from 'common-tags';
+import connectDB from '@database';
 
 connectDB()
   .then((sequelize) => sequelize.sync())
@@ -17,8 +16,6 @@ connectDB()
   })
   .catch(({ message, stack }) => {
     logger.error(
-      oneLine`Unable to connet to database. ${message as string}. ${
-        stack as string
-      }`
+      `Unable to connet to database. ${message as string}. ${stack as string}`
     );
   });

@@ -52,7 +52,7 @@ export default class DiscordBot extends AkairoClient {
 
       logger.info('Loading inhibitors...');
       this.prefixCommandHandler.useInhibitorHandler(this.inhibitorHandler);
-      this.inhibitorHandler.loadAll();
+      // this.inhibitorHandler.loadAll();
       logger.info(`${this.inhibitorHandler.modules.size} inhibitors loaded.`);
 
       logger.info('Loading listeners...');
@@ -80,8 +80,10 @@ export default class DiscordBot extends AkairoClient {
 
       logger.info('Logging into discord...');
       await this.login(process.env.DISCORD_TOKEN);
-    } catch (error) {
-      logger.error(`Unable to login bot.. ${error as string}`);
+    } catch ({ message, stack }) {
+      logger.error(
+        `Unable to login bot.. ${message as string}: ${stack as string}`
+      );
       logger.error('Bot shutting down...');
       process.exit();
     }

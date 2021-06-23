@@ -52,8 +52,12 @@ export default class SlashCommandHandler extends AkairoHandler {
             options: slash.options.options,
           });
         }
-      } catch (error) {
-        logger.error(`Failed to add commands to guild. ${error as string}`);
+      } catch ({ message, stack }) {
+        logger.error(
+          `Failed to add commands to guild. ${message as string}: ${
+            stack as string
+          }`
+        );
       }
     }
   }

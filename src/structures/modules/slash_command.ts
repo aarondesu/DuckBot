@@ -43,8 +43,8 @@ export class SlashCommand extends AkairoModule {
       if (interaction.deferred)
         await interaction.editReply({ embeds: [embed] });
       else await interaction.reply({ embeds: [embed] });
-    } catch (interactionError) {
-      this.logger.error(`Failed to ${interactionError as string}`);
+    } catch ({ errMsg, errStack }) {
+      this.logger.error(`Failed to ${errMsg as string}: ${errStack as string}`);
     }
   }
 

@@ -68,8 +68,12 @@ export default class UserInfoCommand extends SlashCommand {
             ),
         ],
       });
-    } catch (error) {
-      logger.error(`Unable to retrieve user information. ${error as string}`);
+    } catch ({ messag: message, stack }) {
+      await this.displayError(
+        `Unable to retrieve user info ${message as string}`,
+        stack as string,
+        interaction
+      );
     }
   }
 }
