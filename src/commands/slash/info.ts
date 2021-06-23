@@ -1,5 +1,5 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js';
-import { SlashCommand } from '@structures/modules/slash_command';
+import { SlashCommand } from '@structures/modules/slash-command';
 import { oneLine } from 'common-tags';
 import { EmbedColorCoding } from '@constants';
 

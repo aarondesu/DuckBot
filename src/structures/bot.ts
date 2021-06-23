@@ -7,7 +7,7 @@ import {
 import { Intents } from 'discord.js';
 import { resolve } from 'path';
 import logger from '@lib/logger';
-import SlashCommandHandler from './handlers/slash_command_handler';
+import SlashCommandHandler from './handlers/slash-command-handler';
 import { ClientConfig } from '../config';
 
 export default class DiscordBot extends AkairoClient {

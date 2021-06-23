@@ -1,6 +1,6 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js';
 import {} from 'discord-akairo';
-import { SlashCommand } from '@structures/modules/slash_command';
+import { SlashCommand } from '@structures/modules/slash-command';
 import DetectLanguage from 'detectlanguage';
 import axios, { AxiosRequestConfig } from 'axios';
 import logger from '@lib/logger';
