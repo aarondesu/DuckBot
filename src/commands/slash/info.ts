@@ -40,9 +40,10 @@ export default class InfoCommand extends SlashCommand {
 
     try {
       await interaction.reply({ embeds: [botInfo] });
-    } catch (error) {
+    } catch ({ message, stack }) {
       await this.displayError(
-        oneLine`Failed to send message. ${error as string}`,
+        oneLine`Failed to send message. ${message as string}`,
+        stack,
         interaction
       );
     }

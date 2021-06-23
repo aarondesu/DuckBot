@@ -27,9 +27,13 @@ export class SlashCommand extends AkairoModule {
     this.options = options;
   }
 
-  async displayError(message: string, interaction: CommandInteraction) {
+  async displayError(
+    message: string,
+    stack: string,
+    interaction: CommandInteraction
+  ) {
     try {
-      this.logger.error(message);
+      this.logger.error(`${message}:${stack}`);
 
       const embed = new MessageEmbed()
         .setColor(EmbedColorCoding.error)

@@ -140,9 +140,12 @@ export default class TranslateCommand extends SlashCommand {
               .setDescription(translatedText),
           ],
         });
-      } catch (error) {
-        const msg = oneLine`Error handing translation. ${error as string}`;
-        await this.displayError(msg, interaction);
+      } catch ({ message, stack }) {
+        await this.displayError(
+          oneLine`Error handing translation. ${message as string}`,
+          stack,
+          interaction
+        );
       }
     } else {
       try {
@@ -161,9 +164,10 @@ export default class TranslateCommand extends SlashCommand {
               .setDescription(translatedText),
           ],
         });
-      } catch (error) {
+      } catch ({ message, stack }) {
         await this.displayError(
-          oneLine`Error handing translation. ${error as string}`,
+          oneLine`Error handing translation. ${message as string}`,
+          stack,
           interaction
         );
       }
