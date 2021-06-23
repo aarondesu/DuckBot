@@ -78,35 +78,12 @@ export default class ReaectRole extends Command {
 
       await cmdMessage.react(emoji);
 
-      /*
-      // TODO
-      let guild = await GuildModel.findOne({
-        where: { guildID: role.guild.id as string },
-      });
-
-      if (!guild) {
-        guild = await (
-          await GuildModel.create({ guildID: role.guild.id })
-        ).save();
-      }
-
-      await (
-        await ReactionRole.create({
-          messageID: messageId,
-          channelID: message.channel.id,
-          emoji: emojiId,
-          role: roleId,
-          guild,
-        })
-      ).save();
-*/
-
       return await cmdMessage.util?.reply({
         embeds: [
           new MessageEmbed()
             .setColor(EmbedColorCoding.primary)
             .setDescription(
-              `Reaction role successfully added into ${cmdMessage.url}`
+              `Reaction role successfully added into message (Click Here)[${cmdMessage.url}]`
             )
             .setFooter('Reaction role added!')
             .setTimestamp(),
