@@ -4,7 +4,14 @@ import { resolve } from 'path';
 import { Sequelize } from 'sequelize-typescript';
 
 export async function connectDB() {
-  return new Sequelize(DatabaseConfig.uri as string, {
+  const conf = `${DatabaseConfig.uri as string}`;
+  return new Sequelize(conf, {
     models: [resolve(__dirname, 'models')],
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   });
 }
