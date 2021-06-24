@@ -27,7 +27,7 @@ export class SlashCommand extends AkairoModule {
     this.options = options;
   }
 
-  async displayError(
+  async emitError(
     message: string,
     stack: string,
     interaction: CommandInteraction
