@@ -17,7 +17,7 @@ export default class DailyReminder extends CronJob {
     this.channels = new Collection<Snowflake, TextChannel>();
     this.embed = new MessageEmbed()
       .setColor(EmbedColorCoding.primary)
-      .setTitle('Daily Reset!!')
+      .setTitle('Dalies Reset!!')
       .setDescription('Dailies and Gathering Nodes have been reset!')
       .setThumbnail('https://i.postimg.cc/CLjbdZWZ/unknown.png')
       .setTimestamp();
