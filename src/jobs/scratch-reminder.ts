@@ -50,11 +50,7 @@ export default class ScratchReminder extends CronJob {
 
       await Promise.all(sendMsg);
     } catch ({ message, stack }) {
-      this.logger.error(
-        `Error sending scratch reminder: ${message as string}: ${
-          stack as string
-        }`
-      );
+      this.logger.error(`Error sending scratch reminder: ${stack as string}`);
     }
   }
 }

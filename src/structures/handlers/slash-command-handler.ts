@@ -61,11 +61,7 @@ export default class SlashCommandHandler extends AkairoHandler {
 
       await Promise.all(cmds);
     } catch ({ message, stack }) {
-      logger.error(
-        `Failed to add commands to guild. ${message as string}: ${
-          stack as string
-        }`
-      );
+      logger.error(`Failed to add commands to guild. ${stack as string}`);
     }
   }
 
@@ -86,7 +82,7 @@ export default class SlashCommandHandler extends AkairoHandler {
       await module.exec(interaction);
     } catch ({ message, stack }) {
       const strErr = ` Error occured while processing command. ${
-        message as string
+        stack as string
       }`;
 
       logger.error(strErr, stack);

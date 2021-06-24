@@ -27,9 +27,7 @@ export default class AddRoleJoin extends Listener {
       await guildMember.roles.add(guestRole);
     } catch ({ message, stack }) {
       logger.error(
-        `Failed to add role to user ${guildMember.user.tag}. ${
-          message as string
-        }: ${stack as string}`
+        `Failed to add role to user ${message as string}: ${stack as string}`
       );
     }
   }

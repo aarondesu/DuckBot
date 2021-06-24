@@ -42,9 +42,7 @@ export default class DailyReminder extends CronJob {
 
       await Promise.all(sendMsg);
     } catch ({ message, stack }) {
-      this.logger.error(
-        `Error sending daily reminder: ${message as string}: ${stack as string}`
-      );
+      this.logger.error(`Error sending daily reminder: ${stack as string}`);
     }
   }
 }

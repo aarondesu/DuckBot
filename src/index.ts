@@ -14,8 +14,6 @@ connectDB()
       )
     );
   })
-  .catch(({ message, stack }) => {
-    logger.error(
-      `Unable to connet to database. ${message as string}. ${stack as string}`
-    );
+  .catch(({ stack }) => {
+    logger.error(`Unable to connet to database. ${stack as string}`);
   });

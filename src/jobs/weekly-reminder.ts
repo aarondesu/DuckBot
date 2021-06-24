@@ -42,11 +42,7 @@ export default class WeeklyReminder extends CronJob {
 
       await Promise.all(sendMsg);
     } catch ({ message, stack }) {
-      this.logger.error(
-        `Error sending weekly reminder: ${message as string}: ${
-          stack as string
-        }`
-      );
+      this.logger.error(`Error sending weekly reminder: ${stack as string}`);
     }
   }
 }

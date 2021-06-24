@@ -62,9 +62,7 @@ export default class CronJobHandler extends AkairoHandler {
 
       await Promise.all(jobs);
     } catch ({ message, stack }) {
-      logger.error(
-        `Error loading cron jobs ${message as string}: ${stack as string}`
-      );
+      logger.error(`Error loading cron jobs ${stack as string}`);
     }
   }
 }

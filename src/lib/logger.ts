@@ -16,8 +16,13 @@ const customLevels = {
   debug: 4,
 };
 
+const level = () => {
+  return process.env.NODE_ENV === 'development' ? 'debug' : 'info';
+};
+
 const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
+  level: level(),
   levels: customLevels,
   format: customFormat,
 });

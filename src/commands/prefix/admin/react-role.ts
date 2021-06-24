@@ -90,11 +90,7 @@ export default class ReaectRole extends Command {
         ],
       });
     } catch ({ errMsg, stack }) {
-      logger.error(
-        `${this.constructor.name} error. ${errMsg as string}. ${
-          stack as string
-        }`
-      );
+      logger.error(`${this.constructor.name} error. ${stack as string}`);
       return cmdMessage.util?.reply({
         embeds: [
           new MessageEmbed()
