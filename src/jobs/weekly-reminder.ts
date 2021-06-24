@@ -10,7 +10,7 @@ export default class WeeklyReminder extends CronJob {
 
   public constructor() {
     super('weekly-reminder-job', {
-      schedule: ' * * 17 * Wed', // Display info every 4:00 JST
+      schedule: ' 0 0 17 * Wed', // Display info every 4:00 JST
       timezone: 'Asia/Tokyo',
     });
 
