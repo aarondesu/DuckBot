@@ -5,8 +5,7 @@ import {
   AkairoHandlerOptions,
 } from 'discord-akairo';
 import logger from '@lib/logger';
-import { oneLine } from 'common-tags';
-import { SlashCommand } from '@structures/modules/slash_command';
+import { SlashCommand } from '@structures/modules/slash-command';
 
 export default class SlashCommandHandler extends AkairoHandler {
   public constructor(client: AkairoClient, options?: AkairoHandlerOptions) {
@@ -15,10 +14,12 @@ export default class SlashCommandHandler extends AkairoHandler {
       classToHandle: SlashCommand,
     });
 
+    // TEMP
     this.client.on('interaction', async (interaction) => {
       await this.handleCommand(interaction as CommandInteraction);
     });
 
+    // TEMP
     this.client.on('ready', async () => {
       await this.initializeCommands();
     });
@@ -30,12 +31,15 @@ export default class SlashCommandHandler extends AkairoHandler {
     const guilds = this.client.guilds.cache.map((guild) => guild.id);
 
     // Add commands to joined server
-    logger.info('Adding commands to joined servers.');
-    for (const id of guilds) {
-      // Clear all commands from server
-      this.client.guilds.cache.get(id)?.commands.set([]);
+    logger.info('Adding slash commands to joined servers.');
 
-      try {
+    try {
+      const cmds = [];
+
+      for (const id of guilds) {
+        // Clear all commands from server
+        this.client.guilds.cache.get(id)?.commands.set([]);
+
         // Add the commands
         for (const [, data] of this.modules) {
           const slash = data as SlashCommand;
@@ -45,20 +49,23 @@ export default class SlashCommandHandler extends AkairoHandler {
             // eslint-disable-next-line no-continue
             continue;
 
-          // eslint-disable-next-line no-await-in-loop
-          await this.client.guilds.cache.get(id)?.commands.create({
-            name: slash.id,
-            description: slash.options.description,
-            options: slash.options.options,
-          });
+          cmds.push(
+            this.client.guilds.cache.get(id)?.commands.create({
+              name: slash.id,
+              description: slash.options.description,
+              options: slash.options.options,
+            })
+          );
         }
-      } catch ({ message, stack }) {
-        logger.error(
-          `Failed to add commands to guild. ${message as string}: ${
-            stack as string
-          }`
-        );
       }
+
+      await Promise.all(cmds);
+    } catch ({ message, stack }) {
+      logger.error(
+        `Failed to add commands to guild. ${message as string}: ${
+          stack as string
+        }`
+      );
     }
   }
 
@@ -77,8 +84,10 @@ export default class SlashCommandHandler extends AkairoHandler {
       }
 
       await module.exec(interaction);
-    } catch ({ name, message, stack }) {
-      const strErr = oneLine` Error occured while processing command. ${message}`;
+    } catch ({ message, stack }) {
+      const strErr = ` Error occured while processing command. ${
+        message as string
+      }`;
 
       logger.error(strErr, stack);
       await interaction.reply({

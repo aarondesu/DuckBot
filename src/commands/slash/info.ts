@@ -1,5 +1,5 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js';
-import { SlashCommand } from '@structures/modules/slash_command';
+import { SlashCommand } from '@structures/modules/slash-command';
 import { oneLine } from 'common-tags';
 import { EmbedColorCoding } from '@constants';
 
@@ -18,7 +18,7 @@ export default class InfoCommand extends SlashCommand {
       .setThumbnail(
         'https://cdn.discordapp.com/attachments/841881726946377738/855647445777645618/33022.png'
       )
-      .setTitle('RALM-Botm(Rappy A La Mode Bot)')
+      .setTitle('RALM-Bot(Rappy A La Mode Bot)')
       .setDescription('Discord bot for our server!')
       .setThumbnail(
         'https://cdn.discordapp.com/attachments/841881726946377738/855647445777645618/33022.png'

@@ -23,8 +23,6 @@
     "tsc": "tsc"
   },
   "dependencies": {
-    "@types/common-tags": "^1.8.0",
-    "@types/node-emoji": "^1.8.1",
     "axios": "^0.21.1",
     "common-tags": "^1.8.0",
     "cross-env": "^7.0.3",
@@ -36,7 +34,6 @@
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
     "node-cron": "^3.0.0",
-    "node-emoji": "^1.10.0",
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.1.13",
@@ -44,10 +41,13 @@
     "sequelize-typescript": "^2.1.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^4.3.2",
+    "tz-offset": "^0.0.2",
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@types/common-tags": "^1.8.0",
     "@types/node": "^15.12.2",
+    "@types/node-cron": "^2.0.3",
     "@types/validator": "^13.1.4",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",

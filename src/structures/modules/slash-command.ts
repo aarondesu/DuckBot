@@ -48,9 +48,15 @@ export class SlashCommand extends AkairoModule {
     }
   }
 
+  async init() {
+    throw new Error(
+      `Command ${this.constructor.name} execute function not yet implemented.`
+    );
+  }
+
   async exec(_interaction: CommandInteraction) {
     throw new Error(
-      `Command ${this.constructor.name} execute not yet implemented.`
+      `Command ${this.constructor.name} execute function not yet implemented.`
     );
   }
 }

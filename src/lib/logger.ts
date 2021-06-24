@@ -39,6 +39,7 @@ const levels = {
 };
 
 const logger = winston.createLogger({
+  level: 'debug',
   levels,
   format,
   transports,

@@ -26,7 +26,10 @@ export default class ReactRoleRemove extends Listener {
         const removeRoles = [];
 
         for (const reactRole of reactionRoles) {
-          if (reactRole.emojiId === reaction.emoji.toString()) {
+          if (
+            reactRole.emojiId === reaction.emoji.toString() &&
+            reactRole.messageId === reaction.message.id
+          ) {
             removeRoles.push(member?.roles.remove(reactRole.roleId));
           }
         }
