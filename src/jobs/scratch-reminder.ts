@@ -10,8 +10,7 @@ export default class ScratchReminder extends CronJob {
 
   public constructor() {
     super('scratch-reminder-job', {
-      // schedule: '* * 12,18,22,23 * * *',
-      schedule: '*/20 * * * * *',
+      schedule: '* * 12,18,22,23 * * *',
       timezone: 'Asia/Tokyo',
     });
 
