@@ -22,6 +22,7 @@ export default class CronJobHandler extends AkairoHandler {
     });
   }
 
+  // TODO: Rework job initialization
   async initializeJobs() {
     try {
       const jobs = [];
