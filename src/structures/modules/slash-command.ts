@@ -33,8 +33,7 @@ export class SlashCommand extends AkairoModule {
     interaction: CommandInteraction
   ) {
     try {
-      this.logger.error(`${message}:${stack}`);
-
+      this.logger.error(stack);
       const embed = new MessageEmbed()
         .setColor(EmbedColorCoding.error)
         .setFooter('Error handling command')
@@ -44,7 +43,7 @@ export class SlashCommand extends AkairoModule {
         await interaction.editReply({ embeds: [embed] });
       else await interaction.reply({ embeds: [embed] });
     } catch ({ errMsg, errStack }) {
-      this.logger.error(`Failed to ${errMsg as string}: ${errStack as string}`);
+      this.logger.error(`Failed to ${errStack as string}`);
     }
   }
 

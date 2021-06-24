@@ -90,9 +90,7 @@ export default class DiscordBot extends AkairoClient {
       logger.info('Logging into discord...');
       await this.login(process.env.DISCORD_TOKEN);
     } catch ({ message, stack }) {
-      logger.error(
-        `Unable to login bot.. ${message as string}: ${stack as string}`
-      );
+      logger.error(`Unable to login bot.. ${stack as string}`);
       logger.error('Bot shutting down...');
       process.exit();
     }

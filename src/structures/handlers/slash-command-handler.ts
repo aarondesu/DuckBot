@@ -6,6 +6,7 @@ import {
 } from 'discord-akairo';
 import logger from '@lib/logger';
 import { SlashCommand } from '@structures/modules/slash-command';
+import { EmbedColorCoding } from '@constants';
 
 export default class SlashCommandHandler extends AkairoHandler {
   public constructor(client: AkairoClient, options?: AkairoHandlerOptions) {
@@ -14,12 +15,14 @@ export default class SlashCommandHandler extends AkairoHandler {
       classToHandle: SlashCommand,
     });
 
-    // TEMP
+    this.setup();
+  }
+
+  setup() {
     this.client.on('interaction', async (interaction) => {
       await this.handleCommand(interaction as CommandInteraction);
     });
 
-    // TEMP
     this.client.on('ready', async () => {
       await this.initializeCommands();
     });
@@ -35,7 +38,6 @@ export default class SlashCommandHandler extends AkairoHandler {
 
     try {
       const cmds = [];
-
       for (const id of guilds) {
         // Clear all commands from server
         this.client.guilds.cache.get(id)?.commands.set([]);
@@ -61,11 +63,7 @@ export default class SlashCommandHandler extends AkairoHandler {
 
       await Promise.all(cmds);
     } catch ({ message, stack }) {
-      logger.error(
-        `Failed to add commands to guild. ${message as string}: ${
-          stack as string
-        }`
-      );
+      logger.error(`Failed to add commands to guild. ${stack as string}`);
     }
   }
 
@@ -86,7 +84,7 @@ export default class SlashCommandHandler extends AkairoHandler {
       await module.exec(interaction);
     } catch ({ message, stack }) {
       const strErr = ` Error occured while processing command. ${
-        message as string
+        stack as string
       }`;
 
       logger.error(strErr, stack);
@@ -94,8 +92,8 @@ export default class SlashCommandHandler extends AkairoHandler {
         ephemeral: true,
         embeds: [
           new MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('Command Failed')
+            .setColor(EmbedColorCoding.error)
+            .setFooter('Command Failed')
             .setDescription(strErr),
         ],
       });

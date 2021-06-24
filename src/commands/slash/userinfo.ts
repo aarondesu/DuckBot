@@ -6,13 +6,12 @@ import { EmbedColorCoding } from '@constants';
 export default class UserInfoCommand extends SlashCommand {
   public constructor() {
     super('userinfo', {
-      description: `Gets information regarding the user`,
+      description: `Gets information regarding the user. Requests self if no user supplied`,
       options: [
         {
           name: 'user',
           description: 'User to be searched.',
           type: 'USER',
-          required: true,
         },
       ],
     });
@@ -23,6 +22,7 @@ export default class UserInfoCommand extends SlashCommand {
 
     try {
       const { guild } = interaction;
+
       const user = await this.client.users.fetch(
         interaction.options.get('user')?.value as Snowflake
       );

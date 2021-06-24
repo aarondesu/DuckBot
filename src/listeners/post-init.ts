@@ -16,7 +16,5 @@ export default class PostInit extends Listener {
 
     // Set presence data
     this.client.user?.setPresence(DuckPresence);
-
-    // Schedule a cron
   }
 }

@@ -37,11 +37,7 @@ export default class ReactRoleRemove extends Listener {
         await Promise.all(removeRoles);
       }
     } catch ({ message, stack }) {
-      logger.error(
-        `Unexpeted error while removing role. ${message as string}: ${
-          stack as string
-        }`
-      );
+      logger.error(`Unexpeted error while removing role. ${stack as string}`);
     }
   }
 }

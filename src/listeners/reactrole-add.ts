@@ -36,11 +36,7 @@ export default class ReactRoleAdd extends Listener {
         await Promise.all(giveRoles);
       }
     } catch ({ message, stack }) {
-      logger.error(
-        `Unexpeted error while adding role. ${message as string}: ${
-          stack as string
-        }`
-      );
+      logger.error(`Unexpeted error while adding role. ${stack as string}`);
     }
   }
 }
