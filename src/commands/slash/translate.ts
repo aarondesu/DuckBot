@@ -4,7 +4,6 @@ import { SlashCommand } from '@structures/modules/slash-command';
 import DetectLanguage from 'detectlanguage';
 import axios, { AxiosRequestConfig } from 'axios';
 import logger from '@lib/logger';
-import { oneLine } from 'common-tags';
 import { EmbedColorCoding } from '@constants';
 
 type DeepLTranslate = {
@@ -142,7 +141,7 @@ export default class TranslateCommand extends SlashCommand {
         });
       } catch ({ message, stack }) {
         await this.displayError(
-          oneLine`Error handing translation. ${message as string}`,
+          `Error handing translation. ${message as string}`,
           stack,
           interaction
         );
@@ -166,7 +165,7 @@ export default class TranslateCommand extends SlashCommand {
         });
       } catch ({ message, stack }) {
         await this.displayError(
-          oneLine`Error handing translation. ${message as string}`,
+          `Error handing translation. ${message as string}`,
           stack,
           interaction
         );
