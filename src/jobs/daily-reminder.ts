@@ -10,7 +10,7 @@ export default class DailyReminder extends CronJob {
 
   public constructor() {
     super('daily-reminder-job', {
-      schedule: '*/10 * * * * *', // Display info every 4:00 JST
+      schedule: '* * * 4 * *', // Display info every 4:00 JST
       timezone: 'Asia/Tokyo',
     });
 
