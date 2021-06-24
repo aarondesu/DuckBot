@@ -168,7 +168,7 @@ export default class RandomAnimal extends SlashCommand {
       }
 
       if (!result) throw new Error('Unable to get random animal.');
-      else await interaction.reply({ content: result });
+      else await interaction.editReply({ content: result });
     } catch ({ message, stack }) {
       await this.displayError(
         `Random animal failed to process command: ${message as string}`,
