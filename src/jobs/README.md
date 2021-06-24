@@ -4,10 +4,12 @@
 
 ## Example
 
+Filename: `daily-reminder.ts`
+
 ```typescript
 import { CronJob } from "@structures/modules/cronjob";
 
-class DailyReminder extends CronJob {
+export default class DailyReminder extends CronJob {
   public constructor() {
     super("daily-reminder-job", {
       schedule: "",
