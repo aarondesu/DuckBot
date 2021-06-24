@@ -14,6 +14,6 @@ export default async function connectDB() {
         rejectUnauthorized: false,
       },
     },
-    logging: (message) => logger.info(`DB: ${message}`),
+    logging: (message) => logger.debug(`DB: ${message}`),
   });
 }
