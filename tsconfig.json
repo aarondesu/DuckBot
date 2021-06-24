@@ -25,8 +25,6 @@
     "emitDecoratorMetadata": true,
 
     "newLine": "lf",
-    "skipLibCheck": false,
-    "typeRoots": ["src/typings", "node_modules/@types"]
-  },
-  "include": ["src/**/*", "src/typings/**/*"]
+    "skipLibCheck": true
+  }
 }

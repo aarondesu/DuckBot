@@ -6,6 +6,7 @@ import {
 } from 'discord-akairo';
 import logger from '@lib/logger';
 import { SlashCommand } from '@structures/modules/slash-command';
+import { EmbedColorCoding } from '@constants';
 
 export default class SlashCommandHandler extends AkairoHandler {
   public constructor(client: AkairoClient, options?: AkairoHandlerOptions) {
@@ -14,12 +15,14 @@ export default class SlashCommandHandler extends AkairoHandler {
       classToHandle: SlashCommand,
     });
 
-    // TEMP
+    this.setup();
+  }
+
+  setup() {
     this.client.on('interaction', async (interaction) => {
       await this.handleCommand(interaction as CommandInteraction);
     });
 
-    // TEMP
     this.client.on('ready', async () => {
       await this.initializeCommands();
     });
@@ -35,7 +38,6 @@ export default class SlashCommandHandler extends AkairoHandler {
 
     try {
       const cmds = [];
-
       for (const id of guilds) {
         // Clear all commands from server
         this.client.guilds.cache.get(id)?.commands.set([]);
@@ -90,8 +92,8 @@ export default class SlashCommandHandler extends AkairoHandler {
         ephemeral: true,
         embeds: [
           new MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('Command Failed')
+            .setColor(EmbedColorCoding.error)
+            .setFooter('Command Failed')
             .setDescription(strErr),
         ],
       });
