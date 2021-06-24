@@ -37,6 +37,7 @@
     "node-cron": "^3.0.0",
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.4",
+    "random-animals-api": "^1.2.6",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.6.2",
     "sequelize-typescript": "^2.1.0",
