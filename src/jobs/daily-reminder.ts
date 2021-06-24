@@ -10,7 +10,7 @@ export default class DailyReminder extends CronJob {
 
   public constructor() {
     super('daily-reminder-job', {
-      schedule: '* * 4 * * *', // Display info every 4:00 JST
+      schedule: '*/10 * * * * *', // Display info every 4:00 JST
       timezone: 'Asia/Tokyo',
     });
 
@@ -18,10 +18,8 @@ export default class DailyReminder extends CronJob {
     this.embed = new MessageEmbed()
       .setColor(EmbedColorCoding.primary)
       .setTitle('Daily Reset!!')
-      .setDescription(
-        'This is a reminder to remind that dailies have been reset!'
-      )
-      .setThumbnail('')
+      .setDescription('Dailies and Gathering Nodes have been reset!')
+      .setThumbnail('https://i.postimg.cc/CLjbdZWZ/unknown.png')
       .setTimestamp();
   }
 
@@ -38,7 +36,6 @@ export default class DailyReminder extends CronJob {
   async exec() {
     try {
       const sendMsg = [];
-
       for (const [, channel] of this.channels) {
         sendMsg.push(channel.send({ embeds: [this.embed] }));
       }

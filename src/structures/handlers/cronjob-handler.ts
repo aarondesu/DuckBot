@@ -25,7 +25,6 @@ export default class CronJobHandler extends AkairoHandler {
   async initializeJobs() {
     try {
       const jobs = [];
-
       // Get all chrone jobs
       for (const [, data] of this.modules) {
         const cronJob = data as CronJob;
