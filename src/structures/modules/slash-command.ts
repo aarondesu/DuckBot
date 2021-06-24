@@ -37,6 +37,7 @@ export class SlashCommand extends AkairoModule {
       const embed = new MessageEmbed()
         .setColor(EmbedColorCoding.error)
         .setFooter('Error handling command')
+        .setTimestamp()
         .setDescription(`${this.constructor.name}: ${message}`);
 
       if (interaction.deferred)

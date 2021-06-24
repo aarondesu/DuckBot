@@ -30,10 +30,6 @@ export default class RandomAnimal extends SlashCommand {
               value: 'fox',
             },
             {
-              name: 'Shiba',
-              value: 'shiba',
-            },
-            {
               name: 'Panda',
               value: 'panda',
             },
@@ -112,22 +108,6 @@ export default class RandomAnimal extends SlashCommand {
     }
   }
 
-  static async requestShiba() {
-    type shibeRes = {
-      data: string[];
-    };
-
-    try {
-      const result = await axios.request<shibeRes>({
-        url: 'http://shibe.online/api/shibes',
-      });
-
-      return result.data.data[0];
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-
   static async requestDuck() {
     try {
       type duckRes = {
@@ -179,9 +159,6 @@ export default class RandomAnimal extends SlashCommand {
           break;
         case 'fox':
           result = await RandomAnimal.requestFox();
-          break;
-        case 'shiba':
-          result = await RandomAnimal.requestShiba();
           break;
         case 'panda':
           result = await RandomAnimal.requestPanda();
