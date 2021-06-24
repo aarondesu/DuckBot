@@ -35,7 +35,7 @@ export default class ScratchReminder extends CronJob {
   async exec() {
     try {
       // Check time if before 23:00 JST
-      if (moment().isBefore(moment.tz('10:40:00', 'HH:mm:ss', 'Asia/Tokyo'))) {
+      if (moment().isBefore(moment.tz('23:00:00', 'HH:mm:ss', 'Asia/Tokyo'))) {
         this.embed.setDescription(
           'Reminder to use up your free daily sg scratch before the reset'
         );
