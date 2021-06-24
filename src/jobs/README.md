@@ -12,7 +12,7 @@ import { CronJob } from "@structures/modules/cronjob";
 export default class DailyReminder extends CronJob {
   public constructor() {
     super("daily-reminder-job", {
-      schedule: "",
+      schedule: "* * * * * *",
       timezone: "Asia/Tokyo",
     });
   }
