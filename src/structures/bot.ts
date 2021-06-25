@@ -51,48 +51,42 @@ export default class DiscordBot extends AkairoClient {
   }
 
   async start() {
-    try {
-      logger.info('Initializing bot...');
-      logger.info(`Starting bot in NODE_ENV=${process.env.NODE_ENV as string}`);
+    logger.info('Initializing bot...');
+    logger.info(`Starting bot in NODE_ENV=${process.env.NODE_ENV as string}`);
 
-      logger.info('Loading inhibitors...');
-      this.prefixCommandHandler.useInhibitorHandler(this.inhibitorHandler);
-      // this.inhibitorHandler.loadAll();
-      logger.info(`${this.inhibitorHandler.modules.size} inhibitors loaded.`);
+    logger.info('Loading inhibitors...');
+    this.prefixCommandHandler.useInhibitorHandler(this.inhibitorHandler);
+    // this.inhibitorHandler.loadAll();
+    logger.info(`${this.inhibitorHandler.modules.size} inhibitors loaded.`);
 
-      logger.info('Loading listeners...');
-      this.prefixCommandHandler.useListenerHandler(this.listenerHandler);
-      this.listenerHandler.setEmitters({
-        listenerHandler: this.listenerHandler,
-        inhibitorHandler: this.inhibitorHandler,
-        prefixCommandHandler: this.prefixCommandHandler,
-        slashCommandHandler: this.slashCommandHandler,
-      });
-      this.listenerHandler.loadAll();
-      logger.info(`${this.listenerHandler.modules.size} listeners loaded.`);
+    logger.info('Loading listeners...');
+    this.prefixCommandHandler.useListenerHandler(this.listenerHandler);
+    this.listenerHandler.setEmitters({
+      listenerHandler: this.listenerHandler,
+      inhibitorHandler: this.inhibitorHandler,
+      prefixCommandHandler: this.prefixCommandHandler,
+      slashCommandHandler: this.slashCommandHandler,
+    });
+    this.listenerHandler.loadAll();
+    logger.info(`${this.listenerHandler.modules.size} listeners loaded.`);
 
-      logger.info('Loading prefix commands...');
-      this.prefixCommandHandler.loadAll();
-      logger.info(
-        `${this.prefixCommandHandler.modules.size} prefix commands loaded.`
-      );
+    logger.info('Loading prefix commands...');
+    this.prefixCommandHandler.loadAll();
+    logger.info(
+      `${this.prefixCommandHandler.modules.size} prefix commands loaded.`
+    );
 
-      logger.info('Loading slash commands...');
-      this.slashCommandHandler.loadAll();
-      logger.info(
-        `${this.slashCommandHandler.modules.size} slash commands loaded.`
-      );
+    logger.info('Loading slash commands...');
+    this.slashCommandHandler.loadAll();
+    logger.info(
+      `${this.slashCommandHandler.modules.size} slash commands loaded.`
+    );
 
-      logger.info('Loading cron jobs...');
-      this.cronJobHandler.loadAll();
-      logger.info(`${this.cronJobHandler.modules.size} cron jobs loaded.`);
+    logger.info('Loading cron jobs...');
+    this.cronJobHandler.loadAll();
+    logger.info(`${this.cronJobHandler.modules.size} cron jobs loaded.`);
 
-      logger.info('Logging into discord...');
-      await this.login(process.env.DISCORD_TOKEN);
-    } catch ({ message, stack }) {
-      logger.error(`Unable to login bot.. ${stack as string}`);
-      logger.error('Bot shutting down...');
-      process.exit();
-    }
+    logger.info('Logging into discord...');
+    await this.login(process.env.DISCORD_TOKEN);
   }
 }
