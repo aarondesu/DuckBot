@@ -42,7 +42,7 @@ export default class RandomAnimal extends SlashCommand {
       ],
     });
   }
-  
+
   async exec(interaction: CommandInteraction) {
     try {
       const animal = interaction.options.get('animal')?.value as string;
@@ -63,12 +63,12 @@ export default class RandomAnimal extends SlashCommand {
         case 'fox':
           result = await animals.fox();
           break;
-          
+
         case 'panda':
           result = await animals.panda();
           break;
         case 'duck':
-          result = await RandomAnimal.requestDuck();
+          result = await animals.duck();
           break;
         default:
           result = undefined;
