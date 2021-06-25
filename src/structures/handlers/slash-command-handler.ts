@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js';
+import { CommandInteraction } from 'discord.js';
 import {
   AkairoClient,
   AkairoHandler,
@@ -6,7 +6,6 @@ import {
 } from 'discord-akairo';
 import logger from '@lib/logger';
 import { SlashCommand } from '@structures/modules/slash-command';
-import { EmbedColorCoding } from '@constants';
 
 export default class SlashCommandHandler extends AkairoHandler {
   public constructor(client: AkairoClient, options?: AkairoHandlerOptions) {
@@ -24,12 +23,12 @@ export default class SlashCommandHandler extends AkairoHandler {
     });
 
     this.client.on('ready', async () => {
-      await this.initializeCommands();
+      await this.registerSlashCommands();
     });
   }
 
   // TODO: Add permission validation
-  async initializeCommands() {
+  async registerSlashCommands() {
     // Get all joined guilds
     const guilds = this.client.guilds.cache.map((guild) => guild.id);
 
@@ -39,9 +38,6 @@ export default class SlashCommandHandler extends AkairoHandler {
     try {
       const cmds = [];
       for (const id of guilds) {
-        // Clear all commands from server
-        this.client.guilds.cache.get(id)?.commands.set([]);
-
         // Add the commands
         for (const [, data] of this.modules) {
           const slash = data as SlashCommand;
@@ -62,7 +58,7 @@ export default class SlashCommandHandler extends AkairoHandler {
       }
 
       await Promise.all(cmds);
-    } catch ({ message, stack }) {
+    } catch ({ stack }) {
       logger.error(`Failed to add commands to guild. ${stack as string}`);
     }
   }
@@ -73,31 +69,14 @@ export default class SlashCommandHandler extends AkairoHandler {
   async handleCommand(interaction: CommandInteraction) {
     if (!interaction.isCommand()) return;
 
-    try {
-      // Get command and execute
-      const module = this.findCommand(interaction.commandName) as SlashCommand;
-      if (!module) {
-        throw new Error(`Command not found!`);
-        return;
-      }
-
-      await module.exec(interaction);
-    } catch ({ message, stack }) {
-      const strErr = ` Error occured while processing command. ${
-        stack as string
-      }`;
-
-      logger.error(strErr, stack);
-      await interaction.reply({
-        ephemeral: true,
-        embeds: [
-          new MessageEmbed()
-            .setColor(EmbedColorCoding.error)
-            .setFooter('Command Failed')
-            .setDescription(strErr),
-        ],
-      });
+    // Get command and execute
+    const module = this.findCommand(interaction.commandName) as SlashCommand;
+    if (!module) {
+      throw new Error(`Command not found!`);
+      return;
     }
+
+    await module.exec(interaction);
   }
 
   findCommand(name: string) {
