@@ -92,3 +92,19 @@ export async function panda() {
     throw new Error(error);
   }
 }
+
+export async function duck() {
+  try {
+    type duckRes = {
+      url: string;
+    };
+
+    const result = await axios.request<duckRes>({
+      url: 'https://random-d.uk/api/v1/random?type=png',
+    });
+
+    return result.data.url;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
