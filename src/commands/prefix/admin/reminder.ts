@@ -1,5 +1,7 @@
 import { Message, MessageEmbed } from 'discord.js';
 import { Command } from 'discord-akairo';
+import Mustache from 'mustache';
+import moment from 'moment-timezone';
 
 import json from '@json/reminders.json';
 import { JSONDeclaration, Schedule } from '@typings/reminders';
@@ -31,20 +33,43 @@ export default class CheckReminder extends Command {
     const result = reminders.filter((sc) => sc.name === name);
 
     if (result.length === 1) {
+      const currentTime = moment.tz(moment(), 'Asia/Tokyo');
       const sched = result[0];
+
+      const templateVars = {
+        currentdate: {
+          sec: currentTime.second(),
+          minute: currentTime.minute(),
+          hour: currentTime.hour(),
+          day: currentTime.day(),
+          month: currentTime.month(),
+          nextHour: currentTime.add(1, 'hour').startOf('hour'),
+        },
+        launchLink:
+          '[(Click here to launch PSO2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)',
+      };
 
       const messageEmbed = new MessageEmbed()
         .setColor(EmbedColorCoding.primary)
-        .setTitle(sched.content.title)
-        .setImage(sched.content.image ? sched.content.image : '')
-        .setDescription(sched.content.message ? sched.content.message : '')
+        .setTitle(
+          Mustache.render(
+            sched.content.title ? sched.content.title : '',
+            templateVars
+          )
+        )
+        .setDescription(Mustache.render(sched.content.message, templateVars))
         .setThumbnail(sched.content.thumbnail ? sched.content.thumbnail : '')
+        .setImage(sched.content.image ? sched.content.image : '')
         .setFooter('Duck Reminder')
         .setTimestamp();
 
       if (sched.content.fields && sched.content.fields.length > 0) {
         for (const field of sched.content.fields)
-          messageEmbed.addField(field.name, field.value, field.inline);
+          messageEmbed.addField(
+            Mustache.render(field.name, templateVars),
+            Mustache.render(field.value, templateVars),
+            field.inline
+          );
       }
 
       await message.reply({ embeds: [messageEmbed] });
