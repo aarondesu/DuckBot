@@ -77,7 +77,12 @@ export default class ReminderJob extends CronJob {
 
           const messageEmbed = new MessageEmbed()
             .setColor(EmbedColorCoding.primary)
-            .setTitle(Mustache.render(data.content.title, templateVars))
+            .setTitle(
+              Mustache.render(
+                data.content.title ? data.content.title : '',
+                templateVars
+              )
+            )
             .setDescription(Mustache.render(data.content.message, templateVars))
             .setThumbnail(data.content.thumbnail ? data.content.thumbnail : '')
             .setImage(data.content.image ? data.content.image : '')
