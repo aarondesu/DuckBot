@@ -1,9 +1,9 @@
 {
-  "name": "ralm-bot",
+  "name": "duck-bot",
   "version": "1.0.0",
   "description": "Discord bot for private server",
   "main": "dist/index.js",
-  "repository": "https://github.com/Shinudesu/RALMBot.git",
+  "repository": "https://github.com/Shinudesu/DuckBot.git",
   "author": "shinudesu",
   "license": "MIT",
   "private": true,
@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@heroku-cli/color": "^1.1.14",
+    "@types/mustache": "^4.1.1",
     "axios": "^0.21.1",
     "common-tags": "^1.8.0",
     "cross-env": "^7.0.3",
@@ -34,6 +35,7 @@
     "emoji-regex": "^9.2.2",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
+    "mustache": "^4.2.0",
     "node-cron": "^3.0.0",
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.4",

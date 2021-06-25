@@ -5,9 +5,9 @@
       "hours": [4]
     },
     "content": {
-      "title": "⏰ Daily has been reset!",
-      "thumbnail": "https://i.postimg.cc/CLjbdZWZ/unknown.png",
-      "message": "Daily tasks and gathering nodes have been reset!"
+      "title": "⏰ DAILIY TASKS RESET!",
+      "thumbnail": "https://i.postimg.cc/wT18Wq6k/unknown.png",
+      "message": "• Daily tasks and gathering nodes have been reset!\n\n[(Click here to launch PSO2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
     }
   },
   {
@@ -17,9 +17,9 @@
       "daysOfWeek": ["wednesday"]
     },
     "content": {
-      "title": "⏰ Weeklies has been reset!",
-      "thumbnail": "https://i.postimg.cc/CLjbdZWZ/unknown.png",
-      "message": "Weeklies have been reset!"
+      "title": "⏰ WEEKLIY TASKS RESET!",
+      "thumbnail": "https://i.postimg.cc/wT18Wq6k/unknown.png",
+      "message": "• Weekly task have been reset! Task will be available once the maintenance has ended.\n\n[(Click here to launch PSO2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
     }
   },
   {
@@ -28,10 +28,9 @@
       "hours": [12, 18, 20, 21, 22, 23]
     },
     "content": {
-      "title": "🔔 SG SCRATCH REMINDER",
-      "thumbnail": "https://i.postimg.cc/ZnWfgXxy/item02.png",
+      "title": "🔔 DAILY FREE SG SCRATCH REMINDER",
       "image": "https://pso2.jp/players/catalog/img/banner/sg_20210616_01.jpg",
-      "message": "Reminder to use up your sg scratch before the reset!"
+      "message": "• Reminder to use up your sg scratch before the reset!\n\n[(Click here to launch PSO2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
     }
   },
   {
@@ -40,21 +39,20 @@
       "hours": [0]
     },
     "content": {
-      "title": "⏰ SG SCRATCH RESET",
-      "thumbnail": "https://i.postimg.cc/ZnWfgXxy/item02.png",
-      "mmessage": ""
+      "title": "⏰ DAILY FREE SG SCRATCH RESET",
+      "image": "https://pso2.jp/players/catalog/img/banner/sg_20210616_01.jpg",
+      "mmessage": "• Daily free sg scratch has been reset! Don't forget to pull.\n\n[(Click here to launch PSO2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
     }
   },
   {
     "name": "pso2-day",
     "time": {
       "hours": [0, 12, 18, 20, 21, 22, 23],
-      "daysOfWeek": [],
       "days": [2, 22]
     },
     "content": {
       "title": "🎉 PSO2 DAY",
-      "message": "PSO2 day has just started. Enjoy bonuses both on NGS and PSO2! \nPremium PSO2 day at 22nd",
+      "message": "• PSO2 day has just started. Enjoy bonuses both on NGS and PSO2! \n\n• Premium PSO2 day at 22nd\n\n[(Click here to launch PSO2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)",
       "image": "https://i2.wp.com/www.bumped.org/psublog/wp-content/uploads/2019/01/Super-PSO2-Day.jpg?resize=508%2C210&ssl=1",
       "fields": [
         {

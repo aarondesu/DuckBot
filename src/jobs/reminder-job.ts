@@ -2,6 +2,7 @@
 import { CronJob } from '@structures/modules/cronjob';
 import moment from 'moment-timezone';
 import { Collection, MessageEmbed, Snowflake, TextChannel } from 'discord.js';
+import Mustache from 'mustache';
 
 import json from '@json/reminders.json';
 import { JSONDeclaration, Schedule, Day } from '@typings/reminders';
@@ -63,18 +64,33 @@ export default class ReminderJob extends CronJob {
 
         // Check if current hour for the reminder
         if (data.time.hours.includes(currentTime.hour())) {
+          const templateVars = {
+            currentdate: {
+              sec: currentTime.second(),
+              minute: currentTime.minute(),
+              hour: currentTime.hour(),
+              day: currentTime.day(),
+              month: currentTime.month(),
+              nextHour: currentTime.add(1, 'hour').startOf('hour'),
+            },
+          };
+
           const messageEmbed = new MessageEmbed()
             .setColor(EmbedColorCoding.primary)
-            .setTitle(data.content.title)
-            .setImage(data.content.image ? data.content.image : '')
-            .setDescription(data.content.message ? data.content.message : '')
+            .setTitle(Mustache.render(data.content.title, templateVars))
+            .setDescription(Mustache.render(data.content.message, templateVars))
             .setThumbnail(data.content.thumbnail ? data.content.thumbnail : '')
+            .setImage(data.content.image ? data.content.image : '')
             .setFooter('Duck Reminder')
             .setTimestamp();
 
           if (data.content.fields && data.content.fields.length > 0) {
             for (const field of data.content.fields)
-              messageEmbed.addField(field.name, field.value, field.inline);
+              messageEmbed.addField(
+                Mustache.render(field.name, templateVars),
+                Mustache.render(field.value, templateVars),
+                field.inline
+              );
           }
 
           for (const [, channel] of this.channels) {
