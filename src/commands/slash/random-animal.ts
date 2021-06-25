@@ -30,19 +30,19 @@ export default class RandomAnimal extends SlashCommand {
               value: 'fox',
             },
             {
-              name: 'Shiba',
-              value: 'shiba',
-            },
-            {
               name: 'Panda',
               value: 'panda',
+            },
+            {
+              name: 'Duck',
+              value: 'duck',
             },
           ],
         },
       ],
     });
   }
-
+  
   async exec(interaction: CommandInteraction) {
     try {
       const animal = interaction.options.get('animal')?.value as string;
@@ -63,11 +63,12 @@ export default class RandomAnimal extends SlashCommand {
         case 'fox':
           result = await animals.fox();
           break;
-        case 'shiba':
-          result = await animals.shiba();
-          break;
+          
         case 'panda':
           result = await animals.panda();
+          break;
+        case 'duck':
+          result = await RandomAnimal.requestDuck();
           break;
         default:
           result = undefined;
@@ -75,7 +76,7 @@ export default class RandomAnimal extends SlashCommand {
       }
 
       if (!result) throw new Error('Unable to get random animal.');
-      else await interaction.reply({ content: result });
+      else await interaction.editReply({ content: result });
     } catch ({ message, stack }) {
       await this.emitError(message, stack, interaction);
     }
