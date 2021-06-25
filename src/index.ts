@@ -7,12 +7,11 @@ connectDB()
   .then(() => {
     logger.info('Connetion to database successful!');
     const client = new DiscordBot();
-    client.start().catch(({ message, stack }) =>
-      logger.error(
-        `An error occured. ${message as string} 
-      \nStack: ${stack as string}`
-      )
-    );
+    client.start().catch(({ stack }) => {
+      logger.error(stack as string);
+      logger.error('Bot is exiting...');
+      process.exit(0);
+    });
   })
   .catch(({ stack }) => {
     logger.error(`Unable to connet to database. ${stack as string}`);
