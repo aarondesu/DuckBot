@@ -140,11 +140,7 @@ export default class TranslateCommand extends SlashCommand {
           ],
         });
       } catch ({ message, stack }) {
-        await this.displayError(
-          `Error handing translation. ${message as string}`,
-          stack,
-          interaction
-        );
+        await this.emitError(message, stack, interaction);
       }
     } else {
       try {
@@ -164,11 +160,7 @@ export default class TranslateCommand extends SlashCommand {
           ],
         });
       } catch ({ message, stack }) {
-        await this.displayError(
-          `Error handing translation. ${message as string}`,
-          stack,
-          interaction
-        );
+        await this.emitError(message, stack, interaction);
       }
     }
   }

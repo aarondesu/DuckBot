@@ -1,6 +1,6 @@
 import { CommandInteraction } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash-command';
-import axios from 'axios';
+import * as animals from '@lib/random-animals';
 
 export default class RandomAnimal extends SlashCommand {
   public constructor() {
@@ -42,104 +42,7 @@ export default class RandomAnimal extends SlashCommand {
       ],
     });
   }
-
-  static async requestDog() {
-    try {
-      type dogRes = {
-        message: string;
-      };
-
-      const result = await axios.request<dogRes>({
-        url: 'https://dog.ceo/api/breeds/image/random',
-      });
-
-      return result.data.message;
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-
-  static async requestCat() {
-    try {
-      type catRes = {
-        file: string;
-      };
-
-      const result = await axios.request<catRes>({
-        url: 'https://aws.random.cat/meow',
-      });
-      return result.data.file;
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-
-  static async requestBunny() {
-    try {
-      type bunnyRes = {
-        media: {
-          poster: string;
-        };
-      };
-
-      const result = await axios.request<bunnyRes>({
-        url: 'https://api.bunnies.io/v2/loop/random/?media=gif,png',
-      });
-
-      return result.data.media.poster;
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-
-  static async requestFox() {
-    try {
-      type foxRes = {
-        image: string;
-      };
-
-      const result = await axios.request<foxRes>({
-        url: 'https://randomfox.ca/floof/',
-      });
-
-      return result.data.image;
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-
-  static async requestDuck() {
-    try {
-      type duckRes = {
-        url: string;
-      };
-
-      const result = await axios.request<duckRes>({
-        url: 'https://random-d.uk/api/v1/random?type=png',
-      });
-
-      return result.data.url;
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-
-  static async requestPanda() {
-    try {
-      type pandaRes = {
-        link: string;
-      };
-
-      const result = await axios.request<pandaRes>({
-        url: 'https://some-random-api.ml/img/panda',
-      });
-
-      return result.data.link;
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-
+  
   async exec(interaction: CommandInteraction) {
     try {
       const animal = interaction.options.get('animal')?.value as string;
@@ -149,19 +52,20 @@ export default class RandomAnimal extends SlashCommand {
 
       switch (animal) {
         case 'cat':
-          result = await RandomAnimal.requestCat();
+          result = await animals.cat();
           break;
         case 'dog':
-          result = await RandomAnimal.requestDog();
+          result = await animals.dog();
           break;
         case 'bunny':
-          result = await RandomAnimal.requestBunny();
+          result = await animals.bunny();
           break;
         case 'fox':
-          result = await RandomAnimal.requestFox();
+          result = await animals.fox();
           break;
+          
         case 'panda':
-          result = await RandomAnimal.requestPanda();
+          result = await animals.panda();
           break;
         case 'duck':
           result = await RandomAnimal.requestDuck();
@@ -174,11 +78,7 @@ export default class RandomAnimal extends SlashCommand {
       if (!result) throw new Error('Unable to get random animal.');
       else await interaction.editReply({ content: result });
     } catch ({ message, stack }) {
-      await this.displayError(
-        `Random animal failed to process command: ${message as string}`,
-        stack,
-        interaction
-      );
+      await this.emitError(message, stack, interaction);
     }
   }
 }
