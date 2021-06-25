@@ -1,6 +1,6 @@
-# RALM Bot
+# DuckBot
 
-![Build Status](https://github.com/Shinudesu/RALMBot/actions/workflows/main.yml/badge.svg?branch=main)
+![Build Status](https://github.com/Shinudesu/DuckBot/actions/workflows/main.yml/badge.svg?branch=main)
 
 ## Foreword
 

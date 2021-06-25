@@ -1,9 +1,9 @@
 {
-  "name": "ralm-bot",
+  "name": "duck-bot",
   "version": "1.0.0",
   "description": "Discord bot for private server",
   "main": "dist/index.js",
-  "repository": "https://github.com/Shinudesu/RALMBot.git",
+  "repository": "https://github.com/Shinudesu/DuckBot.git",
   "author": "shinudesu",
   "license": "MIT",
   "private": true,

@@ -14,11 +14,11 @@ export default class InfoCommand extends SlashCommand {
     const owner = await this.client.users.fetch('161427536096526336');
     const botInfo = new MessageEmbed()
       .setColor(EmbedColorCoding.primary)
-      .setURL('https://github.com/Shinudesu/RALMBot')
+      .setURL('https://github.com/Shinudesu/DuckBot')
       .setThumbnail(
         'https://cdn.discordapp.com/attachments/841881726946377738/855647445777645618/33022.png'
       )
-      .setTitle('RALM-Bot(Rappy A La Mode Bot)')
+      .setTitle('DuckBot')
       .setDescription('Discord bot for our server!')
       .setThumbnail(
         'https://cdn.discordapp.com/attachments/841881726946377738/855647445777645618/33022.png'
@@ -26,12 +26,12 @@ export default class InfoCommand extends SlashCommand {
       .addFields(
         {
           name: 'Report Issues',
-          value: '[Click Here](https://github.com/Shinudesu/RALMBot/issues)',
+          value: '[Click Here](https://github.com/Shinudesu/DuckBot/issues)',
           inline: true,
         },
         {
           name: 'Source',
-          value: '[Click Here](https://github.com/Shinudesu/RALMBot)',
+          value: '[Click Here](https://github.com/Shinudesu/DuckBot)',
           inline: true,
         }
       )
