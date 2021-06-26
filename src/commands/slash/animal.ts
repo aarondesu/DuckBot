@@ -8,7 +8,7 @@ export default class AnimalCommand extends SlashCommand {
       description: `Generates a random image`,
       options: [
         {
-          name: 'animal',
+          name: 'type',
           description: 'Animal to search for',
           type: 'STRING',
           required: true,
@@ -45,7 +45,7 @@ export default class AnimalCommand extends SlashCommand {
 
   async exec(interaction: CommandInteraction) {
     try {
-      const animal = interaction.options.get('animal')?.value as string;
+      const animal = interaction.options.get('type')?.value as string;
       let result: string | undefined;
 
       await interaction.defer();
