@@ -16,6 +16,7 @@ export default class AnimeCommand extends SlashCommand {
               name: 'type',
               description: 'The type of NSFW to search, default will be waifu',
               type: 'STRING',
+              required: true,
               choices: [
                 {
                   name: 'waifu',
