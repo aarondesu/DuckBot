@@ -1,6 +1,6 @@
 import { CommandInteraction } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash-command';
-import * as animals from '@lib/random-animals';
+import * as animals from '@lib/animal-api';
 
 export default class AnimalCommand extends SlashCommand {
   public constructor() {
