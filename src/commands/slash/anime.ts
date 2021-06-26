@@ -67,7 +67,13 @@ export default class AnimeCommand extends SlashCommand {
           await interaction.editReply({ content: result });
         }
       } else if (wallpaper) {
-        // TODO
+        await interaction.editReply({
+          embeds: [
+            new MessageEmbed()
+              .setDescription('Feature not yet implemented.')
+              .setTimestamp(),
+          ],
+        });
       }
     } catch ({ message, stack }) {
       await this.emitError(message, stack, interaction);
