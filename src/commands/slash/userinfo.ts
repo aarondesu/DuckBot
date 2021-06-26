@@ -46,11 +46,7 @@ export default class UserInfoCommand extends SlashCommand {
               },
               {
                 name: 'Nickname',
-                value: `${
-                  !guildUser?.nickname
-                    ? (guildUser?.nickname as string)
-                    : 'none'
-                }`,
+                value: `${(guildUser?.nickname as string) || 'none'}`,
               },
               {
                 name: 'Account Created',

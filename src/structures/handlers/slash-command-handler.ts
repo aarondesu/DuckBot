@@ -6,6 +6,7 @@ import {
 } from 'discord-akairo';
 import logger from '@lib/logger';
 import { SlashCommand } from '@structures/modules/slash-command';
+import { ClientConfig } from '@config';
 
 export default class SlashCommandHandler extends AkairoHandler {
   public constructor(client: AkairoClient, options?: AkairoHandlerOptions) {
@@ -38,6 +39,12 @@ export default class SlashCommandHandler extends AkairoHandler {
     try {
       const cmds = [];
       for (const id of guilds) {
+        // Check if reset commands
+        if (ClientConfig.resetCommands === 'true') {
+          this.client.guilds.cache.get(id)?.commands.set([]);
+          logger.info(`Reset commands for GUILD_ID: ${id}`);
+        }
+
         // Add the commands
         for (const [, data] of this.modules) {
           const slash = data as SlashCommand;
@@ -56,6 +63,9 @@ export default class SlashCommandHandler extends AkairoHandler {
           );
         }
       }
+
+      // Set reset commands
+      process.env.RESET_COMMANDS = 'false';
 
       await Promise.all(cmds);
     } catch ({ stack }) {
