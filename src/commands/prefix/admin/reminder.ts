@@ -45,8 +45,6 @@ export default class CheckReminder extends Command {
           month: currentTime.month(),
           nextHour: currentTime.add(1, 'hour').startOf('hour'),
         },
-        launchLink:
-          '[(Click here to launch PSO2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)',
       };
 
       const messageEmbed = new MessageEmbed()
