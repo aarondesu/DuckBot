@@ -25,11 +25,10 @@ export default class CronJobHandler extends AkairoHandler {
   // TODO: Rework job initialization
   async initializeJobs() {
     try {
-      const jobs = [];
       // Get all chrone jobs
       for (const [, data] of this.modules) {
         const cronJob = data as CronJob;
-        jobs.push(cronJob.init());
+        cronJob.init();
 
         // Validate the schedule
         const valid = cron.validate(cronJob.options.schedule);
@@ -45,7 +44,7 @@ export default class CronJobHandler extends AkairoHandler {
           // Schedule the cron
           cronJob.task = cron.schedule(
             cronJob.options.schedule,
-            async () => cronJob.exec(),
+            () => cronJob.exec(),
             {
               scheduled: true,
               timezone: cronJob.options.timezone,
@@ -59,8 +58,6 @@ export default class CronJobHandler extends AkairoHandler {
           );
         }
       }
-
-      await Promise.all(jobs);
     } catch ({ message, stack }) {
       logger.error(`Error loading cron jobs ${stack as string}`);
     }

@@ -23,7 +23,7 @@ export default class ReminderJob extends CronJob {
     this.channels = new Collection<Snowflake, TextChannel>();
   }
 
-  async init() {
+  init() {
     // Get data from JSON file
     const schedule: JSONDeclaration = [...json] as JSONDeclaration;
     for (const sched of schedule) {
@@ -36,8 +36,6 @@ export default class ReminderJob extends CronJob {
     ) as Collection<Snowflake, TextChannel>;
 
     this.channels = cache.filter((ch) => ch.name === 'general');
-
-    await Promise.all(cache);
   }
 
   async exec() {
