@@ -2,9 +2,9 @@ import { CommandInteraction } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash-command';
 import * as animals from '@lib/random-animals';
 
-export default class RandomAnimal extends SlashCommand {
+export default class AnimalCommand extends SlashCommand {
   public constructor() {
-    super('random-animal', {
+    super('animal', {
       description: `Generates a random image`,
       options: [
         {
