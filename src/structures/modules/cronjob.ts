@@ -13,9 +13,9 @@ export interface CronJobOptions extends AkairoModuleOptions {
 export class CronJob extends AkairoModule {
   options: CronJobOptions;
 
-  logger: Logger;
-
   task: ScheduledTask | undefined;
+
+  logger: Logger;
 
   public constructor(id: string, options: CronJobOptions) {
     super(id, options);
@@ -25,9 +25,9 @@ export class CronJob extends AkairoModule {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  async init(): Promise<void> {}
+  init() {}
 
-  async exec() {
+  exec() {
     throw new Error(
       `CronJob ${this.constructor.name} initialize is not yet implemented.`
     );
