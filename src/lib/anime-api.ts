@@ -22,6 +22,17 @@ export async function nsfwImage(
 
 /*
 export async function wallpaper(name?: string | undefined): Promise<string> {
-  return name ? name : '';
+  const a
+
+  const authToken = axios.post(
+    'https://www.reddit.com/api/v1/access_token',
+    {},
+    {
+      auth: {
+        
+      }
+      headers: {},
+    }
+  );
 }
 */
