@@ -8,7 +8,7 @@ import { Intents } from 'discord.js';
 import { resolve } from 'path';
 import logger from '@lib/logger';
 import SlashCommandHandler from './handlers/slash-command-handler';
-import { ClientConfig } from '../config';
+import { APITokens, ClientConfig } from '../config';
 import CronJobHandler from './handlers/cronjob-handler';
 
 export default class DiscordBot extends AkairoClient {
@@ -52,7 +52,7 @@ export default class DiscordBot extends AkairoClient {
 
   async start() {
     logger.info('Initializing bot...');
-    logger.info(`Starting bot in NODE_ENV=${process.env.NODE_ENV as string}`);
+    logger.info(`Starting bot in NODE_ENV=${ClientConfig.environment}`);
 
     logger.info('Loading inhibitors...');
     this.prefixCommandHandler.useInhibitorHandler(this.inhibitorHandler);
@@ -87,6 +87,6 @@ export default class DiscordBot extends AkairoClient {
     logger.info(`${this.cronJobHandler.modules.size} cron jobs loaded.`);
 
     logger.info('Logging into discord...');
-    await this.login(process.env.DISCORD_TOKEN);
+    await this.login(APITokens.discordToken);
   }
 }
