@@ -1,5 +1,5 @@
 /* eslint-disable no-continue */
-import { CronJob } from '@structures/modules/cronjob';
+import { CronJob } from '@structures/modules/cron-job';
 import moment from 'moment-timezone';
 import { Collection, MessageEmbed, Snowflake, TextChannel } from 'discord.js';
 
@@ -40,19 +40,20 @@ export default class ReminderJob extends CronJob {
   async exec() {
     try {
       const sendMessage = [];
-      for (const [, data] of this.reminders) {
+      for (const [, schedule] of this.reminders) {
         const currentTime = moment.tz(moment(), 'Asia/Tokyo');
 
         // Check if reminder has days set
-        if (data.time.days && data.time.days.length > 0) {
+        if (schedule.time.days && schedule.time.days.length > 0) {
           // Checks if the day doesn't include today, if not skip this reminder
-          if (!data.time.days?.includes(currentTime.day())) continue;
+          if (!schedule.time.days?.includes(Number(currentTime.format('DD'))))
+            continue;
         }
 
         // Check if reminder has day of week set
-        if (data.time.daysOfWeek && data.time.daysOfWeek?.length > 0) {
+        if (schedule.time.daysOfWeek && schedule.time.daysOfWeek?.length > 0) {
           if (
-            !data.time.daysOfWeek.includes(
+            !schedule.time.daysOfWeek.includes(
               currentTime.format('dddd').toLowerCase() as Day
             )
           )
@@ -60,18 +61,18 @@ export default class ReminderJob extends CronJob {
         }
 
         // Check if current hour for the reminder
-        if (data.time.hours.includes(currentTime.hour())) {
+        if (schedule.time.hours.includes(Number(currentTime.format('HH')))) {
           const messageEmbed = new MessageEmbed()
             .setColor(EmbedColorCoding.primary)
-            .setTitle(data.content.title || '')
-            .setDescription(data.content.message)
-            .setThumbnail(data.content.thumbnail || '')
-            .setImage(data.content.image || '')
+            .setTitle(schedule.content.title || '')
+            .setDescription(schedule.content.message)
+            .setThumbnail(schedule.content.thumbnail || '')
+            .setImage(schedule.content.image || '')
             .setFooter('Duck Reminder')
             .setTimestamp();
 
-          if (data.content.fields && data.content.fields.length > 0) {
-            for (const field of data.content.fields)
+          if (schedule.content.fields && schedule.content.fields.length > 0) {
+            for (const field of schedule.content.fields)
               messageEmbed.addField(field.name, field.value, field.inline);
           }
 

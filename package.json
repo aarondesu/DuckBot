@@ -20,11 +20,11 @@
     "start": "cross-env NODE_ENV=production node -r ./tsconfig-paths-bootstrap.js dist/src/index.js",
     "quickstart": "yarn clean && yarn build && yarn start",
     "test": "jest",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "install": "yarn install --production --check-files"
   },
   "dependencies": {
     "@heroku-cli/color": "^1.1.14",
-    "@types/mustache": "^4.1.1",
     "axios": "^0.21.1",
     "common-tags": "^1.8.0",
     "cross-env": "^7.0.3",

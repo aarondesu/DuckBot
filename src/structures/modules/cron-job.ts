@@ -24,8 +24,11 @@ export class CronJob extends AkairoModule {
     this.logger = logger;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  init() {}
+  init() {
+    throw new Error(
+      `CronJob ${this.constructor.name} initialize is not yet implemented.`
+    );
+  }
 
   exec() {
     throw new Error(

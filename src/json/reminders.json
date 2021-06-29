@@ -5,7 +5,7 @@
       "hours": [4]
     },
     "content": {
-      "title": "⏰ DAILIY TASKS RESET!",
+      "title": "⏰ DAILY TASKS RESET!",
       "thumbnail": "https://i.postimg.cc/wT18Wq6k/unknown.png",
       "message": "• Daily tasks and gathering nodes have been reset!\n\n[(Click here to launch pso2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
     }
@@ -36,7 +36,7 @@
   {
     "name": "sg-after",
     "time": {
-      "hours": [24]
+      "hours": [0]
     },
     "content": {
       "title": "⏰ DAILY FREE SG SCRATCH RESET",
