@@ -18,6 +18,9 @@ export const APITokens = {
   discordToken: process.env.DISCORD_TOKEN,
   rapidApi: process.env.RAPID_API_KEY,
   detectLanguage: process.env.DETECTLANGUAGE_API_KEY,
+  redditSecret: process.env.REDDIT_SECRET_KEY,
+  redditClientId: process.env.REDDIT_CLIENT_ID,
+  redditRefreshToken: process.env.REDDIT_REFRESH_TOKEN,
 };
 
 export const DuckPresence: PresenceData = {

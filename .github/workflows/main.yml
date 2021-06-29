@@ -87,6 +87,8 @@ jobs:
           heroku_email: "${{ secrets.HEROKU_USER_EMAIL }}"
           procfile: "worker: yarn start"
         env:
+          HD_NPM_CONFIG_PRODUCTION: true
+          HD_YARN_PRODUCTION: true
           HD_DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           HD_DETECTLANGUAGE_API_KEY: ${{ secrets.DETECTLANGUAGE_API_KEY }}
           HD_RAPID_API_KEY: ${{ secrets.RAPID_API_KEY }}
