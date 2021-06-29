@@ -4,7 +4,7 @@ import {
   AkairoHandler,
   AkairoHandlerOptions,
 } from 'discord-akairo';
-import { CronJob } from '@structures/modules/cronjob';
+import { CronJob } from '@structures/modules/cron-job';
 import cron from 'node-cron';
 import logger from '@lib/logger';
 import moment from 'moment-timezone';
@@ -37,7 +37,7 @@ export default class CronJobHandler extends AkairoHandler {
         // Validate the time zone
         if (tz && !!moment.tz.zone(tz as string) === false)
           throw new Error(
-            'Invalid timezon! Please refer to https://momentjs.com/timezone/ for valid timezones.'
+            'Invalid timezone! Please refer to https://momentjs.com/timezone/ for valid timezones.'
           );
 
         if (valid) {

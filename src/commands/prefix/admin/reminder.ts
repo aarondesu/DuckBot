@@ -1,9 +1,11 @@
 import { Message, MessageEmbed } from 'discord.js';
 import { Command } from 'discord-akairo';
+import moment from 'moment-timezone';
 
 import json from '@json/reminders.json';
 import { JSONDeclaration, Schedule } from '@typings/reminders';
 import { EmbedColorCoding } from '@constants';
+import logger from '@lib/logger';
 
 interface CmdArgs {
   name: string;
