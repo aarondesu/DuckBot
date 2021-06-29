@@ -20,8 +20,7 @@
     "start": "cross-env NODE_ENV=production node -r ./tsconfig-paths-bootstrap.js dist/src/index.js",
     "quickstart": "yarn clean && yarn build && yarn start",
     "test": "jest",
-    "tsc": "tsc",
-    "install": "yarn install --production --check-files"
+    "tsc": "tsc"
   },
   "dependencies": {
     "@heroku-cli/color": "^1.1.14",
@@ -42,6 +41,7 @@
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.6.2",
     "sequelize-typescript": "^2.1.0",
+    "snoowrap": "^1.23.0",
     "tsconfig-paths": "^3.9.0",
     "tz-offset": "^0.0.2",
     "winston": "^3.3.3"
