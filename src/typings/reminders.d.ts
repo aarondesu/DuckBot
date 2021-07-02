@@ -20,9 +20,9 @@ interface Field {
 }
 
 interface Content {
-  title: string;
+  title?: string;
   thumbnail?: string;
-  message: string;
+  message?: string;
   image?: string;
   fields?: Field[];
 }
