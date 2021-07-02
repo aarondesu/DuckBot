@@ -5,7 +5,6 @@
       "hours": [4]
     },
     "content": {
-      "title": "⏰ DAILY TASKS RESET!",
       "thumbnail": "https://i.postimg.cc/wT18Wq6k/unknown.png",
       "message": "• Daily tasks and gathering nodes have been reset!\n\n[(Click here to launch pso2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
     }
@@ -17,7 +16,6 @@
       "daysOfWeek": ["wednesday"]
     },
     "content": {
-      "title": "⏰ WEEKLIY TASKS RESET!",
       "thumbnail": "https://i.postimg.cc/wT18Wq6k/unknown.png",
       "message": "• Weekly task have been reset! Task will be available once the maintenance has ended.\n\n[(Click here to launch pso2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
     }
@@ -28,7 +26,6 @@
       "hours": [12, 18, 20, 21, 22, 23]
     },
     "content": {
-      "title": "🔔 DAILY FREE SG SCRATCH REMINDER",
       "thumbnail": "https://i.postimg.cc/TPTRrbWh/Screenshot-52.png",
       "message": "• Reminder to use up your sg scratch before the reset!\n\n[(Click here to launch pso2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
     }
@@ -39,7 +36,6 @@
       "hours": [0]
     },
     "content": {
-      "title": "⏰ DAILY FREE SG SCRATCH RESET",
       "thumbnail": "https://i.postimg.cc/TPTRrbWh/Screenshot-52.png",
       "mmessage": "• Daily free sg scratch has been reset! Don't forget to pull.\n\n[(Click here to launch pso2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
     }
@@ -62,7 +58,7 @@
         },
         {
           "name": "NGS",
-          "value": "• 22 SG ticket (x2) \n• 5% Experiance Boost \n• Rare Drop Boost +20%",
+          "value": "• 22 SG ticket (x2) \n• Experiance Boost +5% \n• Rare Drop Boost +20%",
           "inline": true
         }
       ]
