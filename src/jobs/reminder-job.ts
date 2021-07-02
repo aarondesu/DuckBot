@@ -65,7 +65,7 @@ export default class ReminderJob extends CronJob {
           const messageEmbed = new MessageEmbed()
             .setColor(EmbedColorCoding.primary)
             .setTitle(schedule.content.title || '')
-            .setDescription(schedule.content.message)
+            .setDescription(schedule.content.message || '')
             .setThumbnail(schedule.content.thumbnail || '')
             .setImage(schedule.content.image || '')
             .setFooter('Duck Reminder')

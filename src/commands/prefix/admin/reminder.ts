@@ -36,7 +36,7 @@ export default class CheckReminder extends Command {
       const messageEmbed = new MessageEmbed()
         .setColor(EmbedColorCoding.primary)
         .setTitle(sched.content.title || '')
-        .setDescription(sched.content.message)
+        .setDescription(sched.content.message || '')
         .setThumbnail(sched.content.thumbnail || '')
         .setImage(sched.content.image || '')
         .setFooter('Duck Reminder')
