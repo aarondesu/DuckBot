@@ -1,4 +1,4 @@
-name: Build & Deploy
+name: Test & Deploy
 
 on:
   push:
@@ -37,19 +37,6 @@ jobs:
       - name: Run build
         run: yarn build
 
-      - name: Cache build for deployment
-        uses: actions/cache@v2.1.6
-        with:
-          path: |
-            ./dist
-            ./package.json
-            ./pm2.yml
-            ./tsconfig-paths-bootstrap.js
-            ./tsconfig.json
-            ./yarn.lock
-            ./procfile
-          key: ${{ github.sha }}-${{ runner.os }}-${{ matrix.node-version }}
-
   deploy:
     name: Deploy to heroku
 
@@ -66,19 +53,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.4
 
-      - name: Cache build for deployment
-        uses: actions/cache@v2.1.6
-        with:
-          path: |
-            ./dist
-            ./package.json
-            ./pm2.yml
-            ./tsconfig-paths-bootstrap.js
-            ./tsconfig.json
-            ./yarn.lock
-            ./procfile
-          key: ${{ github.sha }}-${{ runner.os }}-${{ matrix.node-version }}
-
       - name: Deploy to heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
@@ -87,8 +61,8 @@ jobs:
           heroku_email: "${{ secrets.HEROKU_USER_EMAIL }}"
           procfile: "worker: yarn start"
         env:
-          HD_NPM_CONFIG_PRODUCTION: true
-          HD_YARN_PRODUCTION: true
+          HD_NPM_CONFIG_PRODUCTION: false
+          HD_YARN_PRODUCTION: false
           HD_DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           HD_DETECTLANGUAGE_API_KEY: ${{ secrets.DETECTLANGUAGE_API_KEY }}
           HD_RAPID_API_KEY: ${{ secrets.RAPID_API_KEY }}

@@ -16,7 +16,6 @@
     },
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true,
 
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
@@ -26,6 +25,7 @@
     "emitDecoratorMetadata": true,
 
     "newLine": "lf",
+    "resolveJsonModule": true,
     "skipLibCheck": true
   }
 }
