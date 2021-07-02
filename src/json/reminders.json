@@ -53,7 +53,7 @@
     "content": {
       "title": "🎉 PSO2 DAY",
       "message": "• PSO2 day has just started. Enjoy bonuses both on NGS and PSO2! \n\n• Premium PSO2 day at 22nd\n\n[(Click here to launch pso2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)",
-      "image": "https://i2.wp.com/www.bumped.org/psublog/wp-content/uploads/2019/01/Super-PSO2-Day.jpg?resize=508%2C210&ssl=1",
+      "image": "https://www.bumped.org/phantasy/wp-content/uploads/2021/06/pso2-day-banner.jpg",
       "fields": [
         {
           "name": "PSO2",
@@ -62,7 +62,7 @@
         },
         {
           "name": "NGS",
-          "value": "• 22 SG ticket \n• Rare Drop Boost +10%",
+          "value": "• 22 SG ticket (x2) \n• 5% Experiance Boost \n• Rare Drop Boost +20%",
           "inline": true
         }
       ]
