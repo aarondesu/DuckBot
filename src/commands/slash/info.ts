@@ -2,7 +2,7 @@ import { CommandInteraction } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash-command';
 import { oneLine } from 'common-tags';
 import { COLOR_PRIMARY } from '@constants';
-import { EmbedUtil } from '@lib/utils';
+import { EmbedBuilderUtil } from '@lib/utils';
 
 export default class InfoCommand extends SlashCommand {
   public constructor() {
@@ -17,7 +17,7 @@ export default class InfoCommand extends SlashCommand {
     try {
       await interaction.reply({
         embeds: [
-          EmbedUtil({
+          EmbedBuilderUtil({
             color: COLOR_PRIMARY,
             url: 'https://github.com/Shinudesu/DuckBot',
             thumbnail:

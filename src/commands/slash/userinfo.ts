@@ -1,6 +1,6 @@
 import { CommandInteraction, Snowflake } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash-command';
-import { dateToString, EmbedUtil } from '@lib/utils';
+import { dateToString, EmbedBuilderUtil } from '@lib/utils';
 import { COLOR_PRIMARY } from '@constants';
 
 export default class UserInfoCommand extends SlashCommand {
@@ -31,7 +31,7 @@ export default class UserInfoCommand extends SlashCommand {
 
       await interaction.editReply({
         embeds: [
-          EmbedUtil({
+          EmbedBuilderUtil({
             color: COLOR_PRIMARY,
             author: user.tag,
             icon: user.avatarURL() as string,

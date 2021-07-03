@@ -4,7 +4,7 @@ import { Command } from 'discord-akairo';
 import json from '@json/reminders.json';
 import { JSONDeclaration, Schedule } from '@typings/reminders';
 import { COLOR_PRIMARY } from '@constants';
-import { EmbedUtil } from '@lib/utils';
+import { EmbedBuilderUtil } from '@lib/utils';
 
 interface CmdArgs {
   name: string;
@@ -36,7 +36,7 @@ export default class CheckReminder extends Command {
 
       await message.reply({
         embeds: [
-          EmbedUtil({
+          EmbedBuilderUtil({
             color: COLOR_PRIMARY,
             title: sched.content.title,
             description: sched.content.message,

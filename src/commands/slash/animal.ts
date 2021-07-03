@@ -17,40 +17,6 @@ export default class AnimalCommand extends SlashCommand {
 
   async exec(interaction: CommandInteraction) {
     try {
-      /*
-      const animal = interaction.options.get('type')?.value as string;
-      let result: string | undefined;
-
-      await interaction.defer();
-
-      switch (animal) {
-        case 'cat':
-          result = await animals.cat();
-          break;
-        case 'dog':
-          result = await animals.dog();
-          break;
-        case 'bunny':
-          result = await animals.bunny();
-          break;
-        case 'fox':
-          result = await animals.fox();
-          break;
-
-        case 'panda':
-          result = await animals.panda();
-          break;
-        case 'duck':
-          result = await animals.duck();
-          break;
-        default:
-          result = undefined;
-          break;
-      }
-
-      if (!result) throw new Error('Unable to get random animal.');
-      else await interaction.editReply({ content: result });
-      */
       await interaction.defer();
 
       const selectMenu = new MessageSelectMenu()

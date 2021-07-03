@@ -7,6 +7,9 @@ import {
 import logger from '@lib/logger';
 import { SlashCommand } from '@structures/modules/slash-command';
 import { ClientConfig } from '@config';
+import { promisify } from 'util';
+
+const wait = promisify(setTimeout);
 
 export default class SlashCommandHandler extends AkairoHandler {
   public constructor(client: AkairoClient, options?: AkairoHandlerOptions) {
@@ -24,6 +27,7 @@ export default class SlashCommandHandler extends AkairoHandler {
     });
 
     this.client.on('ready', async () => {
+      await wait(3000); // Wait for 3 seconds before registering slash commands
       await this.registerSlashCommands();
     });
   }

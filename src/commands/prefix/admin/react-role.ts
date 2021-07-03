@@ -6,7 +6,7 @@ import logger from '@lib/logger';
 import { Argument, Command } from 'discord-akairo';
 import { EmojiResolvable, Message, Role } from 'discord.js';
 import ReactionRole from '@models/reaction-roles.model';
-import { EmbedUtil } from '@lib/utils';
+import { EmbedBuilderUtil } from '@lib/utils';
 
 interface CmdArgs {
   message: Message;
@@ -82,7 +82,7 @@ export default class ReaectRole extends Command {
 
       return await cmdMessage.util?.reply({
         embeds: [
-          EmbedUtil({
+          EmbedBuilderUtil({
             color: COLOR_PRIMARY,
             description: `Reaction role successfully added into message (Click Here)[${cmdMessage.url}]`,
             footer: 'Reaction role added!',
@@ -94,7 +94,7 @@ export default class ReaectRole extends Command {
       logger.error(`${this.constructor.name} error. ${stack as string}`);
       return cmdMessage.util?.reply({
         embeds: [
-          EmbedUtil({
+          EmbedBuilderUtil({
             color: COLOR_ERROR,
             description: `Reaction role failed to process: ${errMsg as string}`,
             footer: 'Error occured',

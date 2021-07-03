@@ -4,7 +4,7 @@ export function dateToString(date: Date): string {
   return date.toISOString().split('T')[0];
 }
 
-export interface EmbedUtilOptions {
+export interface EmbedBuilderUtilOptions {
   color?: ColorResolvable;
   title?: string;
   author?: string;
@@ -19,7 +19,6 @@ export interface EmbedUtilOptions {
   url?: string;
 }
 
-export const EmbedUtil = (options: EmbedUtilOptions) => {
   const messageEmbed = new MessageEmbed();
 
   messageEmbed

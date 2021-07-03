@@ -5,7 +5,7 @@ import DetectLanguage from 'detectlanguage';
 import axios, { AxiosRequestConfig } from 'axios';
 import logger from '@lib/logger';
 import { COLOR_PRIMARY } from '@constants';
-import { EmbedUtil } from '@lib/utils';
+import { EmbedBuilderUtil } from '@lib/utils';
 
 type DeepLTranslate = {
   data: {
@@ -133,7 +133,7 @@ export default class TranslateCommand extends SlashCommand {
 
         await interaction.editReply({
           embeds: [
-            EmbedUtil({
+            EmbedBuilderUtil({
               color: COLOR_PRIMARY,
               timestamp: true,
               description: translatedText,
@@ -154,7 +154,7 @@ export default class TranslateCommand extends SlashCommand {
 
         await interaction.editReply({
           embeds: [
-            EmbedUtil({
+            EmbedBuilderUtil({
               color: COLOR_PRIMARY,
               timestamp: true,
               description: translatedText,

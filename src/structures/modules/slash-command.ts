@@ -3,7 +3,7 @@ import { ApplicationCommandOptionData, CommandInteraction } from 'discord.js';
 import { AkairoModule, AkairoModuleOptions } from 'discord-akairo';
 import logger from '@lib/logger';
 import { COLOR_ERROR } from '@constants';
-import { EmbedUtil } from '@lib/utils';
+import { EmbedBuilderUtil } from '@lib/utils';
 
 export interface SlashCommandOptions extends AkairoModuleOptions {
   description: string;
@@ -31,7 +31,7 @@ export class SlashCommand extends AkairoModule {
   ) {
     try {
       this.logger.error(stack);
-      const embed = EmbedUtil({
+      const embed = EmbedBuilderUtil({
         color: COLOR_ERROR,
         footer: 'Error Handling command',
         timestamp: true,

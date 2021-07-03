@@ -7,7 +7,7 @@ import {
 } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash-command';
 import { nsfwImage } from '@lib/anime-api';
-import { EmbedUtil } from '@lib/utils';
+import { EmbedBuilderUtil } from '@lib/utils';
 
 export default class AnimeCommand extends SlashCommand {
   public constructor() {
@@ -42,7 +42,7 @@ export default class AnimeCommand extends SlashCommand {
         if (!channel.nsfw) {
           await interaction.editReply({
             embeds: [
-              EmbedUtil({
+              EmbedBuilderUtil({
                 image:
                   'https://media1.tenor.com/images/99c6105e9bf7a3f814f9d23db6ae601a/tenor.gif?itemid=12434221',
                 footer: 'Must be NFSW channel',
@@ -85,7 +85,7 @@ export default class AnimeCommand extends SlashCommand {
       } else if (wallpaper) {
         await interaction.editReply({
           embeds: [
-            EmbedUtil({
+            EmbedBuilderUtil({
               description: 'Feature not yet iplemented',
             }),
           ],
