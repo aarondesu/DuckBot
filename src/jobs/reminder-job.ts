@@ -5,7 +5,7 @@ import { Collection, MessageEmbed, Snowflake, TextChannel } from 'discord.js';
 
 import json from '@json/reminders.json';
 import { JSONDeclaration, Schedule, Day } from '@typings/reminders';
-import { EmbedColorCoding } from '@constants';
+import { COLOR_PRIMARY } from '@constants';
 
 export default class ReminderJob extends CronJob {
   reminders: Collection<string, Schedule>;
@@ -63,7 +63,7 @@ export default class ReminderJob extends CronJob {
         // Check if current hour for the reminder
         if (schedule.time.hours.includes(Number(currentTime.format('HH')))) {
           const messageEmbed = new MessageEmbed()
-            .setColor(EmbedColorCoding.primary)
+            .setColor(COLOR_PRIMARY)
             .setTitle(schedule.content.title || '')
             .setDescription(schedule.content.message || '')
             .setThumbnail(schedule.content.thumbnail || '')

@@ -1,4 +1,4 @@
-import { EmbedColorCoding } from '@constants';
+import { COLOR_PRIMARY, COLOR_ERROR } from '@constants';
 import emojiRegex from 'emoji-regex';
 import logger from '@lib/logger';
 // import GuildModel from '@models/guilds.model';
@@ -81,7 +81,7 @@ export default class ReaectRole extends Command {
       return await cmdMessage.util?.reply({
         embeds: [
           new MessageEmbed()
-            .setColor(EmbedColorCoding.primary)
+            .setColor(COLOR_PRIMARY)
             .setDescription(
               `Reaction role successfully added into message (Click Here)[${cmdMessage.url}]`
             )
@@ -94,7 +94,7 @@ export default class ReaectRole extends Command {
       return cmdMessage.util?.reply({
         embeds: [
           new MessageEmbed()
-            .setColor(EmbedColorCoding.error)
+            .setColor(COLOR_ERROR)
             .setDescription(
               `Reaction role failed to process: ${errMsg as string}`
             )

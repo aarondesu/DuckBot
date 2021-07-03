@@ -1,7 +1,7 @@
 import { CommandInteraction, MessageEmbed, Snowflake } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash-command';
 import { dateToString } from '@lib/utils';
-import { EmbedColorCoding } from '@constants';
+import { COLOR_PRIMARY } from '@constants';
 
 export default class UserInfoCommand extends SlashCommand {
   public constructor() {
@@ -32,7 +32,7 @@ export default class UserInfoCommand extends SlashCommand {
       await interaction.editReply({
         embeds: [
           new MessageEmbed()
-            .setColor(EmbedColorCoding.primary)
+            .setColor(COLOR_PRIMARY)
             .setAuthor(`${user.tag}`, `${user.avatarURL() as string}`)
             .setThumbnail(`${user.avatarURL() as string}`)
             .setFooter('User Info')

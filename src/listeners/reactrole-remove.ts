@@ -1,7 +1,7 @@
 import logger from '@lib/logger';
 import ReactionRoles from '@models/reaction-roles.model';
 import { Listener } from 'discord-akairo';
-import { MessageReaction, User } from 'discord.js';
+import { MessageReaction, Snowflake, User } from 'discord.js';
 // import logger from '@lib/logger';
 
 export default class ReactRoleRemove extends Listener {
@@ -30,7 +30,9 @@ export default class ReactRoleRemove extends Listener {
             reactRole.emojiId === reaction.emoji.toString() &&
             reactRole.messageId === reaction.message.id
           ) {
-            removeRoles.push(member?.roles.remove(reactRole.roleId));
+            removeRoles.push(
+              member?.roles.remove(reactRole.roleId as Snowflake)
+            );
           }
         }
 
