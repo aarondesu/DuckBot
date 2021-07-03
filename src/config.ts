@@ -3,8 +3,7 @@ import { PresenceData, Snowflake } from 'discord.js';
 import dotenv from 'dotenv';
 import { resolve } from 'path';
 
-if (process.env.NODE_ENV === 'development')
-  dotenv.config({ path: resolve('.env') });
+dotenv.config({ path: resolve('.env') });
 
 export const ClientConfig = {
   owners: process.env.OWNER_IDS?.split(',') as Snowflake[],

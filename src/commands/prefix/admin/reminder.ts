@@ -1,9 +1,10 @@
-import { Message, MessageEmbed } from 'discord.js';
+import { Message } from 'discord.js';
 import { Command } from 'discord-akairo';
 
 import json from '@json/reminders.json';
 import { JSONDeclaration, Schedule } from '@typings/reminders';
 import { COLOR_PRIMARY } from '@constants';
+import { EmbedBuilderUtil } from '@lib/utils';
 
 interface CmdArgs {
   name: string;
@@ -33,21 +34,20 @@ export default class CheckReminder extends Command {
     if (result.length === 1) {
       const sched = result[0];
 
-      const messageEmbed = new MessageEmbed()
-        .setColor(COLOR_PRIMARY)
-        .setTitle(sched.content.title || '')
-        .setDescription(sched.content.message || '')
-        .setThumbnail(sched.content.thumbnail || '')
-        .setImage(sched.content.image || '')
-        .setFooter('Duck Reminder')
-        .setTimestamp();
-
-      if (sched.content.fields && sched.content.fields.length > 0) {
-        for (const field of sched.content.fields)
-          messageEmbed.addField(field.name, field.value);
-      }
-
-      await message.reply({ embeds: [messageEmbed] });
+      await message.reply({
+        embeds: [
+          EmbedBuilderUtil({
+            color: COLOR_PRIMARY,
+            title: sched.content.title,
+            description: sched.content.message,
+            thumbnail: sched.content.thumbnail,
+            image: sched.content.image,
+            footer: 'Duck reminder',
+            timestamp: true,
+            fields: sched.content.fields,
+          }),
+        ],
+      });
     } else {
       await message.util?.reply(`No such reminder name as ${name}`);
     }

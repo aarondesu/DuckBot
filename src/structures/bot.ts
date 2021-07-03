@@ -13,30 +13,6 @@ import { APITokens, ClientConfig } from '../config';
 import CronJobHandler from './handlers/cronjob-handler';
 
 export default class DiscordBot extends AkairoClient {
-  // TODO: Combine prefix command handler and slash command handler
-  prefixCommandHandler = new CommandHandler(this, {
-    directory: resolve(__dirname, '..', `commands/prefix`),
-    commandUtil: true,
-    allowMention: false,
-    prefix: ClientConfig.prefix,
-  });
-
-  slashCommandHandler = new SlashCommandHandler(this, {
-    directory: resolve(__dirname, '..', `commands/slash`),
-  });
-
-  listenerHandler = new ListenerHandler(this, {
-    directory: resolve(__dirname, '..', `listeners`),
-  });
-
-  inhibitorHandler = new InhibitorHandler(this, {
-    directory: resolve(__dirname, '..', `inhibitors`),
-  });
-
-  cronJobHandler = new CronJobHandler(this, {
-    directory: resolve(__dirname, '..', `jobs`),
-  });
-
   handlers: Collection<string, AkairoHandler>;
 
   public constructor() {
@@ -53,47 +29,62 @@ export default class DiscordBot extends AkairoClient {
     );
 
     this.handlers = new Collection<string, AkairoHandler>();
+
+    const listenerHandler = new ListenerHandler(this, {
+      directory: resolve(__dirname, '..', `listeners`),
+    });
+
+    const slashCommandHandler = new SlashCommandHandler(this, {
+      directory: resolve(__dirname, '..', `commands/slash`),
+    });
+
+    const prefixCommandHandler = new CommandHandler(this, {
+      directory: resolve(__dirname, '..', `commands/prefix`),
+      commandUtil: true,
+      allowMention: false,
+      prefix: ClientConfig.prefix,
+    });
+
+    const inhibitorHandler = new InhibitorHandler(this, {
+      directory: resolve(__dirname, '..', `inhibitors`),
+    });
+
+    const cronJobHandler = new CronJobHandler(this, {
+      directory: resolve(__dirname, '..', `jobs`),
+    });
+
+    prefixCommandHandler.useInhibitorHandler(inhibitorHandler);
+    prefixCommandHandler.useListenerHandler(listenerHandler);
+
+    listenerHandler.setEmitters({
+      listenerHandler,
+      inhibitorHandler,
+      prefixCommandHandler,
+      slashCommandHandler,
+      cronJobHandler,
+    });
+
+    this.handlers.set('listener', listenerHandler);
+    this.handlers.set('slash-commands', slashCommandHandler);
+    this.handlers.set('prefix-commands', prefixCommandHandler);
+    this.handlers.set('inhibitr', inhibitorHandler);
+    this.handlers.set('cron-job', cronJobHandler);
   }
 
   async start() {
     logger.info('Initializing bot...');
-    logger.info(
-      `Starting bot in NODE_ENV=${ClientConfig.environment as string}`
-    );
+    logger.info(`Starting bot in ${ClientConfig.environment as string}`);
 
-    logger.info('Loading inhibitors...');
-    this.prefixCommandHandler.useInhibitorHandler(this.inhibitorHandler);
-    // this.inhibitorHandler.loadAll();
-    logger.info(`${this.inhibitorHandler.modules.size} inhibitors loaded.`);
+    for (const [name, handler] of this.handlers) {
+      try {
+        handler.loadAll();
+        logger.info(`Finished loading ${name} modules!`);
+        logger.info(`${handler.modules.size} ${name} loaded.`);
+      } catch (error) {
+        throw new Error(error);
+      }
+    }
 
-    logger.info('Loading listeners...');
-    this.prefixCommandHandler.useListenerHandler(this.listenerHandler);
-    this.listenerHandler.setEmitters({
-      listenerHandler: this.listenerHandler,
-      inhibitorHandler: this.inhibitorHandler,
-      prefixCommandHandler: this.prefixCommandHandler,
-      slashCommandHandler: this.slashCommandHandler,
-    });
-    this.listenerHandler.loadAll();
-    logger.info(`${this.listenerHandler.modules.size} listeners loaded.`);
-
-    logger.info('Loading prefix commands...');
-    this.prefixCommandHandler.loadAll();
-    logger.info(
-      `${this.prefixCommandHandler.modules.size} prefix commands loaded.`
-    );
-
-    logger.info('Loading slash commands...');
-    this.slashCommandHandler.loadAll();
-    logger.info(
-      `${this.slashCommandHandler.modules.size} slash commands loaded.`
-    );
-
-    logger.info('Loading cron jobs...');
-    this.cronJobHandler.loadAll();
-    logger.info(`${this.cronJobHandler.modules.size} cron jobs loaded.`);
-
-    logger.info('Logging into discord...');
     await this.login(APITokens.discordToken);
   }
 }

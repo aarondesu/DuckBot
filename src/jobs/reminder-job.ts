@@ -1,11 +1,12 @@
 /* eslint-disable no-continue */
 import { CronJob } from '@structures/modules/cron-job';
 import moment from 'moment-timezone';
-import { Collection, MessageEmbed, Snowflake, TextChannel } from 'discord.js';
+import { Collection, Snowflake, TextChannel } from 'discord.js';
 
 import json from '@json/reminders.json';
 import { JSONDeclaration, Schedule, Day } from '@typings/reminders';
 import { COLOR_PRIMARY } from '@constants';
+import { EmbedBuilderUtil } from '@lib/utils';
 
 export default class ReminderJob extends CronJob {
   reminders: Collection<string, Schedule>;
@@ -62,22 +63,19 @@ export default class ReminderJob extends CronJob {
 
         // Check if current hour for the reminder
         if (schedule.time.hours.includes(Number(currentTime.format('HH')))) {
-          const messageEmbed = new MessageEmbed()
-            .setColor(COLOR_PRIMARY)
-            .setTitle(schedule.content.title || '')
-            .setDescription(schedule.content.message || '')
-            .setThumbnail(schedule.content.thumbnail || '')
-            .setImage(schedule.content.image || '')
-            .setFooter('Duck Reminder')
-            .setTimestamp();
-
-          if (schedule.content.fields && schedule.content.fields.length > 0) {
-            for (const field of schedule.content.fields)
-              messageEmbed.addField(field.name, field.value, field.inline);
-          }
+          const embed = EmbedBuilderUtil({
+            color: COLOR_PRIMARY,
+            title: schedule.content.title,
+            description: schedule.content.message,
+            thumbnail: schedule.content.thumbnail,
+            image: schedule.content.image,
+            footer: 'Daily reminder',
+            timestamp: true,
+            fields: schedule.content.fields,
+          });
 
           for (const [, channel] of this.channels) {
-            sendMessage.push(channel.send({ embeds: [messageEmbed] }));
+            sendMessage.push(channel.send({ embeds: [embed] }));
           }
         }
       }

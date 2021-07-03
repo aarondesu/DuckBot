@@ -1,6 +1,13 @@
-import { CommandInteraction, MessageEmbed, TextChannel } from 'discord.js';
+import {
+  CommandInteraction,
+  Message,
+  MessageActionRow,
+  MessageSelectMenu,
+  TextChannel,
+} from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash-command';
 import { nsfwImage } from '@lib/anime-api';
+import { EmbedBuilderUtil } from '@lib/utils';
 
 export default class AnimeCommand extends SlashCommand {
   public constructor() {
@@ -11,24 +18,6 @@ export default class AnimeCommand extends SlashCommand {
           name: 'nsfw',
           description: 'Gets NSFW anime images',
           type: 'SUB_COMMAND',
-          options: [
-            {
-              name: 'type',
-              description: 'The type of NSFW to search, default will be waifu',
-              type: 'STRING',
-              required: true,
-              choices: [
-                {
-                  name: 'waifu',
-                  value: 'waifu',
-                },
-                {
-                  name: 'neko',
-                  value: 'neko',
-                },
-              ],
-            },
-          ],
         },
         {
           name: 'wallpaper',
@@ -53,26 +42,52 @@ export default class AnimeCommand extends SlashCommand {
         if (!channel.nsfw) {
           await interaction.editReply({
             embeds: [
-              new MessageEmbed()
-                .setImage(
-                  'https://media1.tenor.com/images/99c6105e9bf7a3f814f9d23db6ae601a/tenor.gif?itemid=12434221'
-                )
-                .setFooter('Must be NSFW channel')
-                .setTimestamp(),
+              EmbedBuilderUtil({
+                image:
+                  'https://media1.tenor.com/images/99c6105e9bf7a3f814f9d23db6ae601a/tenor.gif?itemid=12434221',
+                footer: 'Must be NFSW channel',
+              }),
             ],
           });
         } else {
-          const type = nsfw?.options?.get('type')?.value as string;
-          const result = (await nsfwImage(type)) as string;
+          // Display select menu to see which nsfw type would be chosen
+          const selectMenu = new MessageSelectMenu()
+            .setCustomID('nsfw-type')
+            .addOptions(
+              {
+                label: 'Waifu',
+                value: 'waifu',
+              },
+              {
+                label: 'Neko',
+                value: 'neko',
+              }
+            );
 
-          await interaction.editReply({ content: result });
+          const message = (await interaction.editReply({
+            content: 'Which one would you like?',
+            components: [new MessageActionRow().addComponents(selectMenu)],
+          })) as Message;
+
+          const collector = message.createMessageComponentInteractionCollector({
+            max: 1,
+          });
+
+          collector.on('collect', async (i) => {
+            if (!i.isSelectMenu()) return;
+
+            const type = i.values?.toString() as string;
+            const result = (await nsfwImage(type)) as string;
+
+            await interaction.editReply({ content: result, components: [] });
+          });
         }
       } else if (wallpaper) {
         await interaction.editReply({
           embeds: [
-            new MessageEmbed()
-              .setDescription('Feature not yet implemented.')
-              .setTimestamp(),
+            EmbedBuilderUtil({
+              description: 'Feature not yet iplemented',
+            }),
           ],
         });
       }

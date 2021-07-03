@@ -1,6 +1,6 @@
-import { CommandInteraction, MessageEmbed, Snowflake } from 'discord.js';
+import { CommandInteraction, Snowflake, User } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash-command';
-import { dateToString } from '@lib/utils';
+import { dateToString, EmbedBuilderUtil } from '@lib/utils';
 import { COLOR_PRIMARY } from '@constants';
 
 export default class UserInfoCommand extends SlashCommand {
@@ -18,35 +18,42 @@ export default class UserInfoCommand extends SlashCommand {
   }
 
   async exec(interaction: CommandInteraction) {
-    await interaction.defer();
-
     try {
-      const { guild } = interaction;
+      await interaction.defer();
 
-      const user = await this.client.users.fetch(
-        interaction.options.get('user')?.value as Snowflake
-      );
+      const { guild } = interaction;
+      const userArgs = interaction.options.get('user')?.value as Snowflake;
+
+      let user: User;
+
+      if (userArgs) {
+        user = await this.client.users.fetch(userArgs);
+      } else {
+        user = interaction.user;
+      }
 
       const guildUser = guild?.members.cache.get(user.id);
 
       await interaction.editReply({
         embeds: [
-          new MessageEmbed()
-            .setColor(COLOR_PRIMARY)
-            .setAuthor(`${user.tag}`, `${user.avatarURL() as string}`)
-            .setThumbnail(`${user.avatarURL() as string}`)
-            .setFooter('User Info')
-            .setTimestamp()
-            .addFields(
-              { name: 'ID', value: `${user.id}`, inline: true },
+          EmbedBuilderUtil({
+            color: COLOR_PRIMARY,
+            author: user.tag,
+            icon: user.avatarURL() as string,
+            thumbnail: user.avatarURL() as string,
+            footer: `User info`,
+            timestamp: true,
+            fields: [
+              { name: 'ID', value: `${user.id}` },
               {
                 name: 'Status',
-                value: `${user.presence.status}`,
+                value: `${user.presence.status as string}`,
                 inline: true,
               },
               {
                 name: 'Nickname',
-                value: `${(guildUser?.nickname as string) || 'none'}`,
+                value: `${guildUser?.nickname?.toString() as string}`,
+                inline: true,
               },
               {
                 name: 'Account Created',
@@ -55,12 +62,14 @@ export default class UserInfoCommand extends SlashCommand {
               {
                 name: 'Join Date',
                 value: `${dateToString(guildUser?.joinedAt as Date)}`,
+                inline: true,
               },
               {
                 name: 'Roles',
-                value: `${guildUser?.roles.cache.size as number}`,
-              }
-            ),
+                value: `${guildUser?.roles.cache.size.toString() as string} `,
+              },
+            ],
+          }),
         ],
       });
     } catch ({ messag: message, stack }) {
