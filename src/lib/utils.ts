@@ -19,6 +19,7 @@ export interface EmbedBuilderUtilOptions {
   url?: string;
 }
 
+export const EmbedBuilderUtil = (options: EmbedBuilderUtilOptions) => {
   const messageEmbed = new MessageEmbed();
 
   messageEmbed
