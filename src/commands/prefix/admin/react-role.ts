@@ -4,8 +4,9 @@ import logger from '@lib/logger';
 // import GuildModel from '@models/guilds.model';
 // mport ReactionRole from '@models/reaction-role.model';
 import { Argument, Command } from 'discord-akairo';
-import { EmojiResolvable, Message, MessageEmbed, Role } from 'discord.js';
+import { EmojiResolvable, Message, Role } from 'discord.js';
 import ReactionRole from '@models/reaction-roles.model';
+import { EmbedUtil } from '@lib/utils';
 
 interface CmdArgs {
   message: Message;
@@ -74,32 +75,31 @@ export default class ReaectRole extends Command {
         emojiId: eId,
         roleId: rId,
       });
+
       await model.save();
 
       await cmdMessage.react(emoji);
 
       return await cmdMessage.util?.reply({
         embeds: [
-          new MessageEmbed()
-            .setColor(COLOR_PRIMARY)
-            .setDescription(
-              `Reaction role successfully added into message (Click Here)[${cmdMessage.url}]`
-            )
-            .setFooter('Reaction role added!')
-            .setTimestamp(),
+          EmbedUtil({
+            color: COLOR_PRIMARY,
+            description: `Reaction role successfully added into message (Click Here)[${cmdMessage.url}]`,
+            footer: 'Reaction role added!',
+            timestamp: true,
+          }),
         ],
       });
     } catch ({ errMsg, stack }) {
       logger.error(`${this.constructor.name} error. ${stack as string}`);
       return cmdMessage.util?.reply({
         embeds: [
-          new MessageEmbed()
-            .setColor(COLOR_ERROR)
-            .setDescription(
-              `Reaction role failed to process: ${errMsg as string}`
-            )
-            .setFooter('Error occured')
-            .setTimestamp(),
+          EmbedUtil({
+            color: COLOR_ERROR,
+            description: `Reaction role failed to process: ${errMsg as string}`,
+            footer: 'Error occured',
+            timestamp: true,
+          }),
         ],
       });
     }

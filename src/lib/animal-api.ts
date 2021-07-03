@@ -2,9 +2,9 @@ import axios from 'axios';
 
 export async function dog() {
   try {
-    type dogRes = {
+    interface dogRes {
       message: string;
-    };
+    }
 
     const result = await axios.request<dogRes>({
       url: 'https://dog.ceo/api/breeds/image/random',
@@ -18,9 +18,9 @@ export async function dog() {
 
 export async function cat() {
   try {
-    type catRes = {
+    interface catRes {
       file: string;
-    };
+    }
 
     const result = await axios.request<catRes>({
       url: 'https://aws.random.cat/meow',

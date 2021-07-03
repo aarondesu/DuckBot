@@ -5,8 +5,9 @@
       "hours": [4]
     },
     "content": {
+      "title": "🕒 Dailes & Gathering Nodes Reset!",
       "thumbnail": "https://i.postimg.cc/wT18Wq6k/unknown.png",
-      "message": "• Daily tasks and gathering nodes have been reset!\n\n[(Click here to launch pso2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
+      "message": "[(Click here to launch pso2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
     }
   },
   {
@@ -16,8 +17,9 @@
       "daysOfWeek": ["wednesday"]
     },
     "content": {
+      "title": "🕓 Weeklies have been reset!",
       "thumbnail": "https://i.postimg.cc/wT18Wq6k/unknown.png",
-      "message": "• Weekly task have been reset! Task will be available once the maintenance has ended.\n\n[(Click here to launch pso2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
+      "message": "[(Click here to launch pso2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
     }
   },
   {
@@ -26,8 +28,9 @@
       "hours": [12, 18, 20, 21, 22, 23]
     },
     "content": {
+      "title": "‼️ Reminder to draw free SG Scratch ‼️",
       "thumbnail": "https://i.postimg.cc/TPTRrbWh/Screenshot-52.png",
-      "message": "• Reminder to use up your sg scratch before the reset!\n[(Click here to launch pso2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
+      "message": "[(Click here to launch pso2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
     }
   },
   {
@@ -36,8 +39,9 @@
       "hours": [0]
     },
     "content": {
+      "title": "✨ Free SG scratch reset! ✨",
       "thumbnail": "https://i.postimg.cc/TPTRrbWh/Screenshot-52.png",
-      "message": "• Daily free sg scratch has been reset! Don't forget to pull.\n[(Click here to launch pso2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
+      "message": "[(Click here to launch pso2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)"
     }
   },
   {
@@ -47,13 +51,13 @@
       "days": [2, 22]
     },
     "content": {
-      "title": "🎉 PSO2 DAY",
+      "title": "✨ PSO2 DAY ✨",
       "message": "• PSO2 day has just started. Enjoy bonuses both on NGS and PSO2! \n\n• Premium PSO2 day at 22nd\n\n[(Click here to launch pso2)](https://cdn.arks-layer.com/Shared/index.php?tweaker=open&cmd=-pso2)",
       "image": "https://www.bumped.org/phantasy/wp-content/uploads/2021/06/pso2-day-banner.jpg",
       "fields": [
         {
           "name": "PSO2",
-          "value": "• Earned Fun +100% \n• Earned EXP +200% \n• Rare Drop Boost +200% \n• Gathering Fever Rate +100% \n• Rare Enemy Arks Rappy \n• Item Grind Success Rate +10% \n• Ability Affixing Success Rate +15% \n• NT Weapon Grind EXP +15%",
+          "value": "• Earned Fun +100% \n• Earned EXP +200% \n• Rare Drop Boost +200% \n\n• Gathering Fever Rate +100% \n• Rare Enemy Arks Rappy \n• Item Grind Success Rate +10% \n• Ability Affixing Success Rate +15% \n• NT Weapon Grind EXP +15%",
           "inline": true
         },
         {

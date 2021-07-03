@@ -2,12 +2,12 @@ import {
   CommandInteraction,
   Message,
   MessageActionRow,
-  MessageEmbed,
   MessageSelectMenu,
   TextChannel,
 } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash-command';
 import { nsfwImage } from '@lib/anime-api';
+import { EmbedUtil } from '@lib/utils';
 
 export default class AnimeCommand extends SlashCommand {
   public constructor() {
@@ -42,12 +42,11 @@ export default class AnimeCommand extends SlashCommand {
         if (!channel.nsfw) {
           await interaction.editReply({
             embeds: [
-              new MessageEmbed()
-                .setImage(
-                  'https://media1.tenor.com/images/99c6105e9bf7a3f814f9d23db6ae601a/tenor.gif?itemid=12434221'
-                )
-                .setFooter('Must be NSFW channel')
-                .setTimestamp(),
+              EmbedUtil({
+                image:
+                  'https://media1.tenor.com/images/99c6105e9bf7a3f814f9d23db6ae601a/tenor.gif?itemid=12434221',
+                footer: 'Must be NFSW channel',
+              }),
             ],
           });
         } else {
@@ -81,15 +80,14 @@ export default class AnimeCommand extends SlashCommand {
             const result = (await nsfwImage(type)) as string;
 
             await interaction.editReply({ content: result, components: [] });
-            collector.stop();
           });
         }
       } else if (wallpaper) {
         await interaction.editReply({
           embeds: [
-            new MessageEmbed()
-              .setDescription('Feature not yet implemented.')
-              .setTimestamp(),
+            EmbedUtil({
+              description: 'Feature not yet iplemented',
+            }),
           ],
         });
       }

@@ -1,10 +1,11 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js';
+import { CommandInteraction } from 'discord.js';
 import {} from 'discord-akairo';
 import { SlashCommand } from '@structures/modules/slash-command';
 import DetectLanguage from 'detectlanguage';
 import axios, { AxiosRequestConfig } from 'axios';
 import logger from '@lib/logger';
 import { COLOR_PRIMARY } from '@constants';
+import { EmbedUtil } from '@lib/utils';
 
 type DeepLTranslate = {
   data: {
@@ -132,11 +133,12 @@ export default class TranslateCommand extends SlashCommand {
 
         await interaction.editReply({
           embeds: [
-            new MessageEmbed()
-              .setColor(COLOR_PRIMARY)
-              .setFooter('Translated using DeepL')
-              .setTimestamp()
-              .setDescription(translatedText),
+            EmbedUtil({
+              color: COLOR_PRIMARY,
+              timestamp: true,
+              description: translatedText,
+              footer: 'Translated using DeepL',
+            }),
           ],
         });
       } catch ({ message, stack }) {
@@ -152,11 +154,12 @@ export default class TranslateCommand extends SlashCommand {
 
         await interaction.editReply({
           embeds: [
-            new MessageEmbed()
-              .setColor(COLOR_PRIMARY)
-              .setFooter('Translated using DeepL')
-              .setTimestamp()
-              .setDescription(translatedText),
+            EmbedUtil({
+              color: COLOR_PRIMARY,
+              timestamp: true,
+              description: translatedText,
+              footer: 'Translated using DeepL',
+            }),
           ],
         });
       } catch ({ message, stack }) {
