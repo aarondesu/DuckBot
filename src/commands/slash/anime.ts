@@ -1,4 +1,11 @@
-import { CommandInteraction, MessageEmbed, TextChannel } from 'discord.js';
+import {
+  CommandInteraction,
+  Message,
+  MessageActionRow,
+  MessageEmbed,
+  MessageSelectMenu,
+  TextChannel,
+} from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash-command';
 import { nsfwImage } from '@lib/anime-api';
 
@@ -11,23 +18,6 @@ export default class AnimeCommand extends SlashCommand {
           name: 'nsfw',
           description: 'Gets NSFW anime images',
           type: 'SUB_COMMAND',
-          options: [
-            {
-              name: 'type',
-              description: 'The type of NSFW to search, default will be waifu',
-              type: 'STRING',
-              choices: [
-                {
-                  name: 'waifu',
-                  value: 'waifu',
-                },
-                {
-                  name: 'neko',
-                  value: 'neko',
-                },
-              ],
-            },
-          ],
         },
         {
           name: 'wallpaper',
@@ -61,10 +51,38 @@ export default class AnimeCommand extends SlashCommand {
             ],
           });
         } else {
-          const type = nsfw?.options?.get('type')?.value as string;
-          const result = (await nsfwImage(type)) as string;
+          // Display select menu to see which nsfw type would be chosen
+          const selectMenu = new MessageSelectMenu()
+            .setCustomID('nsfw-type')
+            .addOptions(
+              {
+                label: 'Waifu',
+                value: 'waifu',
+              },
+              {
+                label: 'Neko',
+                value: 'neko',
+              }
+            );
 
-          await interaction.editReply({ content: result });
+          const message = (await interaction.editReply({
+            content: 'Which one would you like?',
+            components: [new MessageActionRow().addComponents(selectMenu)],
+          })) as Message;
+
+          const collector = message.createMessageComponentInteractionCollector({
+            max: 1,
+          });
+
+          collector.on('collect', async (i) => {
+            if (!i.isSelectMenu()) return;
+
+            const type = i.values?.toString() as string;
+            const result = (await nsfwImage(type)) as string;
+
+            await interaction.editReply({ content: result, components: [] });
+            collector.stop();
+          });
         }
       } else if (wallpaper) {
         await interaction.editReply({
