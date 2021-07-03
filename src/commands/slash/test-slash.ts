@@ -12,6 +12,7 @@ export default class PingCommand extends SlashCommand {
   public constructor() {
     super('select-test', {
       description: `Testing command for select menus`,
+      disabled: true,
     });
   }
 
@@ -54,9 +55,25 @@ export default class PingCommand extends SlashCommand {
           .setURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
       );
 
-      await interaction.reply({
+      const message = (await interaction.reply({
         content: 'Hello WOlrd!',
         components: [row1, row2],
+        fetchReply: true,
+      })) as Message;
+
+      const collector = message.createMessageComponentInteractionCollector({});
+
+      collector.on('collect', async (i) => {
+        if (i.isSelectMenu()) {
+          await i.defer();
+          await i.editReply({
+            content: `${i.values?.toString() as string}`,
+          });
+        }
+      });
+
+      collector.on('end', (collected) => {
+        this.logger.info(`Collected: ${collected.size} items`);
       });
     } catch ({ message, stack }) {
       await this.emitError(message, stack, interaction);
