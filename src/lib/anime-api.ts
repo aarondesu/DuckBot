@@ -1,5 +1,5 @@
-/* eslint-disable import/prefer-default-export */
 import axios from 'axios';
+// import snoowrap from 'snoowrap';
 import logger from './logger';
 
 export async function nsfwImage(
@@ -18,6 +18,25 @@ export async function nsfwImage(
     logger.error(stack);
     return undefined;
   }
+}
+
+export async function wallpaper(): Promise<string | undefined> {
+  /*
+  try {
+    const reddit = new snoowrap({
+      userAgent: '',
+      clientId: '',
+      clientSecret: '',
+      refreshToken: '',
+    });
+
+    return '';
+  } catch ({ stack }) {
+    logger.error(stack);
+    return undefined;
+  }
+  */
+  return '';
 }
 
 /*

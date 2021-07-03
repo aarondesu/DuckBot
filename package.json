@@ -12,12 +12,12 @@
     "yarn": ">=1.x"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development ts-node --files -r tsconfig-paths/register src/index.ts",
     "build": "tsc",
     "clean": "npx rimraf dist",
     "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write .",
     "start": "cross-env NODE_ENV=production node -r ./tsconfig-paths-bootstrap.js dist/src/index.js",
+    "start:dev": "cross-env NODE_ENV=development ts-node --files -r tsconfig-paths/register src/index.ts",
     "quickstart": "yarn clean && yarn build && yarn start",
     "test": "jest",
     "tsc": "tsc"
