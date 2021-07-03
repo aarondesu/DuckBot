@@ -51,6 +51,7 @@ export default class AnimalCommand extends SlashCommand {
       if (!result) throw new Error('Unable to get random animal.');
       else await interaction.editReply({ content: result });
       */
+      await interaction.defer();
 
       const selectMenu = new MessageSelectMenu()
         .setCustomID('animal')
@@ -81,9 +82,7 @@ export default class AnimalCommand extends SlashCommand {
           }
         );
 
-      const message = (await interaction.reply({
-        ephemeral: true,
-        fetchReply: true,
+      const message = (await interaction.editReply({
         content: 'Which animal?',
         components: [new MessageActionRow().addComponents(selectMenu)],
       })) as Message;
@@ -101,8 +100,6 @@ export default class AnimalCommand extends SlashCommand {
 
         const animal = i.values?.toString();
         let result: string | undefined;
-
-        await i.defer();
 
         // Get animal image from api
         switch (animal) {
@@ -131,7 +128,7 @@ export default class AnimalCommand extends SlashCommand {
         }
 
         // Reply to the user
-        await i.editReply({ content: result, components: [] });
+        await interaction.editReply({ content: result, components: [] });
         collector.stop();
       });
     } catch ({ message, stack }) {
