@@ -79,7 +79,6 @@ export default class DiscordBot extends AkairoClient {
       try {
         handler.loadAll();
         logger.info(`Finished loading ${name} modules!`);
-        logger.info(`${handler.modules.size} ${name} loaded.`);
       } catch (error) {
         throw new Error(error);
       }
