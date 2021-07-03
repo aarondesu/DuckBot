@@ -1,10 +1,11 @@
 import {
   AkairoClient,
+  AkairoHandler,
   CommandHandler,
   InhibitorHandler,
   ListenerHandler,
 } from 'discord-akairo';
-import { Intents } from 'discord.js';
+import { Collection, Intents } from 'discord.js';
 import { resolve } from 'path';
 import logger from '@lib/logger';
 import SlashCommandHandler from './handlers/slash-command-handler';
@@ -36,6 +37,8 @@ export default class DiscordBot extends AkairoClient {
     directory: resolve(__dirname, '..', `jobs`),
   });
 
+  handlers: Collection<string, AkairoHandler>;
+
   public constructor() {
     super(
       {
@@ -48,11 +51,15 @@ export default class DiscordBot extends AkairoClient {
         intents: Intents.ALL,
       }
     );
+
+    this.handlers = new Collection<string, AkairoHandler>();
   }
 
   async start() {
     logger.info('Initializing bot...');
-    logger.info(`Starting bot in NODE_ENV=${ClientConfig.environment}`);
+    logger.info(
+      `Starting bot in NODE_ENV=${ClientConfig.environment as string}`
+    );
 
     logger.info('Loading inhibitors...');
     this.prefixCommandHandler.useInhibitorHandler(this.inhibitorHandler);

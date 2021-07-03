@@ -6,7 +6,7 @@ import {
 } from 'discord.js';
 import { AkairoModule, AkairoModuleOptions } from 'discord-akairo';
 import logger from '@lib/logger';
-import { EmbedColorCoding } from '@constants';
+import { COLOR_ERROR } from '@constants';
 
 export interface SlashCommandOptions extends AkairoModuleOptions {
   description: string;
@@ -35,7 +35,7 @@ export class SlashCommand extends AkairoModule {
     try {
       this.logger.error(stack);
       const embed = new MessageEmbed()
-        .setColor(EmbedColorCoding.error)
+        .setColor(COLOR_ERROR)
         .setFooter('Error handling command')
         .setTimestamp()
         .setDescription(`${this.constructor.name}: ${message}`);

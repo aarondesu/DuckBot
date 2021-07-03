@@ -3,7 +3,7 @@ import { Command } from 'discord-akairo';
 
 import json from '@json/reminders.json';
 import { JSONDeclaration, Schedule } from '@typings/reminders';
-import { EmbedColorCoding } from '@constants';
+import { COLOR_PRIMARY } from '@constants';
 
 interface CmdArgs {
   name: string;
@@ -34,7 +34,7 @@ export default class CheckReminder extends Command {
       const sched = result[0];
 
       const messageEmbed = new MessageEmbed()
-        .setColor(EmbedColorCoding.primary)
+        .setColor(COLOR_PRIMARY)
         .setTitle(sched.content.title || '')
         .setDescription(sched.content.message || '')
         .setThumbnail(sched.content.thumbnail || '')

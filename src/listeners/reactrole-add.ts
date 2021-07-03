@@ -1,7 +1,7 @@
 import logger from '@lib/logger';
 import ReactionRoles from '@models/reaction-roles.model';
 import { Listener } from 'discord-akairo';
-import { MessageReaction, User } from 'discord.js';
+import { MessageReaction, User, Snowflake } from 'discord.js';
 
 export default class ReactRoleAdd extends Listener {
   public constructor() {
@@ -29,7 +29,7 @@ export default class ReactRoleAdd extends Listener {
             reactRole.emojiId === reaction.emoji.toString() &&
             reactRole.messageId === reaction.message.id
           ) {
-            giveRoles.push(member?.roles.add(reactRole.roleId));
+            giveRoles.push(member?.roles.add(reactRole.roleId as Snowflake));
           }
         }
 
