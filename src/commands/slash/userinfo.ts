@@ -1,4 +1,4 @@
-import { CommandInteraction, Snowflake } from 'discord.js';
+import { CommandInteraction, Snowflake, User } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash-command';
 import { dateToString, EmbedBuilderUtil } from '@lib/utils';
 import { COLOR_PRIMARY } from '@constants';
@@ -18,14 +18,19 @@ export default class UserInfoCommand extends SlashCommand {
   }
 
   async exec(interaction: CommandInteraction) {
-    await interaction.defer();
-
     try {
-      const { guild } = interaction;
+      await interaction.defer();
 
-      const user = await this.client.users.fetch(
-        interaction.options.get('user')?.value as Snowflake
-      );
+      const { guild } = interaction;
+      const userArgs = interaction.options.get('user')?.value as Snowflake;
+
+      let user: User;
+
+      if (userArgs) {
+        user = await this.client.users.fetch(userArgs);
+      } else {
+        user = interaction.user;
+      }
 
       const guildUser = guild?.members.cache.get(user.id);
 
@@ -61,7 +66,7 @@ export default class UserInfoCommand extends SlashCommand {
               },
               {
                 name: 'Roles',
-                value: `${guildUser?.roles.cache.size.toString()} `,
+                value: `${guildUser?.roles.cache.size.toString() as string} `,
               },
             ],
           }),
