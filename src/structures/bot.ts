@@ -58,7 +58,6 @@ export default class DiscordBot extends AkairoClient {
 
     listenerHandler.setEmitters({
       listenerHandler,
-      inhibitorHandler,
       prefixCommandHandler,
       slashCommandHandler,
       cronJobHandler,
