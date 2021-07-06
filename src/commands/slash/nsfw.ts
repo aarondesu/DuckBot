@@ -45,6 +45,10 @@ export default class AnimeCommand extends SlashCommand {
             {
               label: 'Neko',
               value: 'neko',
+            },
+            {
+              label: 'Futa(trap)',
+              value: 'trap',
             }
           );
 
