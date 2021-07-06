@@ -45,10 +45,6 @@ export default class AnimeCommand extends SlashCommand {
             {
               label: 'Neko',
               value: 'neko',
-            },
-            {
-              label: 'Trap',
-              value: 'trap',
             }
           );
 
@@ -59,6 +55,7 @@ export default class AnimeCommand extends SlashCommand {
 
         const collector = message.createMessageComponentInteractionCollector({
           max: 1,
+          time: 3000,
         });
 
         collector.on('collect', async (i) => {
