@@ -66,7 +66,6 @@ export default class DiscordBot extends AkairoClient {
     this.handlers.set('listener', listenerHandler);
     this.handlers.set('slash-commands', slashCommandHandler);
     this.handlers.set('prefix-commands', prefixCommandHandler);
-    this.handlers.set('inhibitr', inhibitorHandler);
     this.handlers.set('cron-job', cronJobHandler);
   }
 
