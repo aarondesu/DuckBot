@@ -5,12 +5,12 @@ import { APITokens } from '@config';
 import logger from './logger';
 
 export interface IRedditResult {
-  author: string;
-  subredditName: string;
-  subredditUrl: string;
-  title: string;
-  permalink: string;
-  imgUrl: string;
+  author?: string;
+  subredditName?: string;
+  subredditUrl?: string;
+  title?: string;
+  permalink?: string;
+  imgUrl?: string;
 }
 
 const reddit = new Snoowrap({
@@ -118,14 +118,7 @@ export async function getWeeb(): Promise<IRedditResult> {
   const source = redditSource[Math.floor(Math.random() * redditSource.length)];
   const type = redditType[Math.floor(Math.random() * redditType.length)];
 
-  let result: IRedditResult = {
-    author: '',
-    subredditName: '',
-    subredditUrl: '',
-    title: '',
-    permalink: '',
-    imgUrl: '',
-  };
+  let result: IRedditResult = {};
 
   switch (type) {
     case 'hot':
