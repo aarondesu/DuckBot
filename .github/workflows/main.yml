@@ -71,4 +71,6 @@ jobs:
           HD_PREFIX: ${{ secrets.PREFIX }}
           HD_REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
           HD_REDDIT_SECRET_KEY: ${{ secrets.REDDIT_SECRET_KEY }}
+          HD_REDDIT_REFRESH_TOKEN: ${{  }}
+          REDDIT_ACCESS_TOKEN: ${{  }}
           HD_RESET_COMMANDS: false
