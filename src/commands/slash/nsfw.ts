@@ -6,12 +6,12 @@ import {
   TextChannel,
 } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash-command';
-import { nsfwImage } from '@lib/anime-api';
+import { getNsfw } from '@lib/anime-api';
 import { EmbedBuilderUtil } from '@lib/utils';
 
 export default class AnimeCommand extends SlashCommand {
   public constructor() {
-    super('anime', {
+    super('nsfw', {
       description: `Gets anime images depending on type`,
     });
   }
@@ -47,7 +47,7 @@ export default class AnimeCommand extends SlashCommand {
               value: 'neko',
             },
             {
-              label: 'Trap',
+              label: 'Futa(trap)',
               value: 'trap',
             }
           );
@@ -59,15 +59,22 @@ export default class AnimeCommand extends SlashCommand {
 
         const collector = message.createMessageComponentInteractionCollector({
           max: 1,
+          time: 3000,
         });
 
         collector.on('collect', async (i) => {
           if (!i.isSelectMenu()) return;
 
           const type = i.values?.toString() as string;
-          const result = (await nsfwImage(type)) as string;
+          const result = (await getNsfw(type)) as string;
 
           await interaction.editReply({ content: result, components: [] });
+        });
+
+        collector.on('end', async () => {
+          if (collector.ended && collector.collected.size === 0) {
+            await message.delete();
+          }
         });
       }
     } catch ({ message, stack }) {
