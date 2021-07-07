@@ -18,6 +18,7 @@
     "format": "prettier --write .",
     "start": "cross-env NODE_ENV=production node -r ./tsconfig-paths-bootstrap.js dist/src/index.js",
     "start:dev": "cross-env NODE_ENV=development ts-node --files -r tsconfig-paths/register src/index.ts",
+    "playground": "ts-node ./src/playground.ts",
     "quickstart": "yarn clean && yarn build && yarn start",
     "test": "jest",
     "tsc": "npx tsc"
