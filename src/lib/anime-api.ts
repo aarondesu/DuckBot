@@ -26,7 +26,6 @@ const redditSource = [
   'awwnime',
   'twintails',
   'Melanime',
-  'AnimeART',
   'animegifs',
   'wholesomeyuri',
   'kemonomimi',
