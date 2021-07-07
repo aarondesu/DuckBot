@@ -20,10 +20,10 @@ export default class AnimeCommand extends SlashCommand {
       const embed = EmbedBuilderUtil({
         color: COLOR_PRIMARY,
         title: wallpaper.title,
-        url: `https://reddit.com${wallpaper.permalink}`,
+        url: `https://reddit.com${wallpaper.permalink as string}`,
         image: wallpaper.imgUrl,
-        description: `By u/${wallpaper.author}']`,
-        footer: `r/${wallpaper.subredditName}`,
+        description: `By u/${wallpaper.author as string}`,
+        footer: `r/${wallpaper.subredditName as string}`,
         timestamp: true,
       });
 

@@ -73,4 +73,4 @@ jobs:
           HD_REDDIT_SECRET_KEY: ${{ secrets.REDDIT_SECRET_KEY }}
           HD_REDDIT_REFRESH_TOKEN: ${{ secrets.REDDIT_REFRESH_TOKEN }}
           REDDIT_ACCESS_TOKEN: ${{ secrets.REDDIT_ACCESS_TOKEN }}
-          HD_RESET_COMMANDS: false
+          HD_RESET_COMMANDS: true
