@@ -20,6 +20,9 @@ export const APITokens = {
   redditSecret: process.env.REDDIT_SECRET_KEY,
   redditClientId: process.env.REDDIT_CLIENT_ID,
   redditRefreshToken: process.env.REDDIT_REFRESH_TOKEN,
+  redditAccessToken: process.env.REDDIT_ACCESS_TOKEN,
+  redditUsername: process.env.REDDIT_USERNAME,
+  redditPassword: process.env.REDDIT_PASSWORD,
 };
 
 export const DuckPresence: PresenceData = {

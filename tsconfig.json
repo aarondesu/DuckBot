@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES2019",
+    "target": "es6",
+    "lib": ["ESNext"],
     "module": "commonjs",
     "allowJs": true,
     "sourceMap": true,

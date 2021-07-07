@@ -1,8 +1,47 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import axios from 'axios';
-// import snoowrap from 'snoowrap';
+import Snoowrap, { Listing, Submission } from 'snoowrap';
+import { APITokens } from '@config';
+
 import logger from './logger';
 
-export async function nsfwImage(
+export interface IRedditResult {
+  author: string;
+  subredditName: string;
+  subredditUrl: string;
+  title: string;
+  permalink: string;
+  imgUrl: string;
+}
+
+const reddit = new Snoowrap({
+  userAgent: 'API to be used for personal bot for our discord server',
+  clientId: APITokens.redditClientId,
+  clientSecret: APITokens.redditSecret,
+  refreshToken: APITokens.redditRefreshToken,
+  accessToken: APITokens.redditAccessToken,
+});
+
+const redditSource = [
+  'Animewallpaper',
+  'awwnime',
+  'twintails',
+  'Melanime',
+  'AnimeART',
+  'animegifs',
+  'wholesomeyuri',
+  'kemonomimi',
+  'megane',
+];
+const redditType = ['hot', 'top', 'controversial'];
+
+const resultLimit = 200;
+
+export async function getNsfw(
   type: string | undefined
 ): Promise<string | undefined> {
   try {
@@ -20,38 +59,91 @@ export async function nsfwImage(
   }
 }
 
-export async function wallpaper(): Promise<string | undefined> {
-  /*
-  try {
-    const reddit = new snoowrap({
-      userAgent: '',
-      clientId: '',
-      clientSecret: '',
-      refreshToken: '',
-    });
-
-    return '';
-  } catch ({ stack }) {
-    logger.error(stack);
-    return undefined;
+async function weebGet(listing: Listing<Submission>) {
+  let rng = Math.floor(Math.random() * (resultLimit + 1));
+  while (listing[rng].is_self) {
+    rng = Math.floor(Math.random() * (resultLimit + 1));
   }
-  */
-  return '';
+
+  const result: IRedditResult = {
+    title: listing[rng].title,
+    author: listing[rng].author.name,
+    imgUrl: listing[rng].url,
+    permalink: listing[rng].permalink,
+    subredditName: listing[rng].subreddit.display_name,
+    subredditUrl: `https://reddit.com/r/${listing[rng].subreddit.display_name}`,
+  };
+
+  return Promise.resolve(result);
 }
 
-/*
-export async function wallpaper(name?: string | undefined): Promise<string> {
-  const a
+async function getWeebHot(source: string): Promise<IRedditResult> {
+  const submissionRes = reddit
+    .getSubreddit(source)
+    .fetch()
+    .then((subreddit) =>
+      subreddit.getHot({
+        limit: resultLimit,
+      })
+    )
+    .then(weebGet);
 
-  const authToken = axios.post(
-    'https://www.reddit.com/api/v1/access_token',
-    {},
-    {
-      auth: {
-        
-      }
-      headers: {},
-    }
-  );
+  return submissionRes;
 }
-*/
+
+async function getWeebTop(source: string): Promise<IRedditResult> {
+  const submissionRes = reddit
+    .getSubreddit(source)
+    .fetch()
+    .then((subreddit) =>
+      subreddit.getTop({
+        limit: resultLimit,
+      })
+    )
+    .then(weebGet);
+
+  return submissionRes;
+}
+
+async function getWeebControversial(source: string): Promise<IRedditResult> {
+  const submissionRes = reddit
+    .getSubreddit(source)
+    .fetch()
+    .then((subreddit) =>
+      subreddit.getControversial({
+        limit: resultLimit,
+      })
+    )
+    .then(weebGet);
+
+  return submissionRes;
+}
+
+export async function getWeeb(): Promise<IRedditResult> {
+  const source = redditSource[Math.floor(Math.random() * redditSource.length)];
+  const type = redditType[Math.floor(Math.random() * redditType.length)];
+
+  let result: IRedditResult = {
+    author: '',
+    subredditName: '',
+    subredditUrl: '',
+    title: '',
+    permalink: '',
+    imgUrl: '',
+  };
+
+  switch (type) {
+    case 'hot':
+      result = await getWeebHot(source);
+      break;
+    case 'top':
+      result = await getWeebTop(source);
+      break;
+    case 'controversial':
+      result = await getWeebControversial(source);
+      break;
+  }
+
+  console.log(result);
+  return result;
+}
