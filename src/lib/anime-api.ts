@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import axios from 'axios';
 import Snoowrap, { Listing, Submission } from 'snoowrap';
 import { APITokens } from '@config';
@@ -144,6 +139,5 @@ export async function getWeeb(): Promise<IRedditResult> {
       break;
   }
 
-  console.log(result);
   return result;
 }
