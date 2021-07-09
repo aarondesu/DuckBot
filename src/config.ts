@@ -11,6 +11,7 @@ export const ClientConfig = {
   prefix: process.env.PREFIX,
   environment: process.env.NODE_ENV,
   resetCommands: process.env.RESET_COMMANDS,
+  guildDev: process.env.GUILD_DEV,
 };
 
 export const APITokens = {

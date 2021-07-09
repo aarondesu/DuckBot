@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ApplicationCommandOptionData, CommandInteraction } from 'discord.js';
+import {
+  ApplicationCommandData,
+  ApplicationCommandOptionData,
+  CommandInteraction,
+} from 'discord.js';
 import { AkairoModule, AkairoModuleOptions } from 'discord-akairo';
 import logger from '@lib/logger';
 import { COLOR_ERROR } from '@constants';
@@ -11,6 +15,7 @@ export interface SlashCommandOptions extends AkairoModuleOptions {
   disabled?: boolean;
   ownerOnly?: boolean;
   cooldown?: number;
+  devOnly?: boolean;
 }
 
 export class SlashCommand extends AkairoModule {
@@ -56,5 +61,14 @@ export class SlashCommand extends AkairoModule {
     throw new Error(
       `Command ${this.constructor.name} execute function not yet implemented.`
     );
+  }
+
+  getApplicationCommndData(): ApplicationCommandData {
+    return {
+      name: this.id,
+      description: this.options.description,
+      options: this.options.options,
+      defaultPermission: !this.options.disabled,
+    };
   }
 }
