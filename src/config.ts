@@ -26,6 +26,7 @@ export const APITokens = {
   redditPassword: process.env.REDDIT_PASSWORD,
 };
 
+export const weebResultLimit = 200;
 export const weebSource = [
   'Animewallpaper',
   'awwnime',

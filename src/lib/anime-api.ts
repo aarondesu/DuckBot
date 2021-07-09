@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Snoowrap, { Listing, Submission } from 'snoowrap';
-import { APITokens, weebSource } from '@config';
+import { APITokens, weebResultLimit, weebSource } from '@config';
 
 import logger from './logger';
 
@@ -21,8 +21,6 @@ const reddit = new Snoowrap({
   accessToken: APITokens.redditAccessToken,
 });
 
-const resultLimit = 200;
-
 export async function getNsfw(
   type: string | undefined
 ): Promise<string | undefined> {
@@ -42,9 +40,9 @@ export async function getNsfw(
 }
 
 async function weebGet(listing: Listing<Submission>) {
-  let rng = Math.floor(Math.random() * (resultLimit + 1));
+  let rng = Math.floor(Math.random() * (weebResultLimit + 1));
   while (listing[rng].is_self) {
-    rng = Math.floor(Math.random() * (resultLimit + 1));
+    rng = Math.floor(Math.random() * (weebResultLimit + 1));
   }
 
   const result: IRedditResult = {
@@ -65,7 +63,7 @@ async function getWeebHot(source: string): Promise<IRedditResult> {
     .fetch()
     .then((subreddit) =>
       subreddit.getHot({
-        limit: resultLimit,
+        limit: weebResultLimit,
       })
     )
     .then(weebGet);
@@ -79,7 +77,7 @@ async function getWeebTop(source: string): Promise<IRedditResult> {
     .fetch()
     .then((subreddit) =>
       subreddit.getTop({
-        limit: resultLimit,
+        limit: weebResultLimit,
       })
     )
     .then(weebGet);
@@ -93,7 +91,7 @@ async function getWeebControversial(source: string): Promise<IRedditResult> {
     .fetch()
     .then((subreddit) =>
       subreddit.getControversial({
-        limit: resultLimit,
+        limit: weebResultLimit,
       })
     )
     .then(weebGet);
