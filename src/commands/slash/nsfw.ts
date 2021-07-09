@@ -12,7 +12,7 @@ import { EmbedBuilderUtil } from '@lib/utils';
 export default class AnimeCommand extends SlashCommand {
   public constructor() {
     super('nsfw', {
-      description: `Gets anime images depending on type`,
+      description: `( ͡° ͜ʖ ͡°)`,
     });
   }
 

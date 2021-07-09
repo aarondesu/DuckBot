@@ -8,7 +8,7 @@ import { COLOR_PRIMARY } from '@constants';
 export default class AnimeCommand extends SlashCommand {
   public constructor() {
     super('weeb', {
-      description: `Gets anime images depending on type`,
+      description: `Gets random images from various subreddits.`,
     });
   }
 
