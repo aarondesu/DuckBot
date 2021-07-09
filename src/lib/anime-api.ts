@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Snoowrap, { Listing, Submission } from 'snoowrap';
-import { APITokens } from '@config';
+import { APITokens, weebSource } from '@config';
 
 import logger from './logger';
 
@@ -20,18 +20,6 @@ const reddit = new Snoowrap({
   refreshToken: APITokens.redditRefreshToken,
   accessToken: APITokens.redditAccessToken,
 });
-
-const redditSource = [
-  'Animewallpaper',
-  'awwnime',
-  'twintails',
-  'Melanime',
-  'animegifs',
-  'wholesomeyuri',
-  'kemonomimi',
-  'megane',
-];
-const redditType = ['hot', 'top', 'controversial'];
 
 const resultLimit = 200;
 
@@ -114,7 +102,9 @@ async function getWeebControversial(source: string): Promise<IRedditResult> {
 }
 
 export async function getWeeb(): Promise<IRedditResult> {
-  const source = redditSource[Math.floor(Math.random() * redditSource.length)];
+  const redditType = ['hot', 'top', 'controversial'];
+
+  const source = weebSource[Math.floor(Math.random() * weebSource.length)];
   const type = redditType[Math.floor(Math.random() * redditType.length)];
 
   let result: IRedditResult = {};
