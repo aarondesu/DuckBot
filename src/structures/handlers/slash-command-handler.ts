@@ -1,4 +1,4 @@
-import { CommandInteraction } from 'discord.js';
+import { CommandInteraction, Snowflake } from 'discord.js';
 import {
   AkairoClient,
   AkairoHandler,
@@ -6,8 +6,8 @@ import {
 } from 'discord-akairo';
 import logger from '@lib/logger';
 import { SlashCommand } from '@structures/modules/slash-command';
-import { ClientConfig } from '@config';
 import { promisify } from 'util';
+import { ClientConfig } from '@config';
 
 const wait = promisify(setTimeout);
 
@@ -34,42 +34,41 @@ export default class SlashCommandHandler extends AkairoHandler {
 
   // TODO: Add permission validation
   async registerSlashCommands() {
-    // Get all joined guilds
-    const guilds = this.client.guilds.cache.map((guild) => guild.id);
-
-    // Add commands to joined server
-    logger.info('Adding slash commands to joined servers.');
-
     try {
+      // Get all joined guilds
+      // const guilds = this.client.guilds.cache.map((guild) => guild.id);
+      // Add commands to joined server
+      logger.info(
+        'Adding/Updating slash commands to global scope(New commands will take at most 1 hour to update global commands list)'
+      );
+
       const cmds = [];
-      for (const id of guilds) {
-        // Check if reset commands
-        if (ClientConfig.resetCommands === 'true') {
-          this.client.guilds.cache.get(id)?.commands.set([]);
-          logger.info(`Reset commands for GUILD_ID: ${id}`);
+      const guildsDev: Snowflake[] = [ClientConfig.guildDev as Snowflake];
+
+      for (const [, data] of this.modules) {
+        const slash = data as SlashCommand;
+        const commandData = slash.getApplicationCommndData();
+
+        // Add commands to dev guilds
+        if (guildsDev.length !== 0) {
+          for (const guildId of guildsDev) {
+            if (this.client.guilds.cache.get(guildId)) {
+              cmds.push(
+                this.client.guilds.cache
+                  .get(guildId)
+                  ?.commands.create(commandData)
+              );
+            }
+          }
         }
 
-        // Add the commands
-        for (const [, data] of this.modules) {
-          const slash = data as SlashCommand;
-
-          // Check to see if it is disabled, if disabled skip adding this command
-          if (!slash.options.disabled !== undefined && slash.options.disabled)
-            // eslint-disable-next-line no-continue
-            continue;
-
-          cmds.push(
-            this.client.guilds.cache.get(id)?.commands.create({
-              name: slash.id,
-              description: slash.options.description,
-              options: slash.options.options,
-            })
+        // Push to global
+        if (!slash.options.devOnly)
+          logger.debug(
+            `Adding command '${commandData.name}' to global commands list.`
           );
-        }
+        cmds.push(this.client.application?.commands.create(commandData));
       }
-
-      // Set reset commands
-      process.env.RESET_COMMANDS = 'false';
 
       await Promise.all(cmds);
     } catch ({ stack }) {
