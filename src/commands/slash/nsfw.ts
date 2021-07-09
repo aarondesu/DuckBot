@@ -73,7 +73,7 @@ export default class AnimeCommand extends SlashCommand {
 
         collector.on('end', async () => {
           if (collector.ended && collector.collected.size === 0) {
-            await message.delete();
+            await interaction.deleteReply();
           }
         });
       }

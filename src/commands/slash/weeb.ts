@@ -19,12 +19,11 @@ export default class AnimeCommand extends SlashCommand {
       const wallpaper = await getWeeb();
       const embed = EmbedBuilderUtil({
         color: COLOR_PRIMARY,
+        author: `r/${wallpaper.subredditName as string}`,
         title: wallpaper.title,
         url: `https://reddit.com${wallpaper.permalink as string}`,
         image: wallpaper.imgUrl,
         description: `By u/${wallpaper.author as string}`,
-        footer: `r/${wallpaper.subredditName as string}`,
-        timestamp: true,
       });
 
       await interaction.editReply({ embeds: [embed] });
