@@ -77,8 +77,8 @@ export default class AnimeCommand extends SlashCommand {
           }
         });
       }
-    } catch ({ message, stack }) {
-      await this.emitError(message, stack, interaction);
+    } catch (error) {
+      throw new Error(error);
     }
   }
 }

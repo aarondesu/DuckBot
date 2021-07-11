@@ -141,8 +141,8 @@ export default class TranslateCommand extends SlashCommand {
             }),
           ],
         });
-      } catch ({ message, stack }) {
-        await this.emitError(message, stack, interaction);
+      } catch (error) {
+        throw new Error(error);
       }
     } else {
       try {
@@ -162,8 +162,8 @@ export default class TranslateCommand extends SlashCommand {
             }),
           ],
         });
-      } catch ({ message, stack }) {
-        await this.emitError(message, stack, interaction);
+      } catch (error) {
+        throw new Error(error);
       }
     }
   }

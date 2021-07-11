@@ -22,8 +22,8 @@ export default class SlashCommandHandler extends AkairoHandler {
   }
 
   setup() {
-    this.client.on('interaction', async (interaction) => {
-      await this.handleCommand(interaction as CommandInteraction);
+    this.client.on('interaction', (interaction) => {
+      this.handleCommand(interaction as CommandInteraction);
     });
 
     this.client.on('ready', async () => {
@@ -47,7 +47,7 @@ export default class SlashCommandHandler extends AkairoHandler {
         const commandData = slash.getApplicationCommndData();
 
         // Add commands to dev guilds
-        if (guildsDev.length !== 0) {
+        if (guildsDev.length !== 0 && !slash.options.delete) {
           for (const guildId of guildsDev) {
             if (this.client.guilds.cache.get(guildId)) {
               cmds.push(
@@ -59,25 +59,25 @@ export default class SlashCommandHandler extends AkairoHandler {
           }
         }
 
-        // Push to global
-        if (!slash.options.devOnly) {
-          logger.debug(
-            `Adding command '${commandData.name}' to global commands list.`
-          );
-          cmds.push(this.client.application?.commands.create(commandData));
+        if (ClientConfig.environment === 'production') {
+          if (!slash.options.devOnly && !slash.options.delete) {
+            logger.debug(
+              `Adding command '${commandData.name}' to global commands list.`
+            );
+            cmds.push(this.client.application?.commands.create(commandData));
+          }
         }
 
-        // Handle command deletion
         if (slash.options.delete) {
           const slashToDelete = this.client.application?.commands.cache.find(
-            (i) => i.name === slash.id
+            (command) => command.name === commandData.name
           ) as ApplicationCommand;
 
           if (slashToDelete) {
             logger.info(
               `Deleting '${slashToDelete.name}' command from global slash command list`
             );
-            this.client.application?.commands.delete(slashToDelete);
+            cmds.push(this.client.application?.commands.delete(slashToDelete));
           }
         }
       }
@@ -91,7 +91,7 @@ export default class SlashCommandHandler extends AkairoHandler {
   // TODO: Add morme validation
   // TODO: Add cooldown
   // TODO: Add permission checks
-  async handleCommand(interaction: CommandInteraction) {
+  handleCommand(interaction: CommandInteraction) {
     if (!interaction.isCommand()) return;
 
     // Get command and execute
@@ -101,7 +101,17 @@ export default class SlashCommandHandler extends AkairoHandler {
       return;
     }
 
-    await module.exec(interaction);
+    module
+      .exec(interaction)
+      .catch(({ message, stack }) =>
+        this.emit(
+          'slash-error',
+          module.constructor.name,
+          message,
+          stack,
+          interaction
+        )
+      );
   }
 
   findCommand(name: string) {

@@ -72,8 +72,8 @@ export default class UserInfoCommand extends SlashCommand {
           }),
         ],
       });
-    } catch ({ messag: message, stack }) {
-      await this.emitError(message, stack, interaction);
+    } catch (error) {
+      throw new Error(error);
     }
   }
 }

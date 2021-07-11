@@ -27,8 +27,8 @@ export default class AnimeCommand extends SlashCommand {
       });
 
       await interaction.editReply({ embeds: [embed] });
-    } catch ({ message, stack }) {
-      await this.emitError(message, stack, interaction);
+    } catch (error) {
+      throw new Error(error);
     }
   }
 }

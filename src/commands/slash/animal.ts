@@ -97,8 +97,8 @@ export default class AnimalCommand extends SlashCommand {
         await interaction.editReply({ content: result, components: [] });
         collector.stop();
       });
-    } catch ({ message, stack }) {
-      await this.emitError(message, stack, interaction);
+    } catch (error) {
+      throw new Error(error);
     }
   }
 }
