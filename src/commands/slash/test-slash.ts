@@ -13,6 +13,7 @@ export default class PingCommand extends SlashCommand {
     super('select-test', {
       description: `Testing command for select menus`,
       disabled: true,
+      delete: true,
     });
   }
 

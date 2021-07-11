@@ -16,6 +16,7 @@ export interface SlashCommandOptions extends AkairoModuleOptions {
   ownerOnly?: boolean;
   cooldown?: number;
   devOnly?: boolean;
+  delete?: boolean;
 }
 
 export class SlashCommand extends AkairoModule {

@@ -1,4 +1,4 @@
-import { CommandInteraction, Snowflake } from 'discord.js';
+import { ApplicationCommand, CommandInteraction, Snowflake } from 'discord.js';
 import {
   AkairoClient,
   AkairoHandler,
@@ -60,11 +60,26 @@ export default class SlashCommandHandler extends AkairoHandler {
         }
 
         // Push to global
-        if (!slash.options.devOnly)
+        if (!slash.options.devOnly) {
           logger.debug(
             `Adding command '${commandData.name}' to global commands list.`
           );
-        cmds.push(this.client.application?.commands.create(commandData));
+          cmds.push(this.client.application?.commands.create(commandData));
+        }
+
+        // Handle command deletion
+        if (slash.options.delete) {
+          const slashToDelete = this.client.application?.commands.cache.find(
+            (i) => i.name === slash.id
+          ) as ApplicationCommand;
+
+          if (slashToDelete) {
+            logger.info(
+              `Deleting '${slashToDelete.name}' command from global slash command list`
+            );
+            this.client.application?.commands.delete(slashToDelete);
+          }
+        }
       }
 
       await Promise.all(cmds);
