@@ -35,9 +35,6 @@ export default class SlashCommandHandler extends AkairoHandler {
   // TODO: Add permission validation
   async registerSlashCommands() {
     try {
-      // Get all joined guilds
-      // const guilds = this.client.guilds.cache.map((guild) => guild.id);
-      // Add commands to joined server
       logger.info(
         'Adding/Updating slash commands to global scope(New commands will take at most 1 hour to update global commands list)'
       );
