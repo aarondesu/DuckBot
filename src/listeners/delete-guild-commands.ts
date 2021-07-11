@@ -5,7 +5,7 @@ import { ClientConfig } from '@config';
 
 const wait = promisify(setTimeout);
 
-export default class PostInit extends Listener {
+export default class DeleteGuildCommands extends Listener {
   public constructor() {
     super('produc', {
       emitter: 'client',
