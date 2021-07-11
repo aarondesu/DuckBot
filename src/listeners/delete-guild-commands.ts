@@ -24,8 +24,10 @@ export default class PostInit extends Listener {
     for (const [, guild] of guilds) {
       // Check if not dev server
       if (guild.id !== ClientConfig.guildDev) {
-        resolve.push(guild.commands.set([]));
-        logger.info(`Removed guild based commands from guildId: ${guild.id}`);
+        if (guild.commands.cache.size !== 0) {
+          resolve.push(guild.commands.set([]));
+          logger.info(`Removed guild based commands from guildId: ${guild.id}`);
+        }
       }
     }
   }
