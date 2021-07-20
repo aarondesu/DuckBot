@@ -1,4 +1,3 @@
-/* eslint import/prefer-default-export: 0 */
 import { PresenceData, Snowflake } from 'discord.js';
 import dotenv from 'dotenv';
 import { resolve } from 'path';

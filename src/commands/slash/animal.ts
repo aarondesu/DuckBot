@@ -59,6 +59,7 @@ export default class AnimalCommand extends SlashCommand {
       const collector = message.createMessageComponentInteractionCollector({
         filter,
         max: 1,
+        time: 15000,
       });
 
       collector.on('collect', async (i) => {
@@ -96,6 +97,12 @@ export default class AnimalCommand extends SlashCommand {
         // Reply to the user
         await interaction.editReply({ content: result, components: [] });
         collector.stop();
+      });
+
+      collector.on('end', async () => {
+        if (collector.ended && collector.collected.size === 0) {
+          await interaction.deleteReply();
+        }
       });
     } catch (error) {
       throw new Error(error);
