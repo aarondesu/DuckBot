@@ -18,9 +18,7 @@
     "format": "prettier --write .",
     "start": "cross-env NODE_ENV=production node -r ./tsconfig-paths-bootstrap.js dist/src/index.js",
     "start:dev": "cross-env NODE_ENV=development ts-node --files -r tsconfig-paths/register src/index.ts",
-    "playground": "ts-node ./src/playground.ts",
     "quickstart": "yarn clean && yarn build && yarn start",
-    "test": "jest",
     "tsc": "npx tsc"
   },
   "dependencies": {
@@ -36,6 +34,7 @@
     "emoji-regex": "^9.2.2",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
+    "needle": "^2.8.0",
     "node-cron": "^3.0.0",
     "node-fetch": "^2.6.1",
     "node-superfetch": "^0.2.3",
@@ -52,6 +51,7 @@
   },
   "devDependencies": {
     "@types/common-tags": "^1.8.0",
+    "@types/needle": "^2.5.2",
     "@types/node": "^15.12.2",
     "@types/node-cron": "^2.0.3",
     "@types/validator": "^13.1.4",
