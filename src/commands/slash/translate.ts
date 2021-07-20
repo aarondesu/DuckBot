@@ -6,6 +6,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import logger from '@lib/logger';
 import { COLOR_PRIMARY } from '@constants';
 import { EmbedBuilderUtil } from '@lib/utils';
+import { APITokens } from '@config';
 
 type DeepLTranslate = {
   data: {
@@ -63,9 +64,7 @@ export default class TranslateCommand extends SlashCommand {
     });
 
     // Initialize the APIs
-    this.languageApi = new DetectLanguage(
-      process.env.DETECTLANGUAGE_API_KEY as string
-    );
+    this.languageApi = new DetectLanguage(APITokens.translate.detectLanguage);
   }
 
   async detectLanguage(textToTranslate: string) {
@@ -95,7 +94,7 @@ export default class TranslateCommand extends SlashCommand {
       url: 'https://deep-translate1.p.rapidapi.com/language/translate/v2',
       headers: {
         'content-type': 'application/json',
-        'x-rapidapi-key': process.env.RAPID_API_KEY as string,
+        'x-rapidapi-key': APITokens.translate.rapidApi,
         'x-rapidapi-host': 'deep-translate1.p.rapidapi.com',
       },
       data: {

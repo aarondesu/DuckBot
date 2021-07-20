@@ -15,10 +15,10 @@ export interface IRedditResult {
 
 const reddit = new Snoowrap({
   userAgent: 'API to be used for personal bot for our discord server',
-  clientId: APITokens.redditClientId,
-  clientSecret: APITokens.redditSecret,
-  refreshToken: APITokens.redditRefreshToken,
-  accessToken: APITokens.redditAccessToken,
+  clientId: APITokens.reddit.clientId,
+  clientSecret: APITokens.reddit.secret,
+  refreshToken: APITokens.reddit.refreshToekn,
+  accessToken: APITokens.reddit.accessToken,
 });
 
 export async function getNsfw(

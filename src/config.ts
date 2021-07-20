@@ -15,15 +15,26 @@ export const ClientConfig = {
 };
 
 export const APITokens = {
-  discordToken: process.env.DISCORD_TOKEN,
-  rapidApi: process.env.RAPID_API_KEY,
-  detectLanguage: process.env.DETECTLANGUAGE_API_KEY,
-  redditSecret: process.env.REDDIT_SECRET_KEY,
-  redditClientId: process.env.REDDIT_CLIENT_ID,
-  redditRefreshToken: process.env.REDDIT_REFRESH_TOKEN,
-  redditAccessToken: process.env.REDDIT_ACCESS_TOKEN,
-  redditUsername: process.env.REDDIT_USERNAME,
-  redditPassword: process.env.REDDIT_PASSWORD,
+  twitter: {
+    appId: process.env.TWITTER_APP_ID as string,
+    apiKey: process.env.TWITTER_API_KEY as string,
+    apiSecret: process.env.TWITTER_API_SECRET as string,
+    bearerToken: process.env.TWITTER_BEARER_TOKEN as string,
+  },
+  reddit: {
+    secret: process.env.REDDIT_SECRET_KEY as string,
+    clientId: process.env.REDDIT_CLIENT_ID as string,
+    refreshToekn: process.env.REDDIT_REFRESH_TOKEN as string,
+    accessToken: process.env.REDDIT_ACCESS_TOKEN as string,
+  },
+  translate: {
+    rapidApi: process.env.RAPID_API_KEY as string,
+    detectLanguage: process.env.DETECTLANGUAGE_API_KEY as string,
+  },
+};
+
+export const DatabaseConfig = {
+  uri: process.env.DATABASE_URL,
 };
 
 export const weebResultLimit = 200;
@@ -46,8 +57,4 @@ export const DuckPresence: PresenceData = {
     },
   ],
   status: 'online',
-};
-
-export const DatabaseConfig = {
-  uri: process.env.DATABASE_URL,
 };
