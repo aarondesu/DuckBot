@@ -1,4 +1,4 @@
-import { ApplicationCommand, CommandInteraction, Snowflake } from 'discord.js';
+import { CommandInteraction, Snowflake } from 'discord.js';
 import {
   AkairoClient,
   AkairoHandler,
@@ -29,6 +29,8 @@ export default class SlashCommandHandler extends AkairoHandler {
     this.client.on('ready', async () => {
       await wait(3000); // Wait for 3 seconds before registering slash commands
       await this.registerSlashCommands();
+      // await wait(1000);
+      // await this.deleteGuildCommands();
     });
   }
 
@@ -67,25 +69,39 @@ export default class SlashCommandHandler extends AkairoHandler {
             cmds.push(this.client.application?.commands.create(commandData));
           }
         }
-
-        if (slash.options.delete) {
-          const slashToDelete = this.client.application?.commands.cache.find(
-            (command) => command.name === commandData.name
-          ) as ApplicationCommand;
-
-          if (slashToDelete) {
-            logger.info(
-              `Deleting '${slashToDelete.name}' command from global slash command list`
-            );
-            cmds.push(this.client.application?.commands.delete(slashToDelete));
-          }
-        }
       }
 
       await Promise.all(cmds);
     } catch ({ stack }) {
       logger.error(`Failed to add commands to guild. ${stack as string}`);
     }
+  }
+
+  async deleteGuildCommands() {
+    // Finds all registered commands and check if it is loded in modules
+    // If not loaded in modules, delete the command
+    logger.info('Deleting invalid guild commands.');
+
+    const resolve = [];
+    const guildDevList: Snowflake[] = [ClientConfig.guildDev as Snowflake];
+    for (const guildId of guildDevList) {
+      const guild = this.client.guilds.cache.get(guildId);
+
+      if (guild) {
+        for (const [, command] of guild.commands.cache) {
+          const commandModule = this.modules.has(command.name);
+          // Check if undefined
+          if (!commandModule) {
+            logger.info(
+              `Deleting command ${command.name} from guild command list.`
+            );
+            resolve.push(guild.commands.delete(command));
+          }
+        }
+      }
+    }
+
+    await Promise.all(resolve);
   }
 
   // TODO: Add morme validation
