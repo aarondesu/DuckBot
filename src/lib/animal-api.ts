@@ -1,11 +1,15 @@
 import axios from 'axios';
+import {
+  dogRes,
+  catRes,
+  bunnyRes,
+  foxRes,
+  pandaRes,
+  duckRes,
+} from '@typings/animal-api';
 
 export async function dog() {
   try {
-    interface dogRes {
-      message: string;
-    }
-
     const result = await axios.request<dogRes>({
       url: 'https://dog.ceo/api/breeds/image/random',
     });
@@ -18,10 +22,6 @@ export async function dog() {
 
 export async function cat() {
   try {
-    interface catRes {
-      file: string;
-    }
-
     const result = await axios.request<catRes>({
       url: 'https://aws.random.cat/meow',
     });
@@ -33,12 +33,6 @@ export async function cat() {
 
 export async function bunny() {
   try {
-    type bunnyRes = {
-      media: {
-        poster: string;
-      };
-    };
-
     const result = await axios.request<bunnyRes>({
       url: 'https://api.bunnies.io/v2/loop/random/?media=gif,png',
     });
@@ -51,10 +45,6 @@ export async function bunny() {
 
 export async function fox() {
   try {
-    type foxRes = {
-      image: string;
-    };
-
     const result = await axios.request<foxRes>({
       url: 'https://randomfox.ca/floof/',
     });
@@ -79,10 +69,6 @@ export async function shiba() {
 
 export async function panda() {
   try {
-    type pandaRes = {
-      link: string;
-    };
-
     const result = await axios.request<pandaRes>({
       url: 'https://some-random-api.ml/img/panda',
     });
@@ -95,10 +81,6 @@ export async function panda() {
 
 export async function duck() {
   try {
-    type duckRes = {
-      url: string;
-    };
-
     const result = await axios.request<duckRes>({
       url: 'https://random-d.uk/api/v1/random?type=png',
     });
