@@ -19,6 +19,7 @@
     "start": "cross-env NODE_ENV=production node -r ./tsconfig-paths-bootstrap.js dist/src/api/app.js",
     "start:dev": "cross-env NODE_ENV=development ts-node --files -r tsconfig-paths/register src/discordbot/index.ts",
     "server:dev": "cross-env NODE_ENV=development ts-node --files -r tsconfig-paths/register src/api/app.ts",
+    "heroku:quickstart": "yarn clean && yarn build & heroku local",
     "quickstart": "yarn clean && yarn build && yarn start",
     "playground": "cross-env NODE_ENV=development ts-node ./src/playground.ts",
     "tsc": "npx tsc"

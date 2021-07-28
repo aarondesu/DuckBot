@@ -16,12 +16,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
 
+app.get('/api', (_req, res) => {
+  res.send('Hello World!');
+});
+
 logger.info('Starting api server...');
 connectDB()
   .then((sequelize) => sequelize.sync())
   .then(() => {
     app.listen(PORT, () => {
-      logger.info('Api server started!');
+      logger.info(`Api server started! Listening on PORT: ${PORT}`);
       logger.info('Starting discord bot...');
       return client.start();
     });
