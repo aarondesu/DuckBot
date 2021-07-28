@@ -1,10 +1,13 @@
-import winston from 'winston';
+import winston, { format, createLogger } from 'winston';
 import color from '@heroku-cli/color';
 
-const customFormat = winston.format.combine(
-  winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
-  winston.format.printf(({ level, message, timestamp }) => {
-    return color.app(`[${timestamp as string}] (${level}) ${message} `);
+const customFormat = format.combine(
+  format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
+  format.printf(({ level, message, timestamp }) => {
+    let outputMsg = message;
+    if (typeof message === 'object') outputMsg = JSON.stringify(message);
+
+    return color.app(`[${timestamp as string}] (${level}) ${outputMsg} `);
   })
 );
 
@@ -20,7 +23,7 @@ const level = () => {
   return process.env.NODE_ENV === 'development' ? 'debug' : 'info';
 };
 
-const logger = winston.createLogger({
+const logger = createLogger({
   transports: [new winston.transports.Console()],
   level: level(),
   levels: customLevels,

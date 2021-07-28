@@ -7,9 +7,11 @@ import {
 } from 'discord-akairo';
 import { Collection, Intents } from 'discord.js';
 import { resolve } from 'path';
+
 import logger from '@lib/logger';
+import { ClientConfig } from '@config';
+
 import SlashCommandHandler from './handlers/slash-command-handler';
-import { APITokens, ClientConfig } from '../config';
 import CronJobHandler from './handlers/cronjob-handler';
 
 export default class DiscordBot extends AkairoClient {
@@ -82,6 +84,6 @@ export default class DiscordBot extends AkairoClient {
       }
     }
 
-    await this.login(APITokens.discordToken);
+    await this.login(ClientConfig.token);
   }
 }

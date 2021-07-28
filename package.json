@@ -14,13 +14,12 @@
   "scripts": {
     "build": "npx tsc",
     "clean": "npx rimraf dist",
-    "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx .",
     "format": "prettier --write .",
     "start": "cross-env NODE_ENV=production node -r ./tsconfig-paths-bootstrap.js dist/src/index.js",
     "start:dev": "cross-env NODE_ENV=development ts-node --files -r tsconfig-paths/register src/index.ts",
-    "playground": "ts-node ./src/playground.ts",
     "quickstart": "yarn clean && yarn build && yarn start",
-    "test": "jest",
+    "playground": "cross-env NODE_ENV=development ts-node ./src/playground.ts",
     "tsc": "npx tsc"
   },
   "dependencies": {
@@ -36,6 +35,7 @@
     "emoji-regex": "^9.2.2",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
+    "needle": "^2.8.0",
     "node-cron": "^3.0.0",
     "node-fetch": "^2.6.1",
     "node-superfetch": "^0.2.3",
@@ -47,13 +47,16 @@
     "sequelize-typescript": "^2.1.0",
     "snoowrap": "^1.23.0",
     "tsconfig-paths": "^3.9.0",
+    "twit": "^2.2.11",
     "tz-offset": "^0.0.2",
     "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/common-tags": "^1.8.0",
+    "@types/needle": "^2.5.2",
     "@types/node": "^15.12.2",
     "@types/node-cron": "^2.0.3",
+    "@types/twit": "^2.2.30",
     "@types/validator": "^13.1.4",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",

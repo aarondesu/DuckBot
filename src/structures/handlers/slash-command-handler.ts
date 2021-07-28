@@ -22,13 +22,15 @@ export default class SlashCommandHandler extends AkairoHandler {
   }
 
   setup() {
-    this.client.on('interaction', async (interaction) => {
-      await this.handleCommand(interaction as CommandInteraction);
+    this.client.on('interaction', (interaction) => {
+      this.handleCommand(interaction as CommandInteraction);
     });
 
     this.client.on('ready', async () => {
       await wait(3000); // Wait for 3 seconds before registering slash commands
       await this.registerSlashCommands();
+      // await wait(1000);
+      // await this.deleteGuildCommands();
     });
   }
 
@@ -47,7 +49,7 @@ export default class SlashCommandHandler extends AkairoHandler {
         const commandData = slash.getApplicationCommndData();
 
         // Add commands to dev guilds
-        if (guildsDev.length !== 0) {
+        if (guildsDev.length !== 0 && !slash.options.delete) {
           for (const guildId of guildsDev) {
             if (this.client.guilds.cache.get(guildId)) {
               cmds.push(
@@ -59,12 +61,14 @@ export default class SlashCommandHandler extends AkairoHandler {
           }
         }
 
-        // Push to global
-        if (!slash.options.devOnly)
-          logger.debug(
-            `Adding command '${commandData.name}' to global commands list.`
-          );
-        cmds.push(this.client.application?.commands.create(commandData));
+        if (ClientConfig.environment === 'production') {
+          if (!slash.options.devOnly && !slash.options.delete) {
+            logger.debug(
+              `Adding command '${commandData.name}' to global commands list.`
+            );
+            cmds.push(this.client.application?.commands.create(commandData));
+          }
+        }
       }
 
       await Promise.all(cmds);
@@ -73,10 +77,37 @@ export default class SlashCommandHandler extends AkairoHandler {
     }
   }
 
+  async deleteGuildCommands() {
+    // Finds all registered commands and check if it is loded in modules
+    // If not loaded in modules, delete the command
+    logger.info('Deleting invalid guild commands.');
+
+    const resolve = [];
+    const guildDevList: Snowflake[] = [ClientConfig.guildDev as Snowflake];
+    for (const guildId of guildDevList) {
+      const guild = this.client.guilds.cache.get(guildId);
+
+      if (guild) {
+        for (const [, command] of guild.commands.cache) {
+          const commandModule = this.modules.has(command.name);
+          // Check if undefined
+          if (!commandModule) {
+            logger.info(
+              `Deleting command ${command.name} from guild command list.`
+            );
+            resolve.push(guild.commands.delete(command));
+          }
+        }
+      }
+    }
+
+    await Promise.all(resolve);
+  }
+
   // TODO: Add morme validation
   // TODO: Add cooldown
   // TODO: Add permission checks
-  async handleCommand(interaction: CommandInteraction) {
+  handleCommand(interaction: CommandInteraction) {
     if (!interaction.isCommand()) return;
 
     // Get command and execute
@@ -86,7 +117,17 @@ export default class SlashCommandHandler extends AkairoHandler {
       return;
     }
 
-    await module.exec(interaction);
+    module
+      .exec(interaction)
+      .catch(({ message, stack }) =>
+        this.emit(
+          'slashError',
+          module.constructor.name,
+          message,
+          stack,
+          interaction
+        )
+      );
   }
 
   findCommand(name: string) {

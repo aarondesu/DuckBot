@@ -1,13 +1,8 @@
-import {
-  CommandInteraction,
-  Message,
-  MessageActionRow,
-  MessageSelectMenu,
-  TextChannel,
-} from 'discord.js';
+import { CommandInteraction, TextChannel } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash-command';
-import { getNsfw } from '@lib/anime-api';
+import { getRandomNsfwWeeb } from '@lib/anime-api';
 import { EmbedBuilderUtil } from '@lib/utils';
+import { COLOR_PRIMARY } from '@constants';
 
 export default class AnimeCommand extends SlashCommand {
   public constructor() {
@@ -34,51 +29,22 @@ export default class AnimeCommand extends SlashCommand {
           ],
         });
       } else {
-        // Display select menu to see which nsfw type would be chosen
-        const selectMenu = new MessageSelectMenu()
-          .setCustomID('nsfw-type')
-          .addOptions(
-            {
-              label: 'Waifu',
-              value: 'waifu',
-            },
-            {
-              label: 'Neko',
-              value: 'neko',
-            },
-            {
-              label: 'Futa(trap)',
-              value: 'trap',
-            }
-          );
-
-        const message = (await interaction.editReply({
-          content: 'Which one would you like?',
-          components: [new MessageActionRow().addComponents(selectMenu)],
-        })) as Message;
-
-        const collector = message.createMessageComponentInteractionCollector({
-          max: 1,
-          time: 3000,
-        });
-
-        collector.on('collect', async (i) => {
-          if (!i.isSelectMenu()) return;
-
-          const type = i.values?.toString() as string;
-          const result = (await getNsfw(type)) as string;
-
-          await interaction.editReply({ content: result, components: [] });
-        });
-
-        collector.on('end', async () => {
-          if (collector.ended && collector.collected.size === 0) {
-            await interaction.deleteReply();
-          }
+        const nsfwResult = await getRandomNsfwWeeb();
+        await interaction.editReply({
+          embeds: [
+            EmbedBuilderUtil({
+              color: COLOR_PRIMARY,
+              author: `${nsfwResult.subredditName as string}`,
+              title: nsfwResult.title,
+              url: `https://reddit.com${nsfwResult.permalink as string}`,
+              image: nsfwResult.imgUrl,
+              description: `By u/${nsfwResult.author as string}`,
+            }),
+          ],
         });
       }
-    } catch ({ message, stack }) {
-      await this.emitError(message, stack, interaction);
+    } catch (error) {
+      throw new Error(error);
     }
   }
 }

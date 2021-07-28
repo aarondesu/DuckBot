@@ -1,6 +1,5 @@
 import { CommandInteraction } from 'discord.js';
 import { SlashCommand } from '@structures/modules/slash-command';
-import { oneLine } from 'common-tags';
 import { COLOR_PRIMARY } from '@constants';
 import { EmbedBuilderUtil } from '@lib/utils';
 
@@ -43,12 +42,8 @@ export default class InfoCommand extends SlashCommand {
           }),
         ],
       });
-    } catch ({ message, stack }) {
-      await this.emitError(
-        oneLine`Failed to send message. ${message as string}`,
-        stack,
-        interaction
-      );
+    } catch (error) {
+      throw new Error(error);
     }
   }
 }

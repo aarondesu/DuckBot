@@ -13,6 +13,8 @@ export default class PingCommand extends SlashCommand {
     super('select-test', {
       description: `Testing command for select menus`,
       disabled: true,
+      devOnly: true,
+      delete: true,
     });
   }
 
@@ -75,8 +77,8 @@ export default class PingCommand extends SlashCommand {
       collector.on('end', (collected) => {
         this.logger.info(`Collected: ${collected.size} items`);
       });
-    } catch ({ message, stack }) {
-      await this.emitError(message, stack, interaction);
+    } catch (error) {
+      throw new Error(error);
     }
   }
 }
