@@ -2,6 +2,10 @@
 *.log
 *.env
 
+# Specific files
+.eslintcache
+playground.ts
+
 #Folders
 node_modules/
 logs/

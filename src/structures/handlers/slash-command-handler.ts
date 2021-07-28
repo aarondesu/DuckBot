@@ -121,7 +121,7 @@ export default class SlashCommandHandler extends AkairoHandler {
       .exec(interaction)
       .catch(({ message, stack }) =>
         this.emit(
-          'slash-error',
+          'slashError',
           module.constructor.name,
           message,
           stack,

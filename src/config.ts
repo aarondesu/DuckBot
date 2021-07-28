@@ -37,7 +37,7 @@ export const DatabaseConfig = {
 };
 
 export const weebResultLimit = 200;
-export const weebSource = [
+export const weebSfwSource = [
   'Animewallpaper',
   'awwnime',
   'twintails',
@@ -46,7 +46,17 @@ export const weebSource = [
   'wholesomeyuri',
   'kemonomimi',
   'megane',
+  'kitsunemimi',
 ];
+
+export const weebNsfwSourceRandom = [
+  'hentai',
+  'kitsunemimi',
+  'yuri',
+  'MonsterGirl',
+];
+
+export const weebNsfwSource = ['pantsu', 'ecchi'];
 
 export const DuckPresence: PresenceData = {
   activities: [

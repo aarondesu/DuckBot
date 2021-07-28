@@ -1,6 +1,11 @@
 import axios from 'axios';
 import Snoowrap, { Listing, Submission } from 'snoowrap';
-import { APITokens, weebResultLimit, weebSource } from '@config';
+import {
+  APITokens,
+  weebNsfwSourceRandom,
+  weebResultLimit,
+  weebSfwSource,
+} from '@config';
 
 import logger from './logger';
 
@@ -11,6 +16,8 @@ export interface IRedditResult {
   title?: string;
   permalink?: string;
   imgUrl?: string;
+  is18?: boolean;
+  isSelf?: boolean;
 }
 
 const reddit = new Snoowrap({
@@ -21,27 +28,12 @@ const reddit = new Snoowrap({
   accessToken: APITokens.reddit.accessToken,
 });
 
-export async function getNsfw(
-  type: string | undefined
-): Promise<string | undefined> {
-  try {
-    type res = {
-      url: string;
-    };
-
-    const result = await axios.get<res>(
-      `https://api.waifu.pics/nsfw/${type || 'waifu'}`
-    );
-    return result.data.url;
-  } catch ({ stack }) {
-    logger.error(stack);
-    return undefined;
-  }
-}
+reddit.config({ requestDelay: 1000 });
 
 async function weebGet(listing: Listing<Submission>) {
   let rng = Math.floor(Math.random() * (weebResultLimit + 1));
-  while (listing[rng].is_self) {
+  // Check to see if post is marked nsfw and if it is not a self post
+  while (listing[rng].is_self && listing[rng].over_18) {
     rng = Math.floor(Math.random() * (weebResultLimit + 1));
   }
 
@@ -50,14 +42,14 @@ async function weebGet(listing: Listing<Submission>) {
     author: listing[rng].author.name,
     imgUrl: listing[rng].url,
     permalink: listing[rng].permalink,
-    subredditName: listing[rng].subreddit.display_name,
+    subredditName: listing[rng].subreddit_name_prefixed,
     subredditUrl: `https://reddit.com/r/${listing[rng].subreddit.display_name}`,
   };
 
   return Promise.resolve(result);
 }
 
-async function getWeebHot(source: string): Promise<IRedditResult> {
+const getWeebHot = (source: string): Promise<IRedditResult> => {
   const submissionRes = reddit
     .getSubreddit(source)
     .fetch()
@@ -69,9 +61,9 @@ async function getWeebHot(source: string): Promise<IRedditResult> {
     .then(weebGet);
 
   return submissionRes;
-}
+};
 
-async function getWeebTop(source: string): Promise<IRedditResult> {
+const getWeebTop = (source: string): Promise<IRedditResult> => {
   const submissionRes = reddit
     .getSubreddit(source)
     .fetch()
@@ -83,9 +75,9 @@ async function getWeebTop(source: string): Promise<IRedditResult> {
     .then(weebGet);
 
   return submissionRes;
-}
+};
 
-async function getWeebControversial(source: string): Promise<IRedditResult> {
+const getWeebControversial = (source: string): Promise<IRedditResult> => {
   const submissionRes = reddit
     .getSubreddit(source)
     .fetch()
@@ -97,12 +89,13 @@ async function getWeebControversial(source: string): Promise<IRedditResult> {
     .then(weebGet);
 
   return submissionRes;
-}
+};
 
-export async function getWeeb(): Promise<IRedditResult> {
+export const getSfwWeeb = async (): Promise<IRedditResult> => {
   const redditType = ['hot', 'top', 'controversial'];
 
-  const source = weebSource[Math.floor(Math.random() * weebSource.length)];
+  const source =
+    weebSfwSource[Math.floor(Math.random() * weebSfwSource.length)];
   const type = redditType[Math.floor(Math.random() * redditType.length)];
 
   let result: IRedditResult = {};
@@ -120,4 +113,64 @@ export async function getWeeb(): Promise<IRedditResult> {
   }
 
   return result;
+};
+
+export const getNsfwWeeb = async (
+  type: string | undefined
+): Promise<string | undefined> => {
+  try {
+    type res = {
+      url: string;
+    };
+
+    const result = await axios.get<res>(
+      `https://api.waifu.pics/nsfw/${type || 'waifu'}`
+    );
+    return result.data.url;
+  } catch ({ stack }) {
+    logger.error(stack);
+    return undefined;
+  }
+};
+
+function getNsfwRandomResult(submission: Submission): IRedditResult {
+  const result: IRedditResult = {
+    author: submission.author.name,
+    subredditName: submission.subreddit_name_prefixed,
+    subredditUrl: `https://reddit.com/${submission.subreddit_name_prefixed}`,
+    title: submission.title,
+    permalink: submission.permalink,
+    imgUrl: submission.url,
+    isSelf: submission.is_self,
+    is18: submission.over_18,
+  };
+
+  return result;
 }
+
+export const getRandomNsfwWeeb = async (): Promise<IRedditResult> => {
+  let result: IRedditResult;
+  const source =
+    weebNsfwSourceRandom[
+      Math.floor(Math.random() * weebNsfwSourceRandom.length)
+    ];
+
+  const resolve = [];
+  do {
+    resolve.push(
+      (result = Promise.resolve(
+        reddit
+          .getSubreddit(source)
+          .getRandomSubmission()
+          .then(getNsfwRandomResult)
+          .catch(({ stack }) => {
+            logger.error(stack);
+            return undefined;
+          })
+      ) as IRedditResult)
+    );
+  } while (result.isSelf && !result.is18);
+
+  await Promise.all(resolve);
+  return result;
+};

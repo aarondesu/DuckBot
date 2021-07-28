@@ -6,9 +6,9 @@ import { COLOR_ERROR } from '@constants';
 
 export default class CommandError extends Listener {
   public constructor() {
-    super('command-error-', {
+    super('commandError', {
       emitter: 'slashCommandHandler',
-      event: 'slash-error',
+      event: 'slashError',
     });
   }
 
