@@ -59,7 +59,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "${{ secrets.HEROKU_APP_NAME }}"
           heroku_email: "${{ secrets.HEROKU_USER_EMAIL }}"
-          procfile: "worker: yarn start"
+          procfile: "web: yarn start"
         env:
           HD_NPM_CONFIG_PRODUCTION: false
           HD_YARN_PRODUCTION: false

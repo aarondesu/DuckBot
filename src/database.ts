@@ -1,13 +1,13 @@
 /* eslint-disable import/prefer-default-export */
-import { DatabaseConfig } from '@config';
-import logger from '@lib/logger';
+import { DatabaseConfig } from '@common/config';
+import logger from '@common/lib/logger';
 import { resolve } from 'path';
 import { Sequelize } from 'sequelize-typescript';
 
 export default async function connectDB() {
   const conf = `${DatabaseConfig.uri as string}`;
   return new Sequelize(conf, {
-    models: [resolve(__dirname, 'models')],
+    models: [resolve(__dirname, './common/models')],
     dialectOptions: {
       ssl: {
         require: true,
