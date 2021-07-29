@@ -27,7 +27,7 @@ jobs:
 
       - name: Install dependencies
         run: yarn install
-        
+
       - name: Run formatter
         run: yarn format
 
