@@ -34,8 +34,7 @@ export default class AnimeCommand extends SlashCommand {
       } else {
         const type = nsfwType[Math.floor(Math.random() * nsfwType.length)];
 
-        const nsfwResult =
-          type === 'random' ? await getRandomNsfwWeeb() : await getNsfwWeeb();
+        const nsfwResult = await getRandomNsfwWeeb();
         await interaction.editReply({
           embeds: [
             EmbedBuilderUtil({
