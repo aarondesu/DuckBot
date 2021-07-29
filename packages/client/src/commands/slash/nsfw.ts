@@ -5,8 +5,6 @@ import { getRandomNsfwWeeb } from '../../lib/anime-api';
 import { EmbedBuilderUtil } from '../../lib/utils';
 import { COLOR_PRIMARY } from '../../constants';
 
-const nsfwType = ['random', 'normal'];
-
 export default class AnimeCommand extends SlashCommand {
   public constructor() {
     super('nsfw', {
