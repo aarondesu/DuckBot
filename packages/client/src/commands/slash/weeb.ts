@@ -5,7 +5,7 @@ import { getSfwWeeb } from '../../lib/anime-api';
 import { EmbedBuilderUtil } from '../../lib/utils';
 import { COLOR_PRIMARY } from '../../constants';
 
-export default class AnimeCommand extends SlashCommand {
+export default class WeebComand extends SlashCommand {
   public constructor() {
     super('weeb', {
       description: `Gets random images from various subreddits.`,

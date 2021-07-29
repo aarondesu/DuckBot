@@ -7,7 +7,7 @@ import { COLOR_PRIMARY } from '../../constants';
 
 const nsfwType = ['random', 'normal'];
 
-export default class AnimeCommand extends SlashCommand {
+export default class NSFWCommand extends SlashCommand {
   public constructor() {
     super('nsfw', {
       description: `( ͡° ͜ʖ ͡°)`,
