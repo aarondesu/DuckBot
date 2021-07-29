@@ -34,6 +34,12 @@ TWITTER_API_SECRET=
 TWITTER_BEARER_TOKEN=
 ```
 
+## Common Package
+
+Whenever changes have been made on this package, it must be rebuilt again to reflect the changes into other packages. The package can be rebuilt using `yarn build` or `yarn workspace @duckbot/common build`.
+
+Make sure to run `yarn clean` or `yarn workspace @duckbot/common clean` to clean the distribution build for unecessary files.
+
 ## Formatting
 
 ```
