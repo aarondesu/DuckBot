@@ -9,4 +9,4 @@ orbs:
 workflows:
   Deploy:
     jobs:
-      - heroku/deploy-via-gi
+      - heroku/deploy-via-git
