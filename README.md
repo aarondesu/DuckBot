@@ -8,9 +8,11 @@ This bot isn't design to be used widely. It was only inteded to be used as a pri
 
 ## Requirements
 
-> Node 14.x LTS - https://nodejs.org/en/
-> Yarn - npm install -g yarn
-> Heroku - npm install -g heroku
+```
+Node 14.x LTS - https://nodejs.org/en/
+Yarn - npm install -g yarn
+Heroku - npm install -g heroku
+```
 
 ## Environment example
 
@@ -34,10 +36,14 @@ TWITTER_BEARER_TOKEN=
 
 ## Formatting
 
-> yarn lint
-> yarn format
+```
+yarn lint
+yarn format
+```
 
 ## Installing & Running Locally
 
-> yarn install
-> heroku local
+```
+yarn install
+heroku local
+```
