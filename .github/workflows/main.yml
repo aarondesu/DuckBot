@@ -28,14 +28,14 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Run build
+        run: yarn build
+
       - name: Run formatter
         run: yarn format
 
       - name: Run eslint
         run: yarn lint
-
-      - name: Run build
-        run: yarn build
 
   deploy:
     name: Deploy to heroku
@@ -59,6 +59,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "${{ secrets.HEROKU_APP_NAME }}"
           heroku_email: "${{ secrets.HEROKU_USER_EMAIL }}"
+          branch: "main"
           procfile: "web: yarn start"
         env:
           HD_DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
