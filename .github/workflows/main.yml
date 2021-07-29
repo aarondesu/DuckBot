@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: yarn install 
+        run: yarn install
 
       - name: Run formatter
         run: yarn format
@@ -61,8 +61,6 @@ jobs:
           heroku_email: "${{ secrets.HEROKU_USER_EMAIL }}"
           procfile: "web: yarn start"
         env:
-          HD_NPM_CONFIG_PRODUCTION: false
-          HD_YARN_PRODUCTION: false
           HD_DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           HD_DETECTLANGUAGE_API_KEY: ${{ secrets.DETECTLANGUAGE_API_KEY }}
           HD_RAPID_API_KEY: ${{ secrets.RAPID_API_KEY }}
