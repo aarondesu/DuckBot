@@ -28,14 +28,14 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Run build
+        run: yarn build
+
       - name: Run formatter
         run: yarn format
 
       - name: Run eslint
         run: yarn lint
-
-      - name: Run build
-        run: yarn build
 
   deploy:
     name: Deploy to heroku
