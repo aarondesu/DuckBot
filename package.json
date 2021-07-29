@@ -1,5 +1,5 @@
 {
-  "name": "duck-bot",
+  "name": "@duckbot/shinu",
   "version": "1.0.0",
   "description": "Discord bot for private server",
   "main": "dist/index.js",

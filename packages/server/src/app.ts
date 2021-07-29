@@ -3,8 +3,10 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
+import passport from 'passport';
 
 import { logger, connectDB } from '@duckbot/common/dist';
+import routes from './routes';
 
 dotenv.config({ path: path.resolve(__dirname, '../../../', '.env') });
 
@@ -14,10 +16,10 @@ const PORT = process.env.PORT || 60;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get('/api', (_req, res) => {
-  res.send('Hello World!');
-});
+app.use('/api', routes);
 
 connectDB(process.env.DATABASE_URL as string)
   .then((sequelize) => sequelize.sync())

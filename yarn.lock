@@ -165,14 +165,40 @@ __metadata:
     "@types/cors": ^2.8.12
     "@types/express": ^4.17.13
     "@types/node": ^16.4.6
+    "@types/passport": ^1.0.7
+    "@types/passport-discord": ^0.1.4
+    "@types/validator": ^13.6.3
     cors: ^2.8.5
     cross-env: ^7.0.3
     dotenv: ^10.0.0
     express: ^4.17.1
     passport: ^0.4.1
     passport-discord: ^0.1.4
+    pg: ^8.7.1
+    pg-hstore: ^2.3.4
+    reflect-metadata: ^0.1.13
+    sequelize: ^6.6.5
+    sequelize-typescript: ^2.1.0
+    swagger-ui-express: ^4.1.6
     ts-node: ^10.1.0
     tsconfig-paths: ^3.10.1
+    typescript: ^4.3.5
+  languageName: unknown
+  linkType: soft
+
+"@duckbot/shinu@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@duckbot/shinu@workspace:."
+  dependencies:
+    "@typescript-eslint/eslint-plugin": ^4.28.5
+    "@typescript-eslint/parser": ^4.28.5
+    eslint: ^7.31.0
+    eslint-config-ruppy-node: ^1.7.0
+    eslint-config-ruppy-ts: ^1.7.0
+    eslint-plugin-import: ^2.23.4
+    eslint-plugin-node: ^11.1.0
+    eslint-plugin-prettier: ^3.4.0
+    prettier: ^2.3.2
     typescript: ^4.3.5
   languageName: unknown
   linkType: soft
@@ -331,7 +357,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:^4.17.13":
+"@types/express@npm:*, @types/express@npm:^4.17.13":
   version: 4.17.13
   resolution: "@types/express@npm:4.17.13"
   dependencies:
@@ -393,6 +419,46 @@ __metadata:
   version: 15.14.4
   resolution: "@types/node@npm:15.14.4"
   checksum: c4f7251209430faec073bfd5f570ef91c0cdec20e1b4f44b10d694722ec68e0cd1876bb060b3c4d8fc9e340e9cf1e0040bbb7b0e7dd4bff86371c1b41064e8e1
+  languageName: node
+  linkType: hard
+
+"@types/oauth@npm:*":
+  version: 0.9.1
+  resolution: "@types/oauth@npm:0.9.1"
+  dependencies:
+    "@types/node": "*"
+  checksum: 5c079611b455eff58fba6358e028b191a1e65475600f8ed8d98c1696fedcfb0290aa6c6a19cf50f21a9e2d816ecb43a19f910900d91f8ba3727e33c48f97d7f3
+  languageName: node
+  linkType: hard
+
+"@types/passport-discord@npm:^0.1.4":
+  version: 0.1.4
+  resolution: "@types/passport-discord@npm:0.1.4"
+  dependencies:
+    "@types/express": "*"
+    "@types/passport": "*"
+    "@types/passport-oauth2": "*"
+  checksum: 5ef7106f2f05ccb6dac51a8560bc3e052201e141b41d273ee552e01f6ee946494a55eab54d862835d3cc9357d8a168ec3bdc259661e8a943f12865785face78c
+  languageName: node
+  linkType: hard
+
+"@types/passport-oauth2@npm:*":
+  version: 1.4.11
+  resolution: "@types/passport-oauth2@npm:1.4.11"
+  dependencies:
+    "@types/express": "*"
+    "@types/oauth": "*"
+    "@types/passport": "*"
+  checksum: 09d047a6c09a05c036f7db0cf8f8c09bf5878fdd15949bb1baa09a35f439929d471048fa6595f09ea4a4ea25396ce3918b362136579cf4a2b2ee29a92c0dd1ce
+  languageName: node
+  linkType: hard
+
+"@types/passport@npm:*, @types/passport@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "@types/passport@npm:1.0.7"
+  dependencies:
+    "@types/express": "*"
+  checksum: 1b78fbbb589774a2d9794449e039d590c21fefd6b3f0a5cc911e2a79bac85f363121cfdc330d15840879abeb4fb2d68d521111e595bded0f5dc4356bf8dba3ec
   languageName: node
   linkType: hard
 
@@ -1282,23 +1348,6 @@ __metadata:
   checksum: 046a5818033725a5a12b60270473cd9a19b0e88bd007a0c9a66be36983e53626de949aee9d0290fbfe0275aa31837491adbbbb8bf74ef09f78d21598793d6268
   languageName: node
   linkType: hard
-
-"duck-bot@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "duck-bot@workspace:."
-  dependencies:
-    "@typescript-eslint/eslint-plugin": ^4.28.5
-    "@typescript-eslint/parser": ^4.28.5
-    eslint: ^7.31.0
-    eslint-config-ruppy-node: ^1.7.0
-    eslint-config-ruppy-ts: ^1.7.0
-    eslint-plugin-import: ^2.23.4
-    eslint-plugin-node: ^11.1.0
-    eslint-plugin-prettier: ^3.4.0
-    prettier: ^2.3.2
-    typescript: ^4.3.5
-  languageName: unknown
-  linkType: soft
 
 "ecc-jsbn@npm:~0.1.1":
   version: 0.1.2
@@ -4018,6 +4067,24 @@ __metadata:
   dependencies:
     has-flag: ^4.0.0
   checksum: 3dda818de06ebbe5b9653e07842d9479f3555ebc77e9a0280caf5a14fb877ffee9ed57007c3b78f5a6324b8dbeec648d9e97a24e2ed9fdb81ddc69ea07100f4a
+  languageName: node
+  linkType: hard
+
+"swagger-ui-dist@npm:^3.18.1":
+  version: 3.51.1
+  resolution: "swagger-ui-dist@npm:3.51.1"
+  checksum: 5949c28966cd94917a211edb977fe669a297ac6b1daad609bc6ea6ee1df900afaaaf13d427e3b93b7f8dbb49a7e9346bbcd60e134ff6d144460615c3d3225b3f
+  languageName: node
+  linkType: hard
+
+"swagger-ui-express@npm:^4.1.6":
+  version: 4.1.6
+  resolution: "swagger-ui-express@npm:4.1.6"
+  dependencies:
+    swagger-ui-dist: ^3.18.1
+  peerDependencies:
+    express: ">=4.0.0"
+  checksum: aff79812940fa1e693eb9a9f2abd7f6e38d62a9d60b9a70fc90749e572d997d70f4cc110b791774f09c5197f8da32941bec25da780ab4c6d58593df23628d735
   languageName: node
   linkType: hard
 
