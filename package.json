@@ -16,6 +16,8 @@
     "yarn": ">=3.x"
   },
   "scripts": {
+    "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx .",
+    "format": "prettier --write .",
     "build": "yarn workspaces foreach run build",
     "clean": "yarn workspaces foreach run clean",
     "start:server": "yarn workspace @duckbot/server start",
