@@ -54,6 +54,10 @@ export const weebNsfwSourceRandom = [
   'kitsunemimi',
   'yuri',
   'MonsterGirl',
+  'ChurchofTits',
+  'GenshinImpactNSFW',
+  'Hololewd',
+  'LewdVtubers',
 ];
 
 export const weebNsfwSource = ['pantsu', 'ecchi'];

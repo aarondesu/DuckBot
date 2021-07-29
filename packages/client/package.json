@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "npx tsc",
+    "build": "tsc",
     "clean": "npx rimraf dist",
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "start:dev": "cross-env NODE_ENV=development ts-node --files -r tsconfig-paths/register src/index.ts",
@@ -40,6 +40,7 @@
     "snoowrap": "^1.23.0",
     "tsconfig-paths": "^3.9.0",
     "twit": "^2.2.11",
+    "typeorm": "^0.2.35",
     "tz-offset": "^0.0.2",
     "winston": "^3.3.3"
   },

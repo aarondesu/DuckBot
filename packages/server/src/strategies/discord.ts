@@ -1,17 +1,17 @@
 import passport from 'passport';
 import DiscordStrategy from 'passport-discord';
-import { logger } from '@duckbot/common/dist';
+import { logger, User } from '@duckbot/common/dist';
 
-import User from '../models/user.model';
+import { StrategyConfig } from '../config';
 
 passport.serializeUser((user, done) => {
   const u = user as User;
-  done(null, u.discordId);
+  done(null, u.id);
 });
 
-passport.deserializeUser(async (discordId: string, done) => {
+passport.deserializeUser(async (id: string, done) => {
   try {
-    const user = await User.findOne({ where: { discordId } });
+    const user = await User.findOne({ where: { id } });
     return user ? done(null, user) : done(null, null);
   } catch (err) {
     logger.error(err);
@@ -23,35 +23,36 @@ passport.use(
   'discord',
   new DiscordStrategy(
     {
-      clientID: process.env.DASHBOARD_CLIENT_ID as string,
-      clientSecret: process.env.DASHOBARD_CLIENT_SECRET as string,
-      callbackURL: process.env.DASHBOARD_CLIENT_CALLBACK_URL as string,
+      clientID: StrategyConfig.id,
+      clientSecret: StrategyConfig.secret,
+      callbackURL: StrategyConfig.callbackUrl,
       scope: ['identify', 'guilds'],
     },
-    async (_accessToken, _refreshToekn, profile, done) => {
+    async (_accessToken, _refreshToken, profile, done) => {
       try {
-        const { id, username, discriminator, avatar, guilds } = profile;
+        const { id, username, discriminator, avatar } = profile;
+        logger.info('Searching for user...');
         const findUser = await User.findOne({
-          where: { discordId: id },
+          where: {
+            id,
+          },
         });
 
         if (!findUser) {
           logger.info('User does not exist! Creating...');
           const newUser = await User.create({
-            discordId: id,
-            discordTag: `${username}#${discriminator}`,
+            id,
+            tag: `${username}#${discriminator}`,
             avatar,
-            guilds,
-          });
+          }).save();
 
           return done(null, newUser);
         }
 
         logger.info('User found!');
-        const updatedUser = await findUser.update({
-          ddiscordTag: `${username}#${discriminator}`,
+        const updatedUser = await User.update(id, {
+          tag: `${username}#${discriminator}`,
           avatar,
-          guilds,
         });
 
         return done(null, updatedUser);

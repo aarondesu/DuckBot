@@ -1,29 +1,40 @@
+/* eslint-disable import/first */
 /* eslint-disable no-console */
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
-import path from 'path';
 import passport from 'passport';
+import session from 'express-session';
+import { logger, Session } from '@duckbot/common/dist';
+import { TypeormStore } from 'typeorm-store';
 
-import { logger, connectDB } from '@duckbot/common/dist';
+import { DatabaseConfig } from './config';
+import connectDB from './database';
 import routes from './routes';
-
-dotenv.config({ path: path.resolve(__dirname, '../../../', '.env') });
+import './strategies/discord';
 
 const app = express();
 const PORT = process.env.PORT || 60;
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(passport.initialize());
-app.use(passport.session());
+connectDB(DatabaseConfig.url)
+  .then((connection) => {
+    const repository = connection.getRepository(Session);
 
-app.use('/api', routes);
+    app.use(cors());
+    app.use(express.json());
+    app.use(express.urlencoded());
+    app.use(
+      session({
+        secret: process.env.SESSION_SECRET as string,
+        resave: false,
+        saveUninitialized: false,
+        store: new TypeormStore({ repository }),
+      })
+    );
+    app.use(passport.initialize());
+    app.use(passport.session());
 
-connectDB(process.env.DATABASE_URL as string)
-  .then((sequelize) => sequelize.sync())
-  .then(() => {
+    app.use('/api/v1', routes);
+
     logger.info('Starting API server...');
     app.listen(PORT, () => {
       logger.info(`Api server started! Listening on PORT: ${PORT}`);
@@ -31,6 +42,5 @@ connectDB(process.env.DATABASE_URL as string)
   })
   .catch(({ stack }) => {
     logger.error(stack);
-    logger.error('API Exiting');
     process.exit(0);
   });

@@ -21,6 +21,9 @@
     "clean": "yarn workspaces foreach run clean",
     "start:server": "yarn workspace @duckbot/server start",
     "start:client": "yarn workspace @duckbot/client start",
+    "start:dev:client": "yarn workspace @duckbot/client start:dev",
+    "start:dev:server": "yarn workspace @duckbot/server start:dev",
+    "start:dev": "concurrently \"yarn start:dev:server\" \"yarn start:dev:client\"",
     "start": "yarn start:server"
   },
   "devDependencies": {
@@ -34,5 +37,9 @@
     "eslint-plugin-prettier": "^3.4.0",
     "prettier": "^2.3.2",
     "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "concurrently": "^6.2.0",
+    "typeorm": "^0.2.35"
   }
 }

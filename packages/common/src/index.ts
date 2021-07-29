@@ -1,14 +1,16 @@
 // Database
-import connectDB from './database';
-import ReactRole from './models/reaction-roles.model';
+import User from './entities/User.entity';
+import Guild from './entities/Guild.entity';
+import Session from './entities/Session.entity';
 
 // Libs
 import logger from './lib/logger';
 
 export {
   /* Database */
-  connectDB,
-  ReactRole,
+  User,
+  Guild,
+  Session,
   /* Libs */
   logger,
 };
