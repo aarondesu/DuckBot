@@ -9,9 +9,10 @@ This bot isn't design to be used widely. It was only inteded to be used as a pri
 ## Requirements
 
 > Node 14.x LTS - https://nodejs.org/en/
-
 > Yarn - npm install -g yarn
+> Heroku - npm install -g heroku
 
-## Running
+## Installing & Running Locally
 
-> yarn start
+> yarn install
+> heroku local
