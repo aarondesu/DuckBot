@@ -17,11 +17,10 @@
   "scripts": {
     "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx .",
     "format": "prettier --write .",
-    "build": "yarn workspaces foreach run build",
+    "build": "yarn workspaces foreach -pt run build",
     "clean": "yarn workspaces foreach run clean",
     "start:server": "yarn workspace @duckbot/server start",
     "start:client": "yarn workspace @duckbot/client start",
-    "postinstall": "yarn workspace @duckbot/common build",
     "start": "yarn start:server"
   },
   "devDependencies": {
