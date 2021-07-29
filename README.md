@@ -8,10 +8,42 @@ This bot isn't design to be used widely. It was only inteded to be used as a pri
 
 ## Requirements
 
-> Node 14.x LTS - https://nodejs.org/en/
+```
+Node 14.x LTS - https://nodejs.org/en/
+Yarn - npm install -g yarn
+Heroku - npm install -g heroku
+```
 
-> Yarn - npm install -g yarn
+## Environment example
 
-## Running
+```
+DETECTLANGUAGE_API_KEY=
+DEVELOPER_TEST_SERVER=
+DISCORD_TOKEN=
+OWNER_IDS=
+RAPID_API_KEY=
+PREFIX=%
+DATABASE_URL=
+REDDIT_SECRET_KEY= <https://www.reddit.com/dev/api/>
+REDDIT_CLIENT_ID=
+REDDIT_REFRESH_TOKEN=
+REDDIT_ACCESS_TOKEN=
+TWITTER_APP_ID= <https://developer.twitter.com/en/portal/dashboard>
+TWITTER_API_KEY=
+TWITTER_API_SECRET=
+TWITTER_BEARER_TOKEN=
+```
 
-> yarn start
+## Formatting
+
+```
+yarn lint
+yarn format
+```
+
+## Installing & Running Locally
+
+```
+yarn install
+heroku local
+```
