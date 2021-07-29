@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "lib": ["ESNext"],
+    "module": "commonjs",
+    "allowJs": true,
+    "sourceMap": true,
+    "removeComments": true,
+
+    "strict": true,
+
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    "newLine": "lf",
+    "resolveJsonModule": true,
+    "skipLibCheck": true
+  }
+}

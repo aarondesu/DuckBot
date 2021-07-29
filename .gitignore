@@ -1,13 +1,23 @@
+# Yarn
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+*.pnp
+
 #Files
 *.log
 *.env
+*.tsbuildinfo
 
 # Specific files
 .eslintcache
 playground.ts
 
 #Folders
-node_modules/
-logs/
-dist/
-scripts/
+node_modules
+logs
+dist
+scripts
+

@@ -1,0 +1,27 @@
+{
+  "name": "@duckbot/common",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "shinudesu",
+  "license": "MIT",
+  "scripts": {
+    "clean": "npx rimraf dist",
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@heroku-cli/color": "^1.1.14",
+    "dotenv": "^10.0.0",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.6.5",
+    "sequelize-typescript": "^2.1.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^16.4.6",
+    "@types/validator": "^13.6.3",
+    "@types/winston": "^2.4.4",
+    "typescript": "^4.3.5"
+  }
+}
