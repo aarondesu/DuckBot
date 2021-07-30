@@ -7,13 +7,13 @@ import session from 'express-session';
 import { logger, Session } from '@duckbot/common/dist';
 import { TypeormStore } from 'typeorm-store';
 
+import { PORT } from './constants';
 import { DatabaseConfig } from './config';
 import connectDB from './database';
 import routes from './routes';
 import './strategies/discord';
 
 const app = express();
-const PORT = process.env.PORT || 60;
 
 connectDB(DatabaseConfig.url)
   .then((connection) => {

@@ -4,7 +4,6 @@ import {
   BaseEntity,
   Column,
   CreateDateColumn,
-  DeleteDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
@@ -16,7 +15,7 @@ export default class Guild extends BaseEntity {
   @Column()
   name!: string;
 
-  @Column()
+  @Column({ nullable: true })
   avatar!: string;
 
   @CreateDateColumn()
@@ -24,7 +23,4 @@ export default class Guild extends BaseEntity {
 
   @UpdateDateColumn()
   updatedAt!: Date;
-
-  @DeleteDateColumn()
-  deletedAt!: Date;
 }

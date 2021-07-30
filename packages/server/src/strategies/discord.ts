@@ -46,6 +46,8 @@ passport.use(
             avatar,
           }).save();
 
+          if (newUser) logger.info('User created!');
+
           return done(null, newUser);
         }
 
