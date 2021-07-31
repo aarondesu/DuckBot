@@ -19,6 +19,7 @@
     "clean": "yarn workspaces foreach run clean",
     "client": "yarn workspace @duckbot/client",
     "server": "yarn workspace @duckbot/server",
+    "common": "yarn workspace @duckbot/common",
     "dashboard": "yarn workspace @duckbot/dashboard",
     "client:start": "yarn client start",
     "server:start": "yarn server start",
