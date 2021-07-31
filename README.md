@@ -11,7 +11,7 @@ This bot isn't design to be used widely. It was only inteded to be used as a pri
 ```
 Node 14.x LTS - https://nodejs.org/en/
 Yarn - npm install -g yarn
-Heroku - npm install -g heroku
+Heroku - npm install -g heroku <-- Required to test deployment
 ```
 
 ## Environment example

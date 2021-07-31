@@ -17,13 +17,13 @@ export default class GuildJoined extends Listener {
       const findGuild = await EGuild.findOne(guild.id);
       if (!findGuild) {
         await EGuild.create({
-          id: guild.id as string,
+          id: guild.id,
           name: guild.name,
           avatar: guild.icon as string,
         }).save();
         logger.info('Guild has been added to the database!');
       } else {
-        await EGuild.update(guild.id as string, {
+        await EGuild.update(guild.id, {
           name: guild.name,
           avatar: guild.icon as string,
         });

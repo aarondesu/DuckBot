@@ -21,8 +21,8 @@ export default class AnimalCommand extends SlashCommand {
       await interaction.defer();
 
       const selectMenu = new MessageSelectMenu()
-        .setCustomID('animal')
-        .addOptions(
+        .setCustomId('animal')
+        .addOptions([
           {
             label: 'Cat',
             value: 'cat',
@@ -46,8 +46,8 @@ export default class AnimalCommand extends SlashCommand {
           {
             label: 'Duck',
             value: 'duck',
-          }
-        );
+          },
+        ]);
 
       const message = (await interaction.editReply({
         content: 'Which animal?',
@@ -57,7 +57,7 @@ export default class AnimalCommand extends SlashCommand {
       const interactionUser = interaction.user.id;
       const filter = (i: Interaction) => i.user.id === interactionUser;
 
-      const collector = message.createMessageComponentInteractionCollector({
+      const collector = message.createMessageComponentCollector({
         filter,
         max: 1,
         time: 15000,

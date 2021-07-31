@@ -48,7 +48,7 @@ export default class UserInfoCommand extends SlashCommand {
               { name: 'ID', value: `${user.id}` },
               {
                 name: 'Status',
-                value: `${user.presence.status as string}`,
+                value: `${guildUser?.presence?.status as string}`,
                 inline: true,
               },
               {

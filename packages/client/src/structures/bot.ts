@@ -5,7 +5,7 @@ import {
   InhibitorHandler,
   ListenerHandler,
 } from 'discord-akairo';
-import { Collection, Intents, Snowflake } from 'discord.js';
+import { Collection, Intents } from 'discord.js';
 import { resolve } from 'path';
 import { logger } from '@duckbot/common/dist';
 
@@ -21,12 +21,21 @@ export default class DiscordBot extends AkairoClient {
     super(
       {
         // Akario settings
-        ownerID: ClientConfig.owners as Snowflake[],
+        ownerID: ClientConfig.owners,
       },
       {
         // Discord settings
         partials: ['CHANNEL', 'MESSAGE', 'GUILD_MEMBER', 'USER', 'REACTION'],
-        intents: Intents.ALL,
+        intents: [
+          Intents.FLAGS.GUILDS,
+          Intents.FLAGS.GUILD_MEMBERS,
+          Intents.FLAGS.GUILD_MESSAGES,
+          Intents.FLAGS.GUILD_INTEGRATIONS,
+          Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+          Intents.FLAGS.GUILD_WEBHOOKS,
+          Intents.FLAGS.GUILD_MESSAGE_TYPING,
+          Intents.FLAGS.GUILD_PRESENCES,
+        ],
       }
     );
 

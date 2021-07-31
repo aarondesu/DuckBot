@@ -13,6 +13,7 @@
   "dependencies": {
     "@duckbot/common": "workspace:packages/common",
     "apollo-server": "^3.1.1",
+    "class-validator": "^0.13.1",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
