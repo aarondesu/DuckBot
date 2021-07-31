@@ -1,5 +1,6 @@
 import express from 'express';
 import passport from 'passport';
+import { DASHBOARD_REDIRECT } from '../constants';
 
 const router = express.Router();
 
@@ -8,7 +9,7 @@ router.get(
   '/discord/redirect',
   passport.authenticate('discord'),
   (_req, res) => {
-    res.status(200).send({ msg: ' ok ' });
+    res.redirect(DASHBOARD_REDIRECT);
   }
 );
 

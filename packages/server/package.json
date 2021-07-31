@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@duckbot/common": "workspace:packages/common",
+    "apollo-server": "^3.1.1",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
@@ -28,6 +29,7 @@
     "sequelize-typescript": "^2.1.0",
     "swagger-ui-express": "^4.1.6",
     "tsconfig-paths": "^3.10.1",
+    "type-graphql": "^1.1.1",
     "typeorm": "^0.2.35",
     "typeorm-store": "^2.0.0"
   },

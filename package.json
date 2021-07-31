@@ -15,16 +15,19 @@
     "node": ">=14.x"
   },
   "scripts": {
-    "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx .",
-    "format": "prettier --write .",
     "build": "yarn workspaces foreach -pt run build",
     "clean": "yarn workspaces foreach run clean",
-    "start:server": "yarn workspace @duckbot/server start",
-    "start:client": "yarn workspace @duckbot/client start",
-    "start:dev:client": "yarn workspace @duckbot/client start:dev",
-    "start:dev:server": "yarn workspace @duckbot/server start:dev",
+    "client": "yarn workspace @duckbot/client start",
+    "server": "yarn workspace @duckbot/server start",
+    "client:start": "yarn client start",
+    "server:start": "yarn server start",
+    "client:dev": "yarn client start:dev",
+    "server:dev": "yarn server start:dev",
     "start:dev": "concurrently \"yarn start:dev:server\" \"yarn start:dev:client\"",
-    "start": "yarn start:server"
+    "start": "yarn server:start",
+    "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx .",
+    "format": "prettier --write .",
+    "test": "jest"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.28.5",
@@ -39,7 +42,6 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "concurrently": "^6.2.0",
-    "typeorm": "^0.2.35"
+    "concurrently": "^6.2.0"
   }
 }

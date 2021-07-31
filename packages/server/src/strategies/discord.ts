@@ -4,9 +4,10 @@ import { logger, User } from '@duckbot/common/dist';
 
 import { StrategyConfig } from '../config';
 
-passport.serializeUser((user, done) => {
+passport.serializeUser(async (user, done) => {
   const u = user as User;
-  done(null, u.id);
+  const uu = await User.findOne(u.id);
+  done(null, uu?.id);
 });
 
 passport.deserializeUser(async (id: string, done) => {
@@ -52,12 +53,12 @@ passport.use(
         }
 
         logger.info('User found!');
-        const updatedUser = await User.update(id, {
+        await User.update(id, {
           tag: `${username}#${discriminator}`,
           avatar,
         });
 
-        return done(null, updatedUser);
+        return done(null, findUser);
       } catch (err) {
         logger.error(err);
         return done(null, undefined);
