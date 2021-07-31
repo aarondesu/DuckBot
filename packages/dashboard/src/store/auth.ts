@@ -7,7 +7,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  discordId: undefined,
+  discordId: '',
   isLoading: false,
 };
 

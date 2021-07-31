@@ -1,7 +1,7 @@
 import { Listener } from 'discord-akairo';
 import { GuildMember, Role } from 'discord.js';
 
-import { logger } from '@duckbot/common/dist';
+import { logger } from '@duckbot/common';
 
 export default class AddRoleJoin extends Listener {
   public constructor() {

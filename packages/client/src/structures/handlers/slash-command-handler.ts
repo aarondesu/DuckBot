@@ -5,7 +5,7 @@ import {
   AkairoHandlerOptions,
 } from 'discord-akairo';
 import { promisify } from 'util';
-import { logger } from '@duckbot/common/dist';
+import { logger } from '@duckbot/common';
 
 import { SlashCommand } from '../modules/slash-command';
 import { ClientConfig } from '../../config';

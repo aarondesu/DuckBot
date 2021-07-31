@@ -1,13 +1,18 @@
 {
   "name": "@duckbot/common",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "author": "shinudesu",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "clean": "npx rimraf dist",
     "build": "tsc --build"
   },
+  "files": [
+    "/dist"
+  ],
   "dependencies": {
     "@heroku-cli/color": "^1.1.14",
     "dotenv": "^10.0.0",

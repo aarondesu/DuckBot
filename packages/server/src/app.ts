@@ -1,10 +1,8 @@
-/* eslint-disable import/first */
-/* eslint-disable no-console */
 import express from 'express';
 import cors from 'cors';
 import passport from 'passport';
 import session from 'express-session';
-import { logger, Session } from '@duckbot/common/dist';
+import { logger, Session } from '@duckbot/common';
 import { TypeormStore } from 'typeorm-store';
 import path from 'path';
 

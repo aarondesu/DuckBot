@@ -1,6 +1,6 @@
 import passport from 'passport';
 import DiscordStrategy from 'passport-discord';
-import { logger, User } from '@duckbot/common/dist';
+import { logger, User } from '@duckbot/common';
 
 import { StrategyConfig } from '../config';
 

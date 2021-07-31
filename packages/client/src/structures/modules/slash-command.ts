@@ -6,7 +6,7 @@ import {
 } from 'discord.js';
 import { AkairoModule, AkairoModuleOptions } from 'discord-akairo';
 
-import { logger } from '@duckbot/common/dist';
+import { logger } from '@duckbot/common';
 
 export interface SlashCommandOptions extends AkairoModuleOptions {
   description: string;

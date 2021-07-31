@@ -1,6 +1,6 @@
 import { Guild } from 'discord.js';
 import { Listener } from 'discord-akairo';
-import { logger, Guild as EGuild } from '@duckbot/common/dist/';
+import { logger, Guild as EGuild } from '@duckbot/common';
 
 export default class GuildJoined extends Listener {
   constructor() {

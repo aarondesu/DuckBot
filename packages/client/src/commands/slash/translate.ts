@@ -2,7 +2,7 @@
 import { CommandInteraction } from 'discord.js';
 import DetectLanguage from 'detectlanguage';
 import axios, { AxiosRequestConfig } from 'axios';
-import { logger } from '@duckbot/common/dist';
+import { logger } from '@duckbot/common';
 
 import { SlashCommand } from '../../structures/modules/slash-command';
 import { COLOR_PRIMARY } from '../../constants';

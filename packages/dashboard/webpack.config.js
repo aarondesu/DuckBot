@@ -32,7 +32,6 @@ const config = {
     compress: true,
     hot: true,
     overlay: true,
-    transportMode: 'ws',
   },
   plugins: [
     new ProvidePlugin({
@@ -62,13 +61,7 @@ const config = {
       },
       {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 100000,
-            name: '[name].[ext]',
-          },
-        },
+        use: ['file-loader'],
       },
     ],
   },

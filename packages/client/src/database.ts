@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { createConnection } from 'typeorm';
-import { User, Guild, Session } from '@duckbot/common/dist';
+import { User, Guild } from '@duckbot/common';
 
 const connectDB = (url: string) =>
   createConnection({

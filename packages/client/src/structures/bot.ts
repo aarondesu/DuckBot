@@ -7,7 +7,7 @@ import {
 } from 'discord-akairo';
 import { Collection, Intents } from 'discord.js';
 import { resolve } from 'path';
-import { logger } from '@duckbot/common/dist';
+import { logger } from '@duckbot/common';
 
 import { ClientConfig } from '../config';
 

@@ -7,7 +7,7 @@ import {
 import cron from 'node-cron';
 import moment from 'moment-timezone';
 
-import { logger } from '@duckbot/common/dist';
+import { logger } from '@duckbot/common';
 import { CronJob } from '../modules/cron-job';
 
 export default class CronJobHandler extends AkairoHandler {

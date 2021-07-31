@@ -1,5 +1,5 @@
 import Snoowrap, { Listing, Submission } from 'snoowrap';
-import { logger } from '@duckbot/common/dist';
+import { logger } from '@duckbot/common';
 
 import {
   APITokens,

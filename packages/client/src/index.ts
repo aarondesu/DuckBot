@@ -1,4 +1,4 @@
-import { logger } from '@duckbot/common/dist';
+import { logger } from '@duckbot/common';
 
 import DiscordBot from './structures/bot';
 import connectDB from './database';

@@ -1,5 +1,5 @@
 import { Listener } from 'discord-akairo';
-import { logger } from '@duckbot/common/dist';
+import { logger } from '@duckbot/common';
 
 import { DuckPresence } from '../config';
 

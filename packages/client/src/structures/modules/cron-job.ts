@@ -4,7 +4,7 @@ import { Logger } from 'winston';
 import { Timezone } from 'tz-offset';
 import { ScheduledTask } from 'node-cron';
 
-import { logger } from '@duckbot/common/dist';
+import { logger } from '@duckbot/common';
 
 export interface CronJobOptions extends AkairoModuleOptions {
   schedule: string;

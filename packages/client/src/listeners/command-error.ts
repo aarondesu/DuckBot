@@ -1,7 +1,7 @@
 import { Listener } from 'discord-akairo';
 import { CommandInteraction } from 'discord.js';
 
-import { logger } from '@duckbot/common/dist/';
+import { logger } from '@duckbot/common';
 
 import { COLOR_ERROR } from '../constants';
 import { EmbedBuilderUtil } from '../lib/utils';

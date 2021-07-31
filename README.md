@@ -47,6 +47,20 @@ yarn lint
 yarn format
 ```
 
+# Starting in dev
+
+```
+yarn build or yarn common build
+
+yarn server start:dev
+yarn client start:dev
+yarn dashboard start:dev
+
+or
+
+yarn start:dev
+```
+
 ## Installing & Running Locally
 
 ```
