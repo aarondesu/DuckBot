@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": "./",
+    "allowJs": false,
+    "jsx": "react",
+    "lib": ["dom", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "target": "es5"
+  },
+  "exclude": ["node_modules", "dist"]
+}
