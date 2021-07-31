@@ -1,6 +1,11 @@
 /* eslint-disable no-continue */
 import moment from 'moment-timezone';
-import { Collection, Snowflake, TextChannel } from 'discord.js';
+import {
+  Collection,
+  GuildChannel,
+  TextChannel,
+  ThreadChannel,
+} from 'discord.js';
 
 import json from '../json/reminders.json';
 import { JSONDeclaration, Schedule, Day } from '../typings/reminders';
@@ -11,7 +16,7 @@ import { CronJob } from '../structures/modules/cron-job';
 export default class ReminderJob extends CronJob {
   reminders: Collection<string, Schedule>;
 
-  channels: Collection<Snowflake, TextChannel>;
+  channels: Collection<string, GuildChannel | ThreadChannel>;
 
   public constructor() {
     super('reminder-job', {
@@ -20,7 +25,7 @@ export default class ReminderJob extends CronJob {
     });
 
     this.reminders = new Collection<string, Schedule>();
-    this.channels = new Collection<Snowflake, TextChannel>();
+    this.channels = new Collection<string, GuildChannel | ThreadChannel>();
   }
 
   init() {
@@ -30,12 +35,14 @@ export default class ReminderJob extends CronJob {
       this.reminders.set(sched.name, sched);
     }
 
-    // Get channels
-    const cache = this.client.channels.cache.filter(
-      (ch) => ch.deleted === false && ch.type === 'text'
-    ) as Collection<Snowflake, TextChannel>;
+    // Get all channels
+    this.client.guilds.cache.forEach((guild) => {
+      this.channels.concat(
+        guild.channels.cache.filter((ch) => ch.name === 'general')
+      );
+    });
 
-    this.channels = cache.filter((ch) => ch.name === 'general');
+    this.logger.debug(this.channels.size);
   }
 
   async exec() {
@@ -75,7 +82,10 @@ export default class ReminderJob extends CronJob {
           });
 
           for (const [, channel] of this.channels) {
-            sendMessage.push(channel.send({ embeds: [embed] }));
+            if (!channel.isThread) {
+              const ch = channel as GuildChannel as TextChannel;
+              sendMessage.push(ch.send({ embeds: [embed] }));
+            }
           }
         }
       }
