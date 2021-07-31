@@ -4,6 +4,7 @@
   "main": "index.js",
   "author": "shinudesu",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "clean": "npx rimraf dist",
     "build": "tsc",
