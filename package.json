@@ -15,8 +15,8 @@
   },
   "scripts": {
     "packages": "yarn workspaces foreach",
+    "prebuild": "yarn workspaces foreach -pt run prebuild",
     "build": "yarn workspaces foreach -pt run build",
-    "clean": "yarn workspaces foreach run clean",
     "client": "yarn workspace @duckbot/client",
     "server": "yarn workspace @duckbot/server",
     "common": "yarn workspace @duckbot/common",

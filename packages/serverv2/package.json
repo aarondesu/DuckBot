@@ -1,7 +1,7 @@
 {
   "name": "@duckbot/server",
   "scripts": {
-    "prebuild:": "rimraf dist",
+    "prebuild": "rimraf dist",
     "build": "tsc",
     "start": "dotenv -e ../../.env node dist/index.ts",
     "start:dev": "dotenv -e ../../.env nodemon --exec ts-node src/index.ts"
@@ -48,6 +48,7 @@
     "ts-node": "^10.1.0",
     "type-graphql": "^1.1.1",
     "typegraphql-nestjs": "^0.3.1",
-    "typeorm": "^0.2.36"
+    "typeorm": "^0.2.36",
+    "typeorm-store": "^2.0.0"
   }
 }

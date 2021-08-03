@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "clean": "npx rimraf dist",
+    "prebuild": "rimraf dist",
     "build": "cross-env NODE_ENV=production webpack --node-env=production",
     "build:dev": "cross-env NODE_ENV=development webpack --node-env=development",
     "build:prod": "cross-env NODE_ENV=production webpack  --node-env=production",

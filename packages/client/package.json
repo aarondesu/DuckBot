@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "tsc": "npx tsc",
-    "prebuild:": "rimraf dist",
+    "prebuild": "rimraf dist",
     "build": "tsc",
     "clean": "npx rimraf dist",
     "start": "cross-env NODE_ENV=production node dist/index.js",
