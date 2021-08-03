@@ -21,19 +21,16 @@ export class User extends BaseEntity {
   @Column()
   tag!: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column({ nullable: true })
   avatar!: string;
 
-  @Column()
-  @CreateDateColumn()
+  @CreateDateColumn({ nullable: true })
   createdAt!: string;
 
-  @Column()
-  @UpdateDateColumn()
+  @UpdateDateColumn({ nullable: true })
   updatedAt!: string;
 
-  @Column()
   @DeleteDateColumn({ nullable: true })
   deletedAt!: string;
 }
