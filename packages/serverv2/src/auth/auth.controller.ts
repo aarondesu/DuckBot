@@ -11,7 +11,7 @@ export default class AuthController {
     res.status(200).send({ msg: 'ok' });
   }
 
-  @Get('loign')
+  @Get('login')
   @UseGuards(DiscordAuthGuard)
   login() {}
 
