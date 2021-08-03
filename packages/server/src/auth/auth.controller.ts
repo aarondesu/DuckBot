@@ -1,11 +1,19 @@
 /* eslint-disable class-methods-use-this */
-import { Controller, Get, Res, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Res, Req, UseGuards, Redirect } from '@nestjs/common';
 import { Request, Response } from 'express';
 
 import DiscordAuthGuard from './utils/discord.guard';
 
 @Controller('auth')
 export default class AuthController {
+  /**
+   * GET /api/v1/auth
+   * Redirect root to auth/login
+   */
+  @Get()
+  @Redirect('/api/v1/auth/login')
+  root() {}
+
   /*
    * GET /api/v1/auth/login
    * Intitiates discord oAuth
