@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Session } from '@duckbot/common';
 import path from 'path';
 
+import { isProduction } from './config';
 import AuthModule from './auth/auth.module';
 import UserModule from './user/user.module';
-
-const isProduction = process.env.NODE_ENV === 'production';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ const isProduction = process.env.NODE_ENV === 'production';
     GraphQLModule.forRoot({
       debug: !isProduction,
       useGlobalPrefix: true,
-      autoSchemaFile: path.resolve(__dirname, './'),
+      autoSchemaFile: path.resolve(__dirname, './schemal.gql'),
       include: [UserModule],
     }),
     TypeOrmModule.forRoot({
@@ -27,7 +27,7 @@ const isProduction = process.env.NODE_ENV === 'production';
         rejectUnauthorized: false,
         requestCert: true,
       },
-      entities: ['**/*.entity.ts'],
+      entities: ['**/*.entity.ts', Session],
       synchronize: true,
     }),
   ],
