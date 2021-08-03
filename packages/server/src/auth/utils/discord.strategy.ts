@@ -36,12 +36,24 @@ export default class DiscordStrategy extends PassportStrategy(
     cb: VerifyCallback<User>
   ) {
     const { id, displayName, profileUrl } = profile;
-    const user = await this.userService.createUser({
-      id,
+    const findUser = await this.userService.findUser(id);
+    // If user is not found, add one to the database
+    if (findUser === undefined) {
+      const newUser = await this.userService.createUser({
+        id,
+        tag: displayName as string,
+        avatar: profileUrl as string,
+      });
+
+      return cb(undefined, newUser);
+    }
+
+    // Update the user if it is found
+    const updateUser = await this.userService.updateUser(id, {
       tag: displayName as string,
       avatar: profileUrl as string,
     });
 
-    return cb(undefined, user);
+    return cb(undefined, updateUser);
   }
 }
