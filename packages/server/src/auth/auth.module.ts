@@ -4,7 +4,8 @@ import { PassportModule } from '@nestjs/passport';
 import AuthController from './auth.controller';
 import DiscordStrategy from './utils/discord.strategy';
 import SessionSerializer from './utils/session.serializer';
-import UserModule from '../user/user.module';
+
+import UserModule from '../graphql/user/user.module';
 
 @Module({
   imports: [

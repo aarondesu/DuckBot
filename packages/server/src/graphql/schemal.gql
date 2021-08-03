@@ -5,7 +5,7 @@
 type User {
   id: String!
   tag: String!
-  avatar: String!
+  avatar: String
 }
 
 type Query {

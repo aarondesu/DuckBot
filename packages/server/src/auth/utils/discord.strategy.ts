@@ -10,7 +10,7 @@ import {
 } from '@oauth-everything/passport-discord';
 import { User } from '@duckbot/common';
 
-import UserService from '../../user/user.service';
+import UserService from '../../graphql/user/user.service';
 
 @Injectable()
 export default class DiscordStrategy extends PassportStrategy(

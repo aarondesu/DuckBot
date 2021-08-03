@@ -4,7 +4,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { VerifyCallback } from '@oauth-everything/passport-discord';
 import { User, logger } from '@duckbot/common';
 
-import UserService from '../../user/user.service';
+import UserService from '../../graphql/user/user.service';
 
 @Injectable()
 export default class SessionSerializer extends PassportSerializer {

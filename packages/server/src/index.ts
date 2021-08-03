@@ -8,6 +8,8 @@ import passport from 'passport';
 
 import AppModule from './app.module';
 
+logger.info(process.env.NODE_ENV);
+
 async function bootstrap() {
   try {
     const app = await NestFactory.create(AppModule);
