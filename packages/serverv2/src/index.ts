@@ -1,17 +1,20 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { NestFactory } from '@nestjs/core';
-import { logger } from '@duckbot/common';
+import { logger, Session } from '@duckbot/common';
+import { getRepository } from 'typeorm';
+import { TypeormStore } from 'typeorm-store';
+import session from 'express-session';
 import passport from 'passport';
 
 import AppModule from './app.module';
 
-const PORT = process.env.PORT || 5000;
-
 async function bootstrap() {
   try {
     const app = await NestFactory.create(AppModule);
+    const PORT = process.env.PORT || 5000;
+    const repository = getRepository(Session);
 
-    app.setGlobalPrefix('api');
+    app.setGlobalPrefix('api/v1');
     app.enableCors({
       origin: '*',
       credentials: true,
@@ -19,6 +22,14 @@ async function bootstrap() {
 
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use(
+      session({
+        secret: 'duckbotdiscordsessionsecret',
+        resave: false,
+        saveUninitialized: false,
+        store: new TypeormStore({ repository }),
+      })
+    );
 
     await app.listen(PORT, () =>
       logger.info(`Server started! Listening on  PORT ${PORT}`)
