@@ -33,7 +33,7 @@ export default class UserResolver {
   @Mutation(() => User)
   async updateUser(
     @Args('id') id: string,
-    @Args({ name: 'data', type: () => UserService }) data: UpdateUserInput
+    @Args({ name: 'data', type: () => UpdateUserInput }) data: UpdateUserInput
   ) {
     const user = this.userService.updateUser(id, data);
     return user;
