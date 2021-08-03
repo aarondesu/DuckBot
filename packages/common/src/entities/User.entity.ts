@@ -1,19 +1,17 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Field, ObjectType } from '@nestjs/graphql';
 import {
-  Entity,
-  PrimaryColumn,
   BaseEntity,
   Column,
   CreateDateColumn,
-  UpdateDateColumn,
   DeleteDateColumn,
+  Entity,
+  PrimaryColumn,
+  UpdateDateColumn,
 } from 'typeorm';
-import { Field, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
-export class User extends BaseEntity {
+export default class User extends BaseEntity {
   @Field()
   @PrimaryColumn()
   id!: string;
@@ -23,15 +21,18 @@ export class User extends BaseEntity {
   tag!: string;
 
   @Field()
-  @Column()
+  @Column({ nullable: true })
   avatar!: string;
 
+  @Column()
   @CreateDateColumn()
-  createdAt!: Date;
+  createdAt!: string;
 
+  @Column()
   @UpdateDateColumn()
-  updatedAt!: Date;
+  updatedAt!: string;
 
+  @Column()
   @DeleteDateColumn({ nullable: true })
-  deletedAt!: Date;
+  deletedAt!: string;
 }

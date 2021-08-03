@@ -26,6 +26,7 @@
     "start": "yarn server:start",
     "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx .",
     "format": "prettier --write .",
+    "postinstall": "husky install",
     "test": "jest"
   },
   "devDependencies": {

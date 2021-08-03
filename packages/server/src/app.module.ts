@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Session } from '@duckbot/common';
+import { Session, User } from '@duckbot/common';
 import path from 'path';
 
 import { isProduction } from './config';
@@ -27,7 +27,7 @@ import UserModule from './user/user.module';
         rejectUnauthorized: false,
         requestCert: true,
       },
-      entities: ['**/*.entity.ts', Session],
+      entities: [User, Session],
       synchronize: true,
     }),
   ],
