@@ -1,9 +1,9 @@
 /* eslint-disable class-methods-use-this */
 import {} from '@nestjs/common';
 import { Mutation, Query, Resolver, Args } from '@nestjs/graphql';
+import { User } from '@duckbot/common';
 
 import UserService from './user.service';
-import { User } from './user.entity';
 import { CreateUserIput } from './user.input';
 
 @Resolver('User')
