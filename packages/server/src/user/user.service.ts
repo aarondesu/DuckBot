@@ -24,12 +24,12 @@ export default class UserService {
     return user;
   }
 
-  async getUser(id: string): Promise<User> {
+  async findUser(id: string): Promise<User> {
     const user = await this.userRepository.findOne(id);
     return user as User;
   }
 
-  async getUsers(): Promise<User[]> {
+  async findUsers(): Promise<User[]> {
     const users = await this.userRepository.find();
     return users;
   }

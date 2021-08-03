@@ -2,7 +2,6 @@
 import { Controller, Get, Res, Req, UseGuards } from '@nestjs/common';
 import { Request, Response } from 'express';
 
-import { dashboardUrl } from '../config';
 import DiscordAuthGuard from './utils/discord.guard';
 
 @Controller('auth')
@@ -19,10 +18,19 @@ export default class AuthController {
    * GET /api/v1/auth/redirect
    * Redirects to the dashboard
    */
-  @Get('redirect?code=:code')
+  @Get('redirect?')
   @UseGuards(DiscordAuthGuard)
   redirect(@Res() res: Response) {
-    res.redirect(`${dashboardUrl}/dashboard`);
+    res.send(200);
+  }
+
+  /**
+   * GET /api/v1/auth/status
+   * Gets the user information
+   */
+  @Get('status')
+  status(@Req() req: Request, @Res() res: Response) {
+    res.send(req.user);
   }
 
   /*

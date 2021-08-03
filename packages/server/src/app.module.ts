@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Session, User } from '@duckbot/common';
 import path from 'path';
@@ -13,7 +12,6 @@ import UserModule from './user/user.module';
   imports: [
     UserModule,
     AuthModule,
-    PassportModule.register({ session: true }),
     GraphQLModule.forRoot({
       debug: !isProduction,
       useGlobalPrefix: true,

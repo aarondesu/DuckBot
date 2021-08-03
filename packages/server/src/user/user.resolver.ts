@@ -12,13 +12,13 @@ export default class UserResolver {
 
   @Query(() => User)
   async user(@Args('id') id: string) {
-    const user = this.userService.getUser(id);
+    const user = this.userService.findUser(id);
     return user;
   }
 
   @Query(() => [User])
   async users() {
-    return this.userService.getUsers();
+    return this.userService.findUsers();
   }
 
   @Mutation(() => User)

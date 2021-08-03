@@ -20,8 +20,6 @@ async function bootstrap() {
       credentials: true,
     });
 
-    app.use(passport.initialize());
-    app.use(passport.session());
     app.use(
       session({
         secret: 'duckbotdiscordsessionsecret',
@@ -30,6 +28,8 @@ async function bootstrap() {
         store: new TypeormStore({ repository }),
       })
     );
+    app.use(passport.initialize());
+    app.use(passport.session());
 
     await app.listen(PORT, () =>
       logger.info(`Server started! Listening on  PORT ${PORT}`)
