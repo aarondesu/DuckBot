@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { User } from '@duckbot/common';
-import { CreateUserIput } from './user.input';
+import { CreateUserIput, UpdateUserInput } from './user.input';
 
 @Injectable()
 export default class UserService {
@@ -32,5 +32,15 @@ export default class UserService {
   async findUsers(): Promise<User[]> {
     const users = await this.userRepository.find();
     return users;
+  }
+
+  async updateUser(id: string, data: UpdateUserInput): Promise<User> {
+    const findUser = await this.userRepository.findOne({ where: { id } });
+    const user = await this.userRepository.save({
+      ...findUser,
+      ...data,
+    });
+
+    return user;
   }
 }
