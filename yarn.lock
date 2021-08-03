@@ -1888,6 +1888,7 @@ __metadata:
   dependencies:
     "@apollo/federation": ^0.27.1
     "@duckbot/common": "workspace:packages/common"
+    "@nestjs/axios": ^0.0.1
     "@nestjs/common": ^8.0.5
     "@nestjs/config": ^1.0.1
     "@nestjs/core": ^8.0.5
@@ -1896,6 +1897,7 @@ __metadata:
     "@nestjs/platform-express": ^8.0.5
     "@nestjs/testing": ^8.0.5
     "@nestjs/typeorm": ^8.0.1
+    "@oauth-everything/passport-discord": ^1.0.2
     "@types/express": ^4.17.13
     "@types/express-session": ^1.17.4
     "@types/jest": ^26.0.24
@@ -1904,6 +1906,7 @@ __metadata:
     "@types/supertest": ^2.0.11
     apollo-server-express: ^2
     connect-typeorm: ^1.1.4
+    cross-env: ^7.0.3
     dotenv: ^10.0.0
     dotenv-cli: ^4.0.0
     express: ^4.17.1
@@ -1914,7 +1917,6 @@ __metadata:
     jest: ^27.0.6
     nodemon: ^2.0.12
     passport: ^0.4.1
-    passport-discord: ^0.1.4
     pg: ^8.7.1
     reflect-metadata: ^0.1.13
     rimraf: ^3.0.2
@@ -2397,6 +2399,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nestjs/axios@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@nestjs/axios@npm:0.0.1"
+  dependencies:
+    axios: 0.21.1
+  peerDependencies:
+    "@nestjs/common": ^7.0.0 || ^8.0.0
+    reflect-metadata: ^0.1.12
+    rxjs: ^6.0.0 || ^7.0.0
+  checksum: ef16cfea6cf26aeeb1d8d648e400999988c1f4bb1aa0a30c4d529aed6c6b877f3180af28350fa814e31afeedf2adf3c283b00da63dcbcab53a85bb35b8d73a6c
+  languageName: node
+  linkType: hard
+
 "@nestjs/common@npm:^8.0.5":
   version: 8.0.5
   resolution: "@nestjs/common@npm:8.0.5"
@@ -2634,6 +2649,35 @@ __metadata:
   bin:
     opencollective: bin/opencollective.js
   checksum: fd3737c12edf55b5c2279674664c3ed5e756410ea82e9cd324c3f0e032ed5ccd8df1959ec69ea97f2f1c9c33c884aae3d7a7108a73ea0faa90d74ea47cf364d4
+  languageName: node
+  linkType: hard
+
+"@oauth-everything/oauth2-types@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@oauth-everything/oauth2-types@npm:1.0.2"
+  dependencies:
+    "@types/express": ^4.17.2
+    "@types/passport-oauth2": ^1.4.8
+  checksum: 4ece4c488f662a94855a4742f69b7329fbf324b56dd3563a66900b31470dee44bbbec62ea9aa27995f9aa2a48127ddf31eac7c773f1ed126dca9720071d7c9d2
+  languageName: node
+  linkType: hard
+
+"@oauth-everything/passport-discord@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@oauth-everything/passport-discord@npm:1.0.2"
+  dependencies:
+    "@oauth-everything/oauth2-types": ^1.0.2
+    "@oauth-everything/profile": ^1.0.0
+    "@types/passport-oauth2": ^1.4.8
+    passport-oauth2: ^1.5.0
+  checksum: c07d1411cceee93cbf1cd575a874212cb5089de214ca3b8196bdd1cb6cf6bedf603369d6ef9a1fce8a7b44ccf23ef428c7debbc02d95787963517f01ae5c2261
+  languageName: node
+  linkType: hard
+
+"@oauth-everything/profile@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@oauth-everything/profile@npm:1.0.0"
+  checksum: bc8f643242cbec30c415c60ddb6810ea54c7564bda1e34db7dd0e18c8987732c2d8317972762fbe5c72bd6475de552ceee8f44eb882429907ce224a17e57d185
   languageName: node
   linkType: hard
 
@@ -3013,7 +3057,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:*, @types/express@npm:^4.17.12, @types/express@npm:^4.17.13":
+"@types/express@npm:*, @types/express@npm:^4.17.12, @types/express@npm:^4.17.13, @types/express@npm:^4.17.2":
   version: 4.17.13
   resolution: "@types/express@npm:4.17.13"
   dependencies:
@@ -3282,7 +3326,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/passport-oauth2@npm:*":
+"@types/passport-oauth2@npm:*, @types/passport-oauth2@npm:^1.4.8":
   version: 1.4.11
   resolution: "@types/passport-oauth2@npm:1.4.11"
   dependencies:
@@ -12422,15 +12466,6 @@ fsevents@^1.2.7:
   version: 0.1.1
   resolution: "pascalcase@npm:0.1.1"
   checksum: f83681c3c8ff75fa473a2bb2b113289952f802ff895d435edd717e7cb898b0408cbdb247117a938edcbc5d141020909846cc2b92c47213d764e2a94d2ad2b925
-  languageName: node
-  linkType: hard
-
-"passport-discord@npm:^0.1.4":
-  version: 0.1.4
-  resolution: "passport-discord@npm:0.1.4"
-  dependencies:
-    passport-oauth2: ^1.5.0
-  checksum: 81c0a7f45dd9b5b8192e4027d87c086737c8ba763bfb7102b7da6e6d5f99ab3669d6a8a89fa314d7dcc196e63877d0fc9cf23920da805de01abd96d4930221f2
   languageName: node
   linkType: hard
 

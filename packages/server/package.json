@@ -3,8 +3,8 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc",
-    "start": "dotenv -e ../../.env node dist/index.ts",
-    "start:dev": "dotenv -e ../../.env nodemon --exec ts-node src/index.ts"
+    "start": "dotenv -e ../../.env cross-env NODE_PRODUCTION=production node dist/index.ts",
+    "start:dev": "dotenv -e ../../.env cross-env NODE_PRODUCTION=development nodemon --exec ts-node src/index.ts"
   },
   "packageManager": "yarn@3.0.0",
   "devDependencies": {
@@ -23,6 +23,7 @@
   "dependencies": {
     "@apollo/federation": "^0.27.1",
     "@duckbot/common": "workspace:packages/common",
+    "@nestjs/axios": "^0.0.1",
     "@nestjs/common": "^8.0.5",
     "@nestjs/config": "^1.0.1",
     "@nestjs/core": "^8.0.5",
@@ -30,8 +31,10 @@
     "@nestjs/passport": "^8.0.0",
     "@nestjs/platform-express": "^8.0.5",
     "@nestjs/typeorm": "^8.0.1",
+    "@oauth-everything/passport-discord": "^1.0.2",
     "apollo-server-express": "^2",
     "connect-typeorm": "^1.1.4",
+    "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
     "dotenv-cli": "^4.0.0",
     "express": "^4.17.1",
@@ -40,7 +43,6 @@
     "graphql": "^15.5.1",
     "graphql-tools": "^8.0.0",
     "passport": "^0.4.1",
-    "passport-discord": "^0.1.4",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
