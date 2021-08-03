@@ -25,6 +25,14 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   avatar!: string;
 
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  accessToken!: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  refreshToken!: string;
+
   @CreateDateColumn({ nullable: true })
   createdAt!: string;
 

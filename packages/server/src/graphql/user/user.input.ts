@@ -12,6 +12,12 @@ export class CreateUserIput {
 
   @Field()
   avatar!: string;
+
+  @Field()
+  accessToken!: string;
+
+  @Field({ nullable: true })
+  refreshToken!: string;
 }
 
 @InputType()
@@ -21,4 +27,10 @@ export class UpdateUserInput {
 
   @Field()
   avatar!: string;
+
+  @Field({ nullable: true })
+  accessToken!: string;
+
+  @Field({ nullable: true })
+  refreshToken!: string;
 }

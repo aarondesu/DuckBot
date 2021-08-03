@@ -30,8 +30,8 @@ export default class DiscordStrategy extends PassportStrategy(
   }
 
   async validate(
-    _accessToken: string,
-    _refreshToken: string,
+    accessToken: string,
+    refreshToken: string,
     profile: Profile,
     cb: VerifyCallback<User>
   ) {
@@ -43,6 +43,8 @@ export default class DiscordStrategy extends PassportStrategy(
         id,
         tag: displayName as string,
         avatar: profileUrl as string,
+        accessToken,
+        refreshToken,
       });
 
       return cb(undefined, newUser);
@@ -52,6 +54,8 @@ export default class DiscordStrategy extends PassportStrategy(
     const updateUser = await this.userService.updateUser(id, {
       tag: displayName as string,
       avatar: profileUrl as string,
+      accessToken,
+      refreshToken,
     });
 
     return cb(undefined, updateUser);
