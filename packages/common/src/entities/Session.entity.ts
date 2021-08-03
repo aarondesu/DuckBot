@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import {
   Entity,
   PrimaryColumn,
@@ -10,7 +11,7 @@ import {
 import { SessionEntity } from 'typeorm-store';
 
 @Entity()
-export default class Session extends BaseEntity implements SessionEntity {
+export class Session extends BaseEntity implements SessionEntity {
   @PrimaryColumn()
   id!: string;
 

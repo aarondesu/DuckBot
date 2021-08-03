@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Entity,
@@ -10,10 +11,10 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import Guild from './Guild.entity';
+import { Guild } from './guild.entity';
 
 @Entity()
-export default class Prefix extends BaseEntity {
+export class Prefix extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 

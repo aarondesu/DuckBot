@@ -5,9 +5,7 @@ import { logger, User } from '@duckbot/common';
 import { StrategyConfig } from '../config';
 
 passport.serializeUser(async (user, done) => {
-  const u = user as User;
-  const uu = await User.findOne(u.id);
-  done(null, uu?.id);
+  done(null, (user as User).id);
 });
 
 passport.deserializeUser(async (id: string, done) => {

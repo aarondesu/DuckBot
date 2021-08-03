@@ -2,20 +2,23 @@ import express from 'express';
 import cors from 'cors';
 import passport from 'passport';
 import session from 'express-session';
-import { logger, Session } from '@duckbot/common';
+import { logger, Session, UserResolver } from '@duckbot/common';
 import { TypeormStore } from 'typeorm-store';
+import { graphqlHTTP } from 'express-graphql';
+import { buildSchema } from 'type-graphql';
 import path from 'path';
 
 import { PORT } from './constants';
 import { DatabaseConfig } from './config';
 import connectDB from './database';
 import routes from './routes';
+
 import './strategies/discord';
 
 const app = express();
 
 connectDB(DatabaseConfig.url)
-  .then((connection) => {
+  .then(async (connection) => {
     const repository = connection.getRepository(Session);
 
     app.use(cors());
@@ -32,7 +35,18 @@ connectDB(DatabaseConfig.url)
     app.use(passport.initialize());
     app.use(passport.session());
 
+    const schema = await buildSchema({
+      resolvers: [UserResolver],
+    });
+
     app.use('/api/v1', routes);
+    app.use(
+      '/api/graphql',
+      graphqlHTTP({
+        schema,
+        graphiql: true,
+      })
+    );
 
     // Serve dashboard on production
     if (process.env.NODE_ENV === 'production') {

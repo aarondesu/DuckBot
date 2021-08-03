@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import {
   Entity,
   PrimaryColumn,
@@ -8,7 +9,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export default class Guild extends BaseEntity {
+export class Guild extends BaseEntity {
   @PrimaryColumn()
   id!: string;
 

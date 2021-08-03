@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "clean": "npx rimraf dist",
+    "prebuild": "rimraf dist",
     "build": "tsc --build"
   },
   "files": [
@@ -16,9 +16,12 @@
   "dependencies": {
     "@heroku-cli/color": "^1.1.14",
     "dotenv": "^10.0.0",
+    "dotenv-cli": "^4.0.0",
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "type-graphql": "^1.1.1",
     "typeorm": "^0.2.35",
     "typeorm-store": "^2.0.0",
     "winston": "^3.3.3"
