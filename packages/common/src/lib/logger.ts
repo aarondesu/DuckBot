@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import winston, { format, createLogger } from 'winston';
 import color from '@heroku-cli/color';
 
@@ -23,11 +24,9 @@ const level = () => {
   return process.env.NODE_ENV === 'development' ? 'debug' : 'info';
 };
 
-const logger = createLogger({
+export const logger = createLogger({
   transports: [new winston.transports.Console()],
   level: level(),
   levels: customLevels,
   format: customFormat,
 });
-
-export default logger;
