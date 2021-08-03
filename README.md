@@ -17,13 +17,16 @@ Heroku - npm install -g heroku <-- Required to test deployment
 ## Environment example
 
 ```
-DETECTLANGUAGE_API_KEY=
 DEVELOPER_TEST_SERVER=
-DISCORD_TOKEN=
+DISCORD_TOKEN= <https://discord.com/developers/>
+DISCORD_CLIENT_ID=
+DISCORD_CLIENT_SECRET=
+DISCORD_CLIENT_CALLBACK_URL=
 OWNER_IDS=
-RAPID_API_KEY=
-PREFIX=%
+PREFIX=
 DATABASE_URL=
+RAPID_API_KEY=<https://rapidapi.com/gatzuma/api/deep-translate1>
+DETECTLANGUAGE_API_KEY=<https://detectlanguage.com/>
 REDDIT_SECRET_KEY= <https://www.reddit.com/dev/api/>
 REDDIT_CLIENT_ID=
 REDDIT_REFRESH_TOKEN=

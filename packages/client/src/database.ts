@@ -10,7 +10,7 @@ const connectDB = (url: string) =>
       rejectUnauthorized: false,
       requestCert: true,
     },
-    entities: [User, Guild, Session],
+    entities: [User, Guild],
     synchronize: true,
   });
 

@@ -1,6 +1,6 @@
-import { Guild } from 'discord.js';
+import { Guild as DGuild } from 'discord.js';
 import { Listener } from 'discord-akairo';
-import { logger, Guild as EGuild } from '@duckbot/common';
+import { logger, Guild } from '@duckbot/common';
 
 export default class GuildJoined extends Listener {
   constructor() {
@@ -10,20 +10,21 @@ export default class GuildJoined extends Listener {
     });
   }
 
-  async exec(guild: Guild) {
+  async exec(guild: DGuild) {
     logger.info(`Bot joined guild ${guild.name}! Adding guild to database...`);
     // Check if guild has been created
     try {
-      const findGuild = await EGuild.findOne(guild.id);
+      const findGuild = await Guild.findOne(guild.id);
       if (!findGuild) {
-        await EGuild.create({
+        await Guild.create({
           id: guild.id,
           name: guild.name,
           avatar: guild.icon as string,
         }).save();
+
         logger.info('Guild has been added to the database!');
       } else {
-        await EGuild.update(guild.id, {
+        await Guild.update(guild.id, {
           name: guild.name,
           avatar: guild.icon as string,
         });

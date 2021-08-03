@@ -14,23 +14,24 @@
     "node": ">=14.x"
   },
   "scripts": {
+    "packages": "yarn workspaces foreach",
+    "prebuild": "yarn workspaces foreach -pt run prebuild",
     "build": "yarn workspaces foreach -pt run build",
-    "clean": "yarn workspaces foreach run clean",
     "client": "yarn workspace @duckbot/client",
     "server": "yarn workspace @duckbot/server",
     "common": "yarn workspace @duckbot/common",
     "dashboard": "yarn workspace @duckbot/dashboard",
-    "client:start": "yarn client start",
-    "server:start": "yarn server start",
-    "client:dev": "yarn client start:dev",
-    "server:dev": "yarn server start:dev",
     "start:dev": "concurrently \"yarn server start:dev\" \"yarn client start:dev\" \"yarn dashboard start:dev\"",
+    "heroku:dev": "heroku local",
     "start": "yarn server:start",
     "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx .",
     "format": "prettier --write .",
+    "postinstall": "husky install",
     "test": "jest"
   },
   "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
     "@typescript-eslint/eslint-plugin": "^4.28.5",
     "@typescript-eslint/parser": "^4.28.5",
     "eslint": "^7.31.0",
@@ -44,10 +45,13 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "latest",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.1",
     "prettier": "^2.3.2",
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "concurrently": "^6.2.0"
+    "concurrently": "^6.2.0",
+    "dotenv-cli": "^4.0.0",
+    "rimraf": "^3.0.2"
   }
 }

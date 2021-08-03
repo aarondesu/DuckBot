@@ -1,0 +1,47 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { PassportStrategy } from '@nestjs/passport';
+import { Inject, Injectable } from '@nestjs/common';
+import {
+  Profile,
+  Strategy,
+  VerifyCallback,
+} from '@oauth-everything/passport-discord';
+import { User } from '@duckbot/common';
+
+import UserService from '../../user/user.service';
+
+@Injectable()
+export default class DiscordStrategy extends PassportStrategy(
+  Strategy,
+  'discord'
+) {
+  constructor(
+    @Inject(UserService)
+    private readonly userService: UserService
+  ) {
+    super({
+      clientID: process.env.DISCORD_CLIENT_ID as string,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
+      callbackUrl: process.env.DISCORD_CLIENT_CALLBACK_URL as string,
+      scope: ['identify', 'guilds'],
+    });
+  }
+
+  async validate(
+    _accessToken: string,
+    _refreshToken: string,
+    profile: Profile,
+    cb: VerifyCallback<User>
+  ) {
+    const { id, displayName, profileUrl } = profile;
+    const user = await this.userService.createUser({
+      id,
+      tag: displayName as string,
+      avatar: profileUrl as string,
+    });
+
+    return cb(undefined, user);
+  }
+}
