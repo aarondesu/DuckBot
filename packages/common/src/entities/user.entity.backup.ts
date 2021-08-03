@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { Field, ObjectType } from '@nestjs/graphql';
 import {
   BaseEntity,
@@ -11,7 +12,7 @@ import {
 
 @Entity()
 @ObjectType()
-export default class User extends BaseEntity {
+export class User extends BaseEntity {
   @Field()
   @PrimaryColumn()
   id!: string;
