@@ -11,9 +11,9 @@ export default class DiscordStrategy extends PassportStrategy(
 ) {
   constructor() {
     super({
-      clientID: process.env.DASHBOARD_CLIENT_ID as string,
-      clientSecret: process.env.DASHBOARD_CLIENT_SECRET as string,
-      callbackUrl: process.env.DASHBOARD_CLIENT_CALLBACK_URL as string,
+      clientID: process.env.DISCORD_CLIENT_ID as string,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
+      callbackUrl: process.env.DISCORD_CLIENT_CALLBACK_URL as string,
       scope: ['identify', 'guilds'],
     });
   }
