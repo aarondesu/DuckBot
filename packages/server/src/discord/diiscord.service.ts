@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { HttpService } from '@nestjs/axios';
 import { map, Observable } from 'rxjs';
 import { AxiosResponse } from 'axios';

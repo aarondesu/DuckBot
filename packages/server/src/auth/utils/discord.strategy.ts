@@ -1,15 +1,11 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PassportStrategy } from '@nestjs/passport';
 import { Inject, Injectable } from '@nestjs/common';
+import { logger, User } from '@duckbot/common';
 import {
   Profile,
   Strategy,
   VerifyCallback,
 } from '@oauth-everything/passport-discord';
-import { logger, User } from '@duckbot/common';
 
 import UserService from '../../graphql/user/user.service';
 
