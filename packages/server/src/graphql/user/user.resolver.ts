@@ -1,14 +1,27 @@
+/* eslint-disable no-console */
 /* eslint-disable class-methods-use-this */
-import {} from '@nestjs/common';
-import { Mutation, Query, Resolver, Args } from '@nestjs/graphql';
+// import { Inject } from '@nestjs/common';
+import {
+  Mutation,
+  Query,
+  Resolver,
+  Args,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql';
 import { User } from '@duckbot/common';
 
 import UserService from './user.service';
-import { CreateUserIput, UpdateUserInput } from './user.input';
+import { CreateUserIput, UpdateUserInput, Guild } from './user.input';
 
-@Resolver('User')
+import DiscordService from '../../discord/diiscord.service';
+
+@Resolver(() => User)
 export default class UserResolver {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly discordService: DiscordService,
+    private readonly userService: UserService
+  ) {}
 
   @Mutation(() => User)
   async createUser(
@@ -21,7 +34,7 @@ export default class UserResolver {
 
   @Query(() => User)
   async user(@Args('id') id: string) {
-    const user = this.userService.findUser(id);
+    const user = await this.userService.findUser(id);
     return user;
   }
 
@@ -37,5 +50,12 @@ export default class UserResolver {
   ) {
     const user = this.userService.updateUser(id, data);
     return user;
+  }
+
+  @ResolveField(() => [Guild])
+  async guilds(@Parent() user: User) {
+    console.log(user);
+    console.log('Guild Resolve field');
+    return this.discordService.fetchGuilds(user.accessToken);
   }
 }

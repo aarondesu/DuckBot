@@ -1905,6 +1905,7 @@ __metadata:
     "@types/passport-discord": ^0.1.4
     "@types/supertest": ^2.0.11
     apollo-server-express: ^2
+    axios: ^0.21.1
     connect-typeorm: ^1.1.4
     cross-env: ^7.0.3
     dotenv: ^10.0.0

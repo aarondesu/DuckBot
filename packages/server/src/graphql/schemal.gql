@@ -6,6 +6,16 @@ type User {
   id: String!
   tag: String!
   avatar: String
+  accessToken: String
+  refreshToken: String
+  guilds: [Guild!]!
+}
+
+type Guild {
+  id: String!
+  name: String!
+  icon: String
+  owner: Boolean!
 }
 
 type Query {
@@ -15,10 +25,20 @@ type Query {
 
 type Mutation {
   createUser(data: CreateUserIput!): User!
+  updateUser(data: UpdateUserInput!, id: String!): User!
 }
 
 input CreateUserIput {
   id: String!
   tag: String!
   avatar: String!
+  accessToken: String!
+  refreshToken: String
+}
+
+input UpdateUserInput {
+  tag: String!
+  avatar: String!
+  accessToken: String
+  refreshToken: String
 }

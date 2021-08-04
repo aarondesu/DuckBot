@@ -4,9 +4,10 @@ import { User } from '@duckbot/common';
 
 import UserResolver from './user.resolver';
 import UserService from './user.service';
+import DiscordModule from '../../discord/discord.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],
+  imports: [DiscordModule, TypeOrmModule.forFeature([User])],
   providers: [UserResolver, UserService],
   exports: [UserService],
 })

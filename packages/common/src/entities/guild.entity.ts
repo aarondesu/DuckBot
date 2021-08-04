@@ -20,9 +20,9 @@ export class Guild extends BaseEntity {
   @Column()
   name!: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column({ nullable: true })
-  avatar!: string;
+  icon!: string;
 
   @CreateDateColumn()
   createdAt!: Date;

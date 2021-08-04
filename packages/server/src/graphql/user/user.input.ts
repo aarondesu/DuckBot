@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable import/prefer-default-export */
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 
 @InputType()
 export class CreateUserIput {
@@ -33,4 +33,19 @@ export class UpdateUserInput {
 
   @Field({ nullable: true })
   refreshToken!: string;
+}
+
+@ObjectType()
+export class Guild {
+  @Field()
+  id!: string;
+
+  @Field()
+  name!: string;
+
+  @Field({ nullable: true })
+  icon!: string;
+
+  @Field()
+  owner!: boolean;
 }
