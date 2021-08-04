@@ -27,6 +27,7 @@
     "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx .",
     "format": "prettier --write .",
     "postinstall": "husky install",
+    "heroku-postbuild": "yarn workspaces focus --a --production",
     "test": "jest"
   },
   "devDependencies": {
