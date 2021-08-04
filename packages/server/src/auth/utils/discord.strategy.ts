@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -8,7 +9,7 @@ import {
   Strategy,
   VerifyCallback,
 } from '@oauth-everything/passport-discord';
-import { User } from '@duckbot/common';
+import { logger, User } from '@duckbot/common';
 
 import UserService from '../../graphql/user/user.service';
 
@@ -35,14 +36,16 @@ export default class DiscordStrategy extends PassportStrategy(
     profile: Profile,
     cb: VerifyCallback<User>
   ) {
-    const { id, displayName, profileUrl } = profile;
+    const { id, displayName, _json } = profile;
     const findUser = await this.userService.findUser(id);
+
     // If user is not found, add one to the database
     if (findUser === undefined) {
+      logger.debug('User does not exist! Creating new user');
       const newUser = await this.userService.createUser({
         id,
         tag: displayName as string,
-        avatar: profileUrl as string,
+        avatar: _json.avatar as string,
         accessToken,
         refreshToken,
       });
@@ -51,9 +54,10 @@ export default class DiscordStrategy extends PassportStrategy(
     }
 
     // Update the user if it is found
+    logger.debug('User exists updating user!');
     const updateUser = await this.userService.updateUser(id, {
       tag: displayName as string,
-      avatar: profileUrl as string,
+      avatar: _json.avatar as string,
       accessToken,
       refreshToken,
     });
