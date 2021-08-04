@@ -19,14 +19,14 @@ export default class GuildJoined extends Listener {
         await Guild.create({
           id: guild.id,
           name: guild.name,
-          avatar: guild.icon as string,
+          icon: guild.icon as string,
         }).save();
 
         logger.info('Guild has been added to the database!');
       } else {
         await Guild.update(guild.id, {
           name: guild.name,
-          avatar: guild.icon as string,
+          icon: guild.icon as string,
         });
       }
     } catch ({ stack }) {

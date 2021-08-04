@@ -23,7 +23,7 @@ export default class PostInit extends Listener {
           // Update guild info if it exists
           return Guild.update(guild, {
             name: exists.name,
-            avatar: exists.icon as string,
+            icon: exists.icon as string,
           });
         }
 
@@ -43,7 +43,7 @@ export default class PostInit extends Listener {
         return Guild.create({
           id: guild.id,
           name: guild.name,
-          avatar: guild.icon as string,
+          icon: guild.icon as string,
         }).save();
       })
     );
