@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import React, { FC } from 'react';
 import { Header, Menu } from 'semantic-ui-react';
 
 type FixedLocation = 'left' | 'top' | 'right' | 'bottom';
 
 interface NavbarProps {
-  fixed: FixedLocation;
+  fixed?: FixedLocation;
 }
 
 const Navbar: FC<NavbarProps> = ({ fixed, children }) => {

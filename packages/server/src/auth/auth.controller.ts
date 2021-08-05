@@ -2,6 +2,7 @@
 import { Controller, Get, Res, Req, UseGuards, Redirect } from '@nestjs/common';
 import { Request, Response } from 'express';
 
+import { dashboardUrl } from '../config';
 import DiscordAuthGuard from './utils/discord.guard';
 
 @Controller('auth')
@@ -29,7 +30,7 @@ export default class AuthController {
   @Get('redirect?')
   @UseGuards(DiscordAuthGuard)
   redirect(@Res() res: Response) {
-    res.send(200);
+    res.redirect(`${dashboardUrl}/dashboard`);
   }
 
   /**
@@ -38,7 +39,11 @@ export default class AuthController {
    */
   @Get('status')
   status(@Req() req: Request, @Res() res: Response) {
-    res.send(req.user);
+    if (req.user) {
+      res.send(req.user);
+    } else {
+      res.sendStatus(401);
+    }
   }
 
   /*

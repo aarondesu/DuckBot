@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-redeclare */
 import React, { FC, FormEvent } from 'react';
 import { Button, Header, Segment } from 'semantic-ui-react';
 
@@ -8,11 +10,12 @@ import {
   LandingContent,
   LandingPageContainer,
   ContentWrapper,
-  DuckAvatar,
   LandingFooter,
+  DuckAvatar,
 } from './styles';
 
 import { API_AUTH_URL } from '../../constants';
+import duckimg from '../../assets/duck.jpg';
 
 const LandingPage: FC = () => {
   const authenticate = (e: FormEvent<HTMLButtonElement>) => {
@@ -27,7 +30,7 @@ const LandingPage: FC = () => {
           <Navbar />
           <LandingContent text textAlign="center">
             <ContentWrapper>
-              <DuckAvatar src="src/assets/duck.jpg" size="medium" circular />
+              <DuckAvatar src={duckimg} size="medium" circular />
               <Segment inverted>
                 <Header as="h1" content="Connect With Duck" />
                 <Button

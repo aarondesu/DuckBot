@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import Auth from './auth';
+import Discord from './discord';
 
 const store = configureStore({
   reducer: {
     auth: Auth,
+    discord: Discord,
   },
 });
 
