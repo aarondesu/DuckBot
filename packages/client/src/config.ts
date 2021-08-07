@@ -58,6 +58,7 @@ export const weebNsfwSourceRandom = [
   'GenshinImpactNSFW',
   'Hololewd',
   'LewdVtubers',
+  'AnalHentai',
 ];
 
 export const weebNsfwSource = ['pantsu', 'ecchi'];
