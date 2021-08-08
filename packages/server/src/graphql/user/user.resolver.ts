@@ -48,7 +48,7 @@ export default class UserResolver {
     @Args('id') id: string,
     @Args({ name: 'data', type: () => UpdateUserInput }) data: UpdateUserInput
   ) {
-    const user = this.userService.updateUser(id, data);
+    const user = await this.userService.updateUser(id, data);
     return user;
   }
 
