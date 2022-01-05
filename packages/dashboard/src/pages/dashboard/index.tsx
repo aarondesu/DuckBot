@@ -37,8 +37,6 @@ const DashboardPage: FC = () => {
 
     // Check if discordId has been set
     if (discordId === '') {
-      // Display modal
-      // TODO
       setDisplayModal(true);
     }
   }, [dispatch, navigate, isLoading, discordId]);

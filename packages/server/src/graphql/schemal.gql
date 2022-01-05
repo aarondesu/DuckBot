@@ -9,12 +9,14 @@ type User {
   accessToken: String
   refreshToken: String
   guilds: [Guild!]!
+  botGuilds: [Guild!]!
 }
 
 type Guild {
   id: String!
   name: String!
   icon: String
+  permissions: String
   owner: Boolean!
 }
 

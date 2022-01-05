@@ -56,4 +56,9 @@ export default class UserResolver {
   async guilds(@Parent() user: User) {
     return this.discordService.fetchGuilds(user.accessToken);
   }
+
+  @ResolveField(() => [Guild])
+  async botGuilds() {
+    return this.discordService.fetchBotGuilds();
+  }
 }

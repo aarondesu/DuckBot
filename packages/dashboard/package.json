@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production webpack --node-env=production",
     "build:dev": "cross-env NODE_ENV=development webpack --node-env=development",
     "build:prod": "cross-env NODE_ENV=production webpack  --node-env=production",
-    "start:dev": "cross-env NODE_ENV=development webpack serve --node-env=development",
+    "start:dev": "dotenv -e ../../.env -- cross-env NODE_ENV=development webpack serve --node-env=development",
     "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx .",
     "format": "prettier --write ."
   },

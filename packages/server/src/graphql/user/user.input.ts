@@ -46,6 +46,9 @@ export class Guild {
   @Field({ nullable: true })
   icon!: string;
 
+  @Field({ nullable: true })
+  permissions!: string;
+
   @Field()
   owner!: boolean;
 }

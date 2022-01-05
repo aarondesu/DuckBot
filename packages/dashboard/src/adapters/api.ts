@@ -16,3 +16,18 @@ export const userLogout = async () => {
     withCredentials: true,
   });
 };
+
+export const validateGuild = (id: string) => {
+  return axios.get<boolean>(`${API_URL}/discord/joined`, {
+    withCredentials: true,
+    data: {
+      id,
+    },
+  });
+};
+
+export const getGuilds = () => {
+  return axios.get(`${API_URL}/discord/guilds`, {
+    withCredentials: true,
+  });
+};

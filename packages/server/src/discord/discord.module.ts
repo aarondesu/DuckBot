@@ -10,6 +10,7 @@ import DiscordService from './diiscord.service';
       maxRedirects: 5,
     }),
   ],
+  controllers: [],
   providers: [DiscordService],
   exports: [DiscordService],
 })
