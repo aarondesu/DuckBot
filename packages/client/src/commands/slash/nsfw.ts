@@ -1,11 +1,9 @@
 import { CommandInteraction, TextChannel } from 'discord.js';
 
 import { SlashCommand } from '../../structures/modules/slash-command';
-import { getNsfwWeeb, getRandomNsfwWeeb } from '../../lib/anime-api';
+import { getRandomNsfwWeeb } from '../../lib/anime-api';
 import { EmbedBuilderUtil } from '../../lib/utils';
 import { COLOR_PRIMARY } from '../../constants';
-
-const nsfwType = ['random', 'normal'];
 
 export default class AnimeCommand extends SlashCommand {
   public constructor() {
@@ -32,10 +30,7 @@ export default class AnimeCommand extends SlashCommand {
           ],
         });
       } else {
-        const type = nsfwType[Math.floor(Math.random() * nsfwType.length)];
-
-        const nsfwResult =
-          type === 'random' ? await getRandomNsfwWeeb() : await getNsfwWeeb();
+        const nsfwResult = await getRandomNsfwWeeb();
         await interaction.editReply({
           embeds: [
             EmbedBuilderUtil({
