@@ -33,7 +33,7 @@ export class CronJob extends AkairoModule {
 
   exec() {
     throw new Error(
-      `CronJob ${this.constructor.name} initialize is not yet implemented.`
+      `CronJob ${this.constructor.name} exec is not yet implemented.`
     );
   }
 }

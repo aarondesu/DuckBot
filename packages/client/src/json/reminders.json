@@ -45,5 +45,17 @@
         }
       ]
     }
+  },
+  {
+    "name": "weekly-task",
+    "time": {
+      "hours": [20],
+      "daysOfWeek": ["tuesday", "friday"]
+    },
+    "content": {
+      "title": "🕒 Weekly ToDo Llist",
+      "thumbnail": "https://i.postimg.cc/wT18Wq6k/unknown.png",
+      "message": "□ Weekly Task\n □ Item exchange : Team Badge ▷ Purple Trigger\n□ Item exchange : Gold Prim Sword ▷ Affix Success Rate +10"
+    }
   }
 ]

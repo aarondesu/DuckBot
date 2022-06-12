@@ -23,5 +23,16 @@
     "newLine": "lf",
     "resolveJsonModule": true,
     "skipLibCheck": true
-  }
+  },
+  "references": [
+    {
+      "path": "packages/client"
+    },
+    {
+      "path": "packages/common"
+    },
+    {
+      "path": "packages/server"
+    }
+  ]
 }

@@ -80,7 +80,7 @@ export default class DiscordBot extends AkairoClient {
         handler.loadAll();
         logger.info(`Finished loading ${name} modules!`);
       } catch (error) {
-        throw new Error(error);
+        throw new Error(`Error loading module ${name}`);
       }
     }
 
